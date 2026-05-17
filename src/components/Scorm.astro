@@ -1,0 +1,194 @@
+---
+const metricas = [
+  { label: 'Progreso', valor: '78%', color: 'var(--purple-light)' },
+  { label: 'Nota', valor: '8.4', color: 'var(--cyan)' },
+  { label: 'Tiempo', valor: '2h 14m', color: '#f59e0b' },
+];
+
+const estudiantes = [
+  { nombre: 'Ana García', progreso: 92, nota: 9.1 },
+  { nombre: 'Carlos López', progreso: 74, nota: 7.8 },
+  { nombre: 'María Torres', progreso: 85, nota: 8.5 },
+  { nombre: 'Juan Díaz', progreso: 61, nota: 6.9 },
+];
+---
+<section class="scorm" id="scorm">
+  <div class="container">
+    <h2 class="section__title">SCORM & Analíticas</h2>
+    <p class="section__sub">Seguimiento en tiempo real del rendimiento y aprendizaje</p>
+
+    <div class="scorm__grid">
+      <div class="metrics">
+        {metricas.map((m) => (
+          <div class="metric__card">
+            <span class="metric__label">{m.label}</span>
+            <span class="metric__valor" style={`color: ${m.color}`}>{m.valor}</span>
+          </div>
+        ))}
+      </div>
+
+      <div class="table__wrapper">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Estudiante</th>
+              <th>Progreso</th>
+              <th>Nota</th>
+            </tr>
+          </thead>
+          <tbody>
+            {estudiantes.map((e) => (
+              <tr>
+                <td>{e.nombre}</td>
+                <td>
+                  <div class="progress__bar">
+                    <div class="progress__fill" style={`width: ${e.progreso}%`}></div>
+                  </div>
+                  <span class="progress__label">{e.progreso}%</span>
+                </td>
+                <td class="nota">{e.nota}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .scorm {
+    padding: 6rem 0;
+    background: radial-gradient(ellipse at 20% 50%, rgba(0, 212, 255, 0.05) 0%, transparent 60%);
+  }
+
+  .section__title {
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    text-align: center;
+    margin-bottom: 0.75rem;
+    background: linear-gradient(135deg, var(--cyan), var(--purple-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .section__sub {
+    text-align: center;
+    color: var(--text-muted);
+    margin-bottom: 3.5rem;
+  }
+
+  .scorm__grid {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+
+  .metrics {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .metric__card {
+    background: var(--bg-card);
+    border: 1px solid rgba(123, 47, 247, 0.2);
+    border-radius: 10px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .metric__label {
+    font-size: 0.8rem;
+    font-family: var(--font-display);
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .metric__valor {
+    font-size: 2.2rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+  }
+
+  .table__wrapper {
+    background: var(--bg-card);
+    border: 1px solid rgba(123, 47, 247, 0.2);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .table th {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding: 1rem 1.5rem;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .table td {
+    padding: 1rem 1.5rem;
+    font-size: 0.9rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    vertical-align: middle;
+  }
+
+  .table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .table tr:hover td {
+    background: rgba(123, 47, 247, 0.05);
+  }
+
+  .progress__bar {
+    height: 6px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 4px;
+  }
+
+  .progress__fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--purple), var(--cyan));
+    border-radius: 3px;
+  }
+
+  .progress__label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  .nota {
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--cyan);
+  }
+
+  @media (max-width: 768px) {
+    .scorm__grid {
+      grid-template-columns: 1fr;
+    }
+    .metrics {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+    .metric__card {
+      flex: 1;
+      min-width: 120px;
+    }
+  }
+</style>

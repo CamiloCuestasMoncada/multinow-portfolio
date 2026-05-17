@@ -1,0 +1,98 @@
+---
+---
+<footer class="footer">
+  <div class="container footer__inner">
+    <div class="footer__brand">
+      <img src="/logo.png" alt="Multinow" class="footer__logo" />
+      <p class="footer__tagline">Videojuegos educativos personalizados en 2D</p>
+    </div>
+    <nav class="footer__nav">
+      <a href="#inicio">Inicio</a>
+      <a href="#portafolio">Portafolio</a>
+      <a href="#scorm">SCORM</a>
+    </nav>
+    <div class="footer__contact">
+      <a href="mailto:contacto@multinow.co" class="footer__email">contacto@multinow.co</a>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <p>© {new Date().getFullYear()} Multinow. Todos los derechos reservados.</p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    border-top: 1px solid rgba(123, 47, 247, 0.2);
+    padding: 3rem 0 1.5rem;
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  .footer__inner {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 3rem;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+
+  .footer__logo {
+    height: 40px;
+    margin-bottom: 0.5rem;
+  }
+
+  .footer__tagline {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  .footer__nav {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .footer__nav a {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    transition: color 0.2s;
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+  }
+
+  .footer__nav a:hover {
+    color: var(--cyan);
+  }
+
+  .footer__email {
+    font-size: 0.875rem;
+    color: var(--cyan);
+    transition: opacity 0.2s;
+  }
+
+  .footer__email:hover {
+    opacity: 0.8;
+  }
+
+  .footer__bottom {
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  @media (max-width: 768px) {
+    .footer__inner {
+      grid-template-columns: 1fr;
+      text-align: center;
+      gap: 1.5rem;
+    }
+    .footer__nav {
+      justify-content: center;
+    }
+    .footer__logo {
+      margin: 0 auto 0.5rem;
+      display: block;
+    }
+  }
+</style>

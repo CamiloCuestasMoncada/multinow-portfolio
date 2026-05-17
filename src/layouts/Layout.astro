@@ -1,0 +1,23 @@
+---
+interface Props {
+  title?: string;
+}
+const { title = 'Multinow | Videojuegos Educativos Personalizados' } = Astro.props;
+---
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Multinow - Desarrollamos videojuegos educativos personalizados en 2D con Godot" />
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  @import '../styles/global.css';
+</style>

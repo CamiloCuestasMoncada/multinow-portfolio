@@ -1,0 +1,134 @@
+---
+const juegos = [
+  {
+    titulo: 'El Científico Químico',
+    descripcion: 'Aprende química a través de experimentos interactivos en un laboratorio virtual.',
+    thumb: '/games/quimico.jpg',
+    tags: ['Ciencias', 'Secundaria'],
+  },
+  {
+    titulo: 'Desafío Trivia Corporativa',
+    descripcion: 'Gamificación de onboarding y capacitación empresarial en formato trivia.',
+    thumb: '/games/trivia.jpg',
+    tags: ['Corporativo', 'Trivia'],
+  },
+  {
+    titulo: 'Laboratorio Virtual Interactivo',
+    descripcion: 'Simulación de prácticas de laboratorio seguras para educación superior.',
+    thumb: '/games/laboratorio.jpg',
+    tags: ['Universitario', 'Simulación'],
+  },
+];
+---
+<section class="portafolio" id="portafolio">
+  <div class="container">
+    <h2 class="section__title">Portafolio</h2>
+    <p class="section__sub">Proyectos desarrollados a medida para distintos sectores educativos</p>
+    <div class="grid">
+      {juegos.map((juego) => (
+        <article class="card">
+          <div class="card__thumb">
+            <div class="card__placeholder">▶</div>
+          </div>
+          <div class="card__body">
+            <div class="card__tags">
+              {juego.tags.map((t) => <span class="tag">{t}</span>)}
+            </div>
+            <h3 class="card__title">{juego.titulo}</h3>
+            <p class="card__desc">{juego.descripcion}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .portafolio {
+    padding: 6rem 0;
+  }
+
+  .section__title {
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    text-align: center;
+    margin-bottom: 0.75rem;
+    background: linear-gradient(135deg, var(--purple-light), var(--cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .section__sub {
+    text-align: center;
+    color: var(--text-muted);
+    margin-bottom: 3.5rem;
+    font-size: 1rem;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .card {
+    background: var(--bg-card);
+    border: 1px solid rgba(123, 47, 247, 0.25);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-6px);
+    border-color: var(--purple-light);
+    box-shadow: 0 0 30px var(--purple-glow);
+  }
+
+  .card__thumb {
+    height: 180px;
+    background: linear-gradient(135deg, rgba(123, 47, 247, 0.3), rgba(0, 212, 255, 0.15));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .card__placeholder {
+    font-size: 3rem;
+    opacity: 0.5;
+  }
+
+  .card__body {
+    padding: 1.5rem;
+  }
+
+  .card__tags {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    font-size: 0.7rem;
+    font-family: var(--font-display);
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    background: rgba(0, 212, 255, 0.1);
+    color: var(--cyan);
+    border: 1px solid rgba(0, 212, 255, 0.3);
+    letter-spacing: 0.05em;
+  }
+
+  .card__title {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: var(--text);
+  }
+
+  .card__desc {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+</style>

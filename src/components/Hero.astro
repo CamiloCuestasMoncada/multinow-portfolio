@@ -1,0 +1,110 @@
+---
+---
+<section class="hero" id="inicio">
+  <div class="container hero__inner">
+    <div class="hero__text">
+      <h1 class="hero__title">
+        Empodera tu aprendizaje con
+        <span class="hero__highlight">videojuegos educativos</span>
+        personalizados
+      </h1>
+      <p class="hero__sub">
+        Desarrollamos experiencias de aprendizaje únicas en 2D con Godot,
+        adaptadas a tus objetivos pedagógicos.
+      </p>
+      <a href="#portafolio" class="btn btn--primary">Ver portafolio</a>
+    </div>
+    <div class="hero__graphic">
+      <img src="/logo.png" alt="Multinow logo" class="hero__logo" />
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background: radial-gradient(ellipse at 70% 50%, rgba(123, 47, 247, 0.15) 0%, transparent 60%),
+                radial-gradient(ellipse at 30% 80%, rgba(0, 212, 255, 0.08) 0%, transparent 50%),
+                var(--bg-dark);
+    padding: 6rem 0 4rem;
+  }
+
+  .hero__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .hero__title {
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero__highlight {
+    background: linear-gradient(135deg, var(--purple-light), var(--cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero__sub {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    margin-bottom: 2.5rem;
+    max-width: 480px;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 0.9rem 2.2rem;
+    border-radius: 6px;
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .btn--primary {
+    background: linear-gradient(135deg, var(--purple), var(--purple-light));
+    color: #fff;
+    box-shadow: 0 0 25px var(--purple-glow);
+  }
+
+  .btn--primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 40px var(--purple-glow);
+  }
+
+  .hero__graphic {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .hero__logo {
+    width: 320px;
+    filter: drop-shadow(0 0 40px var(--purple-glow)) drop-shadow(0 0 80px rgba(0, 212, 255, 0.2));
+    animation: float 4s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-16px); }
+  }
+
+  @media (max-width: 768px) {
+    .hero__inner {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+    .hero__graphic { order: -1; }
+    .hero__logo { width: 200px; }
+    .hero__sub { margin: 0 auto 2rem; }
+  }
+</style>
