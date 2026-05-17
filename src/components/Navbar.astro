@@ -1,0 +1,177 @@
+---
+---
+<header class="navbar">
+  <div class="container navbar__inner">
+    <a href="#inicio" class="navbar__brand">
+      <img src="/logo.png" alt="Multinow" class="navbar__logo" />
+    </a>
+    <nav class="navbar__nav">
+      <a href="#inicio" class="nav__link">Inicio</a>
+      <a href="#portafolio" class="nav__link">Portafolio</a>
+      <a href="#scorm" class="nav__link">SCORM</a>
+      <a href="#contacto" class="nav__link">Contacto</a>
+    </nav>
+    <a href="#contacto" class="btn btn--outline">Hablemos</a>
+    <button class="navbar__toggle" aria-label="Abrir menú" id="menuToggle">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<script>
+  const toggle = document.getElementById('menuToggle');
+  const nav = document.querySelector('.navbar__nav');
+  toggle?.addEventListener('click', () => {
+    nav?.classList.toggle('navbar__nav--open');
+    toggle.classList.toggle('navbar__toggle--open');
+  });
+
+  // Cerrar al hacer click en un link
+  document.querySelectorAll('.nav__link').forEach(link => {
+    link.addEventListener('click', () => {
+      nav?.classList.remove('navbar__nav--open');
+      toggle?.classList.remove('navbar__toggle--open');
+    });
+  });
+</script>
+
+<style>
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 1rem 0;
+    background: rgba(7, 7, 26, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(123, 47, 247, 0.15);
+    transition: background 0.3s;
+  }
+
+  .navbar__inner {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .navbar__brand {
+    flex-shrink: 0;
+  }
+
+  .navbar__logo {
+    height: 36px;
+    display: block;
+  }
+
+  .navbar__nav {
+    display: flex;
+    gap: 2rem;
+    margin-left: auto;
+  }
+
+  .nav__link {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    transition: color 0.2s;
+    position: relative;
+  }
+
+  .nav__link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--cyan);
+    transition: width 0.3s;
+  }
+
+  .nav__link:hover {
+    color: var(--cyan);
+  }
+
+  .nav__link:hover::after {
+    width: 100%;
+  }
+
+  .btn--outline {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.55rem 1.4rem;
+    border: 1px solid var(--purple-light);
+    border-radius: 6px;
+    color: var(--purple-light);
+    transition: all 0.3s;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .btn--outline:hover {
+    background: var(--purple-light);
+    color: #fff;
+    box-shadow: 0 0 20px var(--purple-glow);
+  }
+
+  .navbar__toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    margin-left: auto;
+  }
+
+  .navbar__toggle span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--text);
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+
+  .navbar__toggle--open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .navbar__toggle--open span:nth-child(2) { opacity: 0; }
+  .navbar__toggle--open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  @media (max-width: 768px) {
+    .navbar__nav {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      gap: 0;
+      background: rgba(7, 7, 26, 0.98);
+      border-top: 1px solid rgba(123, 47, 247, 0.2);
+      padding: 1rem 0;
+      margin-left: 0;
+    }
+
+    .navbar__nav--open {
+      display: flex;
+    }
+
+    .nav__link {
+      padding: 0.9rem 1.5rem;
+    }
+
+    .btn--outline {
+      display: none;
+    }
+
+    .navbar__toggle {
+      display: flex;
+    }
+  }
+</style>

@@ -4,14 +4,20 @@
   <div class="container hero__inner">
     <div class="hero__text">
       <h1 class="hero__title">
-        Empodera tu aprendizaje con
-        <span class="hero__highlight">videojuegos educativos</span>
-        personalizados
+        Desarrollamos
+        <span class="hero__highlight">videojuegos 2D personalizados</span>
+        para tu marca, campaña o proyecto
       </h1>
       <p class="hero__sub">
-        Desarrollamos experiencias de aprendizaje únicas en 2D con Godot,
-        adaptadas a tus objetivos pedagógicos.
+        Educación, publicidad, entretenimiento o capacitación corporativa —
+        creamos experiencias interactivas únicas en Godot adaptadas a tus objetivos.
       </p>
+      <div class="hero__chips">
+        <span class="chip">🎓 Educativos</span>
+        <span class="chip">📢 Campañas</span>
+        <span class="chip">🏷️ Branded</span>
+        <span class="chip">🎮 Personalizados</span>
+      </div>
       <a href="#portafolio" class="btn btn--primary">Ver portafolio</a>
     </div>
     <div class="hero__graphic">
@@ -54,8 +60,26 @@
   .hero__sub {
     color: var(--text-muted);
     font-size: 1.1rem;
-    margin-bottom: 2.5rem;
+    margin-bottom: 1.5rem;
     max-width: 480px;
+  }
+
+  .hero__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-bottom: 2rem;
+  }
+
+  .chip {
+    font-size: 0.78rem;
+    padding: 0.35rem 0.9rem;
+    border-radius: 20px;
+    background: rgba(123, 47, 247, 0.12);
+    border: 1px solid rgba(123, 47, 247, 0.3);
+    color: var(--text-muted);
+    font-family: var(--font-display);
+    letter-spacing: 0.04em;
   }
 
   .btn {
