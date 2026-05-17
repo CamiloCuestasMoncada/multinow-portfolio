@@ -59,17 +59,24 @@ const proyecto = {
     <h2 class="section__title">Nuestros Servicios</h2>
     <p class="section__sub">Videojuegos 2D personalizados para cada objetivo</p>
 
-    <div class="tabs" role="tablist">
-      {tabs.map((tab, i) => (
-        <button
-          class={`tab${i === 0 ? ' tab--active' : ''}`}
-          role="tab"
-          data-tab={tab.id}
-          aria-selected={i === 0 ? 'true' : 'false'}
-        >
-          {tab.label}
-        </button>
-      ))}
+    <div class="tabs__wrapper">
+      <div class="tabs" role="tablist">
+        {tabs.map((tab, i) => (
+          <button
+            class={`tab${i === 0 ? ' tab--active' : ''}`}
+            role="tab"
+            data-tab={tab.id}
+            aria-selected={i === 0 ? 'true' : 'false'}
+          >
+            {tab.label}
+          </button>
+        ))}
+      </div>
+      <div class="tabs__scroll-hint" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"/>
+        </svg>
+      </div>
     </div>
 
     <!-- EDUCATIVO -->
@@ -185,6 +192,17 @@ const proyecto = {
 <script>
   const tabButtons = document.querySelectorAll<HTMLButtonElement>('.tab');
   const panels = document.querySelectorAll<HTMLElement>('.panel');
+  const tabsEl = document.querySelector<HTMLElement>('.tabs');
+  const wrapper = document.querySelector<HTMLElement>('.tabs__wrapper');
+
+  const updateFade = () => {
+    if (!tabsEl || !wrapper) return;
+    const atEnd = tabsEl.scrollLeft + tabsEl.clientWidth >= tabsEl.scrollWidth - 4;
+    wrapper.style.setProperty('--fade-opacity', atEnd ? '0' : '1');
+  };
+
+  tabsEl?.addEventListener('scroll', updateFade, { passive: true });
+  updateFade();
 
   tabButtons.forEach((btn) => {
     btn.addEventListener('click', () => {
@@ -225,16 +243,71 @@ const proyecto = {
   }
 
   /* TABS */
+  .tabs__wrapper {
+    position: relative;
+    margin-bottom: 2.5rem;
+  }
+
+  .tabs__wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60px;
+    height: 100%;
+    background: linear-gradient(to right, transparent, var(--bg-dark));
+    pointer-events: none;
+    border-radius: 0 8px 8px 0;
+    opacity: var(--fade-opacity, 1);
+    transition: opacity 0.3s ease;
+  }
+
   .tabs {
     display: flex;
     gap: 0.75rem;
-    margin-bottom: 2.5rem;
     overflow-x: auto;
     scrollbar-width: none;
     padding-bottom: 0.25rem;
+    padding-right: 3rem;
   }
 
   .tabs::-webkit-scrollbar { display: none; }
+
+  .tabs__scroll-hint {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(123, 47, 247, 0.2);
+    border: 1px solid var(--purple-light);
+    border-radius: 50%;
+    color: #fff;
+    opacity: var(--fade-opacity, 1);
+    transition: opacity 0.3s ease;
+    animation: nudge 1.2s ease-in-out infinite;
+    pointer-events: none;
+    box-shadow: 0 0 12px rgba(168, 85, 247, 0.7), 0 0 28px rgba(168, 85, 247, 0.3);
+  }
+
+  .tabs__scroll-hint svg {
+    width: 18px;
+    height: 18px;
+    filter: drop-shadow(0 0 4px rgba(168, 85, 247, 1));
+  }
+
+  @keyframes nudge {
+    0%, 100% { transform: translateY(-50%) translateX(0);   box-shadow: 0 0 12px rgba(168,85,247,0.7), 0 0 28px rgba(168,85,247,0.3); }
+    50%       { transform: translateY(-50%) translateX(5px); box-shadow: 0 0 20px rgba(168,85,247,0.9), 0 0 40px rgba(168,85,247,0.5); }
+  }
+
+  @media (min-width: 769px) {
+    .tabs__scroll-hint { display: none; }
+  }
 
   .tab {
     font-family: var(--font-display);
