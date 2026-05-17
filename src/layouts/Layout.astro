@@ -1,17 +1,102 @@
 ---
 interface Props {
   title?: string;
+  description?: string;
+  image?: string;
+  canonical?: string;
 }
-const { title = 'Multinow | Videojuegos Educativos Personalizados' } = Astro.props;
+
+const {
+  title = 'Multinow | Videojuegos 2D Personalizados para Educación, Marcas y Campañas',
+  description = 'Desarrollamos videojuegos 2D personalizados en Godot para educación, marcas y campañas publicitarias. Gamificación, integración SCORM y experiencias interactivas únicas.',
+  image = 'https://multinow.co/og-image.png',
+  canonical = 'https://multinow.co',
+} = Astro.props;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Multinow',
+  url: 'https://multinow.co',
+  logo: 'https://multinow.co/logo.png',
+  description,
+  email: 'multimedialescm@gmail.com',
+  foundingDate: '2023',
+  knowsAbout: [
+    'Videojuegos educativos 2D',
+    'Gamificación empresarial',
+    'Desarrollo en Godot',
+    'SCORM',
+    'Videojuegos publicitarios',
+    'Branded games',
+    'Videojuegos personalizados',
+  ],
+  offers: [
+    {
+      '@type': 'Offer',
+      name: 'Videojuegos Educativos con SCORM',
+      description: 'Juegos 2D pedagógicos integrados con LMS vía SCORM para seguimiento de progreso.',
+    },
+    {
+      '@type': 'Offer',
+      name: 'Branded Games',
+      description: 'Videojuegos personalizados con la identidad de tu marca para campañas y engagement.',
+    },
+    {
+      '@type': 'Offer',
+      name: 'Videojuegos para Campañas Publicitarias',
+      description: 'Experiencias interactivas que amplifican campañas y aumentan el tiempo de exposición.',
+    },
+    {
+      '@type': 'Offer',
+      name: 'Proyectos a Medida',
+      description: 'Desarrollo de videojuegos 2D personalizados para cualquier industria o propósito.',
+    },
+  ],
+  contactPoint: {
+    '@type': 'ContactPoint',
+    email: 'multimedialescm@gmail.com',
+    contactType: 'customer service',
+    availableLanguage: 'Spanish',
+  },
+};
 ---
 <!doctype html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Multinow - Desarrollamos videojuegos educativos personalizados en 2D con Godot" />
-    <link rel="icon" type="image/png" href="/logo.png" />
+
+    <!-- Primary SEO -->
     <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content="videojuegos educativos personalizados, videojuegos 2D a medida, desarrollo videojuegos Godot, gamificación empresarial, branded games, videojuegos publicitarios, SCORM videojuegos, gamificación educativa, videojuegos para marcas, juegos interactivos corporativos, videojuegos Colombia" />
+    <meta name="author" content="Multinow" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={canonical} />
+
+    <!-- Open Graph (Facebook, LinkedIn, WhatsApp) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="es_CO" />
+    <meta property="og:site_name" content="Multinow" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/logo.png" />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
   <body>
     <slot />
