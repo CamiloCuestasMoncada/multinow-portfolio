@@ -16,6 +16,7 @@
   </div>
   <div class="footer__bottom">
     <p>© {new Date().getFullYear()} Multinow. Todos los derechos reservados.</p>
+    <p class="footer__location">📍 Bogotá, Colombia</p>
   </div>
 </footer>
 
@@ -78,6 +79,14 @@
     color: var(--text-muted);
     padding-top: 1.5rem;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .footer__location {
+    font-size: 0.72rem;
+    color: rgba(148, 163, 184, 0.6);
   }
 
   @media (max-width: 768px) {
