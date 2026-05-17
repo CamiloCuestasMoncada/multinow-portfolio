@@ -11,7 +11,7 @@
       <a href="#servicios">Servicios</a>
     </nav>
     <div class="footer__contact">
-      <a href="mailto:multimedialescm@gmail.com" class="footer__email">multimedialescm@gmail.com</a>
+      <span id="footer-email" class="footer__email"></span>
     </div>
   </div>
   <div class="footer__bottom">
@@ -19,6 +19,19 @@
     <p class="footer__location">📍 Bogotá, Colombia</p>
   </div>
 </footer>
+
+<script>
+  const u = 'multimedialescm';
+  const d = 'gmail.com';
+  const el = document.getElementById('footer-email');
+  if (el) {
+    const a = document.createElement('a');
+    a.href = `mailto:${u}@${d}`;
+    a.textContent = `${u}@${d}`;
+    a.className = 'footer__email';
+    el.replaceWith(a);
+  }
+</script>
 
 <style>
   .footer {

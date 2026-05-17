@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
 import Navbar from '../components/Navbar.astro';
 import Hero from '../components/Hero.astro';
 import Servicios from '../components/Servicios.astro';
@@ -10,6 +11,69 @@ import WhatsappFloat from '../components/WhatsappFloat.astro';
   <Navbar />
   <Hero />
   <Servicios />
+
+  <div class="mecanicas__img">
+    <img src="/bgMecanicas.png" alt="Bocetos de mecánicas de juego" />
+    <div class="mecanicas__color"></div>
+  </div>
+
   <Footer />
   <WhatsappFloat />
 </Layout>
+
+<style>
+  .mecanicas__img {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .mecanicas__img::before,
+  .mecanicas__img::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 120px;
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  .mecanicas__img::before {
+    top: 0;
+    background: linear-gradient(to bottom, var(--bg-dark), transparent);
+  }
+
+  .mecanicas__img::after {
+    bottom: 0;
+    background: linear-gradient(to top, var(--bg-dark), transparent);
+  }
+
+  .mecanicas__img img {
+    display: block;
+    width: 100%;
+    height: auto;
+    mix-blend-mode: screen;
+    opacity: 0.10;
+    filter: invert(1) sepia(1) hue-rotate(250deg) saturate(5) brightness(0.75) contrast(1.2);
+    position: relative;
+    z-index: 1;
+  }
+
+  .mecanicas__color {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, #3b95e3, #e871f1, #3b95e3);
+    background-size: 200% 100%;
+    mix-blend-mode: color;
+    opacity: 0.85;
+    z-index: 2;
+    pointer-events: none;
+    animation: gradientShift 15s ease-in-out infinite;
+  }
+
+  @keyframes gradientShift {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+</style>
