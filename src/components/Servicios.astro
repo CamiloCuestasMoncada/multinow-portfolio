@@ -9,9 +9,8 @@ const tabs = [
 const educativo = {
   descripcion: 'Desarrollamos videojuegos pedagógicos en 2D exportados en HTML5, listos para integrarse en cualquier plataforma web o aula virtual. Si tu institución usa un LMS, podemos agregar compatibilidad SCORM a pedido para que el juego reporte progreso, notas y tiempo directamente en tu plataforma.',
   juegos: [
-    { titulo: 'El Científico Químico', desc: 'Laboratorio virtual interactivo para aprender química experimental.', tags: ['Ciencias', 'Secundaria'] },
-    { titulo: 'Historia en Movimiento', desc: 'Aventura narrativa que recorre eventos históricos de forma inmersiva.', tags: ['Historia', 'Primaria'] },
-    { titulo: 'Mundo Matemático', desc: 'Puzzles y desafíos para reforzar conceptos matemáticos clave.', tags: ['Matemáticas', 'Básica'] },
+    { titulo: 'El Científico Químico', desc: 'Laboratorio virtual interactivo para aprender química experimental.', tags: ['Ciencias', 'Secundaria'], videoId: '7w4wpHoLdf8' },
+    { titulo: 'Finanzas Personales', desc: 'Simulador de decisiones financieras para aprender a gestionar ingresos, gastos y ahorro.', tags: ['Economía', 'Bachillerato'], videoId: 'BW1p48jTwOo' },
   ],
   metricas: [
     { label: 'Progreso', valor: '78%', color: 'var(--purple-light)' },
@@ -31,7 +30,6 @@ const marca = {
   juegos: [
     { titulo: 'Brand Runner', desc: 'Endless runner con la estética y personajes de la marca para redes sociales.', tags: ['Branded', 'Social'] },
     { titulo: 'Quiz de Producto', desc: 'Trivia interactiva que educa al usuario sobre los beneficios del producto.', tags: ['Educación', 'Ventas'] },
-    { titulo: 'Mundo de Marca', desc: 'Exploración en 2D del universo y valores de la empresa.', tags: ['Storytelling', 'Corporativo'] },
   ],
 };
 
@@ -40,7 +38,6 @@ const campana = {
   juegos: [
     { titulo: 'Aventura de Temporada', desc: 'Juego temático de campaña navideña con mecánicas de colección y premios.', tags: ['Campaña', 'Estacional'] },
     { titulo: 'Reto Viral', desc: 'Minijuego competitivo con tabla de posiciones para activaciones digitales.', tags: ['Viral', 'Competitivo'] },
-    { titulo: 'Misión Lanzamiento', desc: 'Experiencia narrativa que presenta un nuevo producto de forma inmersiva.', tags: ['Lanzamiento', 'Storytelling'] },
   ],
 };
 
@@ -49,7 +46,6 @@ const proyecto = {
   juegos: [
     { titulo: 'Simulador Técnico', desc: 'Entrenamiento de personal en procesos industriales dentro de un entorno seguro.', tags: ['Simulación', 'Capacitación'] },
     { titulo: 'Experiencia de Evento', desc: 'Instalación interactiva gamificada para ferias, exposiciones o activaciones presenciales.', tags: ['Evento', 'Instalación'] },
-    { titulo: 'Tu Idea Aquí', desc: 'Cuéntanos tu proyecto y lo convertimos en una experiencia de juego única.', tags: ['A medida', 'Personalizado'] },
   ],
 };
 ---
@@ -85,7 +81,24 @@ const proyecto = {
       <div class="cards">
         {educativo.juegos.map((j) => (
           <article class="card">
-            <div class="card__thumb"><span>▶</span></div>
+            {j.videoId ? (
+              <div class="card__thumb card__thumb--yt" data-vid={j.videoId}>
+                <img
+                  src={`https://img.youtube.com/vi/${j.videoId}/maxresdefault.jpg`}
+                  alt={`Demo: ${j.titulo}`}
+                  loading="lazy"
+                  class="card__thumb-img"
+                />
+                <button class="yt-play" aria-label="Reproducir demo">
+                  <svg viewBox="0 0 68 48" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M66.52 7.74C65.7 4.66 63.27 2.24 60.2 1.42 54.93 0 34 0 34 0S13.07 0 7.8 1.42C4.73 2.24 2.3 4.66 1.48 7.74 0 13.03 0 24 0 24s0 10.97 1.48 16.26c.82 3.08 3.25 5.5 6.32 6.32C13.07 48 34 48 34 48s20.93 0 26.2-1.42c3.07-.82 5.5-3.24 6.32-6.32C68 34.97 68 24 68 24s0-10.97-1.48-16.26z" fill="#ff0000"/>
+                    <path d="M27 34l18-10-18-10v20z" fill="#fff"/>
+                  </svg>
+                </button>
+              </div>
+            ) : (
+              <div class="card__thumb"><span>▶</span></div>
+            )}
             <div class="card__body">
               <div class="card__tags">{j.tags.map((t) => <span class="tag">{t}</span>)}</div>
               <h3 class="card__title">{j.titulo}</h3>
@@ -203,6 +216,13 @@ const proyecto = {
 
   tabsEl?.addEventListener('scroll', updateFade, { passive: true });
   updateFade();
+
+  document.querySelectorAll<HTMLElement>('.card__thumb--yt').forEach((thumb) => {
+    thumb.addEventListener('click', () => {
+      const vid = thumb.dataset.vid;
+      thumb.innerHTML = `<iframe src="https://www.youtube.com/embed/${vid}?autoplay=1&rel=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+    });
+  });
 
   tabButtons.forEach((btn) => {
     btn.addEventListener('click', () => {
@@ -322,6 +342,9 @@ const proyecto = {
     cursor: pointer;
     transition: all 0.3s ease;
     white-space: nowrap;
+    appearance: none;
+    -webkit-appearance: none;
+    -webkit-tap-highlight-color: transparent;
   }
 
   .tab:hover {
@@ -382,6 +405,57 @@ const proyecto = {
     justify-content: center;
     font-size: 2.5rem;
     opacity: 0.5;
+  }
+
+  .card__thumb--yt {
+    position: relative;
+    height: 160px;
+    overflow: hidden;
+    cursor: pointer;
+    opacity: 1;
+    background: #000;
+  }
+
+  .card__thumb-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+
+  .card__thumb--yt:hover .card__thumb-img {
+    transform: scale(1.04);
+  }
+
+  .yt-play {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+
+  .yt-play svg {
+    width: 56px;
+    height: 40px;
+    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.6));
+    transition: transform 0.2s ease;
+  }
+
+  .card__thumb--yt:hover .yt-play svg {
+    transform: scale(1.12);
+  }
+
+  .card__thumb--yt iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
   }
 
   .card__body { padding: 1.25rem; }
