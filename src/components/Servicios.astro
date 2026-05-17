@@ -1,0 +1,514 @@
+---
+const tabs = [
+  { id: 'educativo', label: 'Educativo' },
+  { id: 'marca', label: 'Para Marcas' },
+  { id: 'campana', label: 'Campañas' },
+  { id: 'proyecto', label: 'Proyectos' },
+];
+
+const educativo = {
+  descripcion: 'Videojuegos pedagógicos integrados con plataformas LMS vía SCORM. Seguimiento en tiempo real del progreso, notas y tiempo de cada estudiante.',
+  juegos: [
+    { titulo: 'El Científico Químico', desc: 'Laboratorio virtual interactivo para aprender química experimental.', tags: ['Ciencias', 'Secundaria'] },
+    { titulo: 'Historia en Movimiento', desc: 'Aventura narrativa que recorre eventos históricos de forma inmersiva.', tags: ['Historia', 'Primaria'] },
+    { titulo: 'Mundo Matemático', desc: 'Puzzles y desafíos para reforzar conceptos matemáticos clave.', tags: ['Matemáticas', 'Básica'] },
+  ],
+  metricas: [
+    { label: 'Progreso', valor: '78%', color: 'var(--purple-light)' },
+    { label: 'Nota', valor: '8.4', color: 'var(--cyan)' },
+    { label: 'Tiempo', valor: '2h 14m', color: '#f59e0b' },
+  ],
+  estudiantes: [
+    { nombre: 'Ana García', progreso: 92, nota: 9.1 },
+    { nombre: 'Carlos López', progreso: 74, nota: 7.8 },
+    { nombre: 'María Torres', progreso: 85, nota: 8.5 },
+    { nombre: 'Juan Díaz', progreso: 61, nota: 6.9 },
+  ],
+};
+
+const marca = {
+  descripcion: 'Experiencias de juego que integran la identidad de tu marca de forma natural. Generan recordación, engagement y conexión emocional con tu audiencia.',
+  juegos: [
+    { titulo: 'Brand Runner', desc: 'Endless runner con la estética y personajes de la marca para redes sociales.', tags: ['Branded', 'Social'] },
+    { titulo: 'Quiz de Producto', desc: 'Trivia interactiva que educa al usuario sobre los beneficios del producto.', tags: ['Educación', 'Ventas'] },
+    { titulo: 'Mundo de Marca', desc: 'Exploración en 2D del universo y valores de la empresa.', tags: ['Storytelling', 'Corporativo'] },
+  ],
+};
+
+const campana = {
+  descripcion: 'Videojuegos diseñados para amplificar campañas publicitarias. Aumentan el tiempo de exposición a la marca y generan contenido compartible orgánicamente.',
+  juegos: [
+    { titulo: 'Aventura de Temporada', desc: 'Juego temático de campaña navideña con mecánicas de colección y premios.', tags: ['Campaña', 'Estacional'] },
+    { titulo: 'Reto Viral', desc: 'Minijuego competitivo con tabla de posiciones para activaciones digitales.', tags: ['Viral', 'Competitivo'] },
+    { titulo: 'Misión Lanzamiento', desc: 'Experiencia narrativa que presenta un nuevo producto de forma inmersiva.', tags: ['Lanzamiento', 'Storytelling'] },
+  ],
+};
+
+const proyecto = {
+  descripcion: 'Si tienes una idea que no encaja en las categorías anteriores, la desarrollamos. Desde simuladores técnicos hasta experiencias interactivas para eventos.',
+  juegos: [
+    { titulo: 'Simulador Técnico', desc: 'Entrenamiento de personal en procesos industriales dentro de un entorno seguro.', tags: ['Simulación', 'Capacitación'] },
+    { titulo: 'Experiencia de Evento', desc: 'Instalación interactiva gamificada para ferias, exposiciones o activaciones presenciales.', tags: ['Evento', 'Instalación'] },
+    { titulo: 'Tu Idea Aquí', desc: 'Cuéntanos tu proyecto y lo convertimos en una experiencia de juego única.', tags: ['A medida', 'Personalizado'] },
+  ],
+};
+---
+
+<section class="servicios" id="servicios">
+  <div class="container">
+    <h2 class="section__title">Nuestros Servicios</h2>
+    <p class="section__sub">Videojuegos 2D personalizados para cada objetivo</p>
+
+    <div class="tabs" role="tablist">
+      {tabs.map((tab, i) => (
+        <button
+          class={`tab${i === 0 ? ' tab--active' : ''}`}
+          role="tab"
+          data-tab={tab.id}
+          aria-selected={i === 0 ? 'true' : 'false'}
+        >
+          {tab.label}
+        </button>
+      ))}
+    </div>
+
+    <!-- EDUCATIVO -->
+    <div class="panel panel--active" id="panel-educativo" role="tabpanel">
+      <p class="panel__desc">{educativo.descripcion}</p>
+      <div class="cards">
+        {educativo.juegos.map((j) => (
+          <article class="card">
+            <div class="card__thumb"><span>▶</span></div>
+            <div class="card__body">
+              <div class="card__tags">{j.tags.map((t) => <span class="tag">{t}</span>)}</div>
+              <h3 class="card__title">{j.titulo}</h3>
+              <p class="card__desc">{j.desc}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <div class="scorm">
+        <div class="scorm__header">
+          <h3 class="scorm__title">SCORM & Analíticas</h3>
+          <p class="scorm__sub">Seguimiento en tiempo real integrado con tu LMS</p>
+        </div>
+        <div class="scorm__grid">
+          <div class="metrics">
+            {educativo.metricas.map((m) => (
+              <div class="metric__card">
+                <span class="metric__label">{m.label}</span>
+                <span class="metric__valor" style={`color: ${m.color}`}>{m.valor}</span>
+              </div>
+            ))}
+          </div>
+          <div class="table__wrapper">
+            <table class="table">
+              <thead>
+                <tr><th>Estudiante</th><th>Progreso</th><th>Nota</th></tr>
+              </thead>
+              <tbody>
+                {educativo.estudiantes.map((e) => (
+                  <tr>
+                    <td>{e.nombre}</td>
+                    <td>
+                      <div class="progress__bar"><div class="progress__fill" style={`width: ${e.progreso}%`}></div></div>
+                      <span class="progress__pct">{e.progreso}%</span>
+                    </td>
+                    <td class="nota">{e.nota}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MARCA -->
+    <div class="panel" id="panel-marca" role="tabpanel">
+      <p class="panel__desc">{marca.descripcion}</p>
+      <div class="cards">
+        {marca.juegos.map((j) => (
+          <article class="card">
+            <div class="card__thumb"><span>▶</span></div>
+            <div class="card__body">
+              <div class="card__tags">{j.tags.map((t) => <span class="tag tag--cyan">{t}</span>)}</div>
+              <h3 class="card__title">{j.titulo}</h3>
+              <p class="card__desc">{j.desc}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+
+    <!-- CAMPAÑA -->
+    <div class="panel" id="panel-campana" role="tabpanel">
+      <p class="panel__desc">{campana.descripcion}</p>
+      <div class="cards">
+        {campana.juegos.map((j) => (
+          <article class="card">
+            <div class="card__thumb"><span>▶</span></div>
+            <div class="card__body">
+              <div class="card__tags">{j.tags.map((t) => <span class="tag tag--amber">{t}</span>)}</div>
+              <h3 class="card__title">{j.titulo}</h3>
+              <p class="card__desc">{j.desc}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+
+    <!-- PROYECTO -->
+    <div class="panel" id="panel-proyecto" role="tabpanel">
+      <p class="panel__desc">{proyecto.descripcion}</p>
+      <div class="cards">
+        {proyecto.juegos.map((j) => (
+          <article class="card">
+            <div class="card__thumb"><span>▶</span></div>
+            <div class="card__body">
+              <div class="card__tags">{j.tags.map((t) => <span class="tag tag--green">{t}</span>)}</div>
+              <h3 class="card__title">{j.titulo}</h3>
+              <p class="card__desc">{j.desc}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+      <div class="cta__box">
+        <p>¿Tienes un proyecto en mente? Cuéntanos y lo hacemos realidad.</p>
+        <a href="mailto:multimedialescm@gmail.com" class="btn btn--primary">Contactar</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const tabButtons = document.querySelectorAll<HTMLButtonElement>('.tab');
+  const panels = document.querySelectorAll<HTMLElement>('.panel');
+
+  tabButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.tab;
+
+      tabButtons.forEach((b) => {
+        b.classList.remove('tab--active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      panels.forEach((p) => p.classList.remove('panel--active'));
+
+      btn.classList.add('tab--active');
+      btn.setAttribute('aria-selected', 'true');
+      document.getElementById(`panel-${target}`)?.classList.add('panel--active');
+    });
+  });
+</script>
+
+<style>
+  .servicios {
+    padding: 6rem 0;
+  }
+
+  .section__title {
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    text-align: center;
+    margin-bottom: 0.75rem;
+    background: linear-gradient(135deg, var(--purple-light), var(--cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .section__sub {
+    text-align: center;
+    color: var(--text-muted);
+    margin-bottom: 2.5rem;
+  }
+
+  /* TABS */
+  .tabs {
+    display: flex;
+    gap: 0.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    margin-bottom: 2.5rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .tabs::-webkit-scrollbar { display: none; }
+
+  .tab {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.75rem 1.5rem;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.25s;
+    white-space: nowrap;
+    margin-bottom: -1px;
+  }
+
+  .tab:hover { color: var(--text); }
+
+  .tab--active {
+    color: var(--purple-light);
+    border-bottom-color: var(--purple-light);
+  }
+
+  /* PANELS */
+  .panel { display: none; }
+  .panel--active { display: block; }
+
+  .panel__desc {
+    color: var(--text-muted);
+    font-size: 1rem;
+    max-width: 680px;
+    margin-bottom: 2rem;
+    line-height: 1.7;
+  }
+
+  /* CARDS */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .card {
+    background: var(--bg-card);
+    border: 1px solid rgba(123, 47, 247, 0.2);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    border-color: var(--purple-light);
+    box-shadow: 0 0 28px var(--purple-glow);
+  }
+
+  .card__thumb {
+    height: 160px;
+    background: linear-gradient(135deg, rgba(123,47,247,0.25), rgba(0,212,255,0.1));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    opacity: 0.5;
+  }
+
+  .card__body { padding: 1.25rem; }
+
+  .card__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .tag {
+    font-size: 0.68rem;
+    font-family: var(--font-display);
+    letter-spacing: 0.05em;
+    padding: 0.2rem 0.55rem;
+    border-radius: 4px;
+    background: rgba(123,47,247,0.12);
+    border: 1px solid rgba(123,47,247,0.3);
+    color: var(--purple-light);
+  }
+
+  .tag--cyan {
+    background: rgba(0,212,255,0.08);
+    border-color: rgba(0,212,255,0.3);
+    color: var(--cyan);
+  }
+
+  .tag--amber {
+    background: rgba(245,158,11,0.08);
+    border-color: rgba(245,158,11,0.3);
+    color: #f59e0b;
+  }
+
+  .tag--green {
+    background: rgba(52,211,153,0.08);
+    border-color: rgba(52,211,153,0.3);
+    color: #34d399;
+  }
+
+  .card__title {
+    font-size: 1rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .card__desc {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  /* SCORM */
+  .scorm {
+    background: rgba(0,0,0,0.2);
+    border: 1px solid rgba(0,212,255,0.15);
+    border-radius: 16px;
+    padding: 2rem;
+  }
+
+  .scorm__header { margin-bottom: 1.5rem; }
+
+  .scorm__title {
+    font-size: 1.2rem;
+    color: var(--cyan);
+    margin-bottom: 0.3rem;
+  }
+
+  .scorm__sub {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  .scorm__grid {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  .metrics {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .metric__card {
+    background: var(--bg-card);
+    border: 1px solid rgba(123,47,247,0.2);
+    border-radius: 10px;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .metric__label {
+    font-size: 0.72rem;
+    font-family: var(--font-display);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .metric__valor {
+    font-size: 2rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+  }
+
+  .table__wrapper {
+    background: var(--bg-card);
+    border: 1px solid rgba(123,47,247,0.2);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .table th {
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding: 0.9rem 1.25rem;
+    text-align: left;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .table td {
+    padding: 0.85rem 1.25rem;
+    font-size: 0.875rem;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    vertical-align: middle;
+  }
+
+  .table tr:last-child td { border-bottom: none; }
+  .table tr:hover td { background: rgba(123,47,247,0.05); }
+
+  .progress__bar {
+    height: 5px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 3px;
+  }
+
+  .progress__fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--purple), var(--cyan));
+    border-radius: 3px;
+  }
+
+  .progress__pct {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+  }
+
+  .nota {
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--cyan);
+  }
+
+  /* CTA */
+  .cta__box {
+    background: linear-gradient(135deg, rgba(123,47,247,0.15), rgba(0,212,255,0.08));
+    border: 1px solid rgba(123,47,247,0.3);
+    border-radius: 12px;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+
+  .cta__box p {
+    color: var(--text-muted);
+    font-size: 1rem;
+  }
+
+  .btn--primary {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    border-radius: 6px;
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    background: linear-gradient(135deg, var(--purple), var(--purple-light));
+    color: #fff;
+    box-shadow: 0 0 20px var(--purple-glow);
+    transition: all 0.3s;
+    white-space: nowrap;
+  }
+
+  .btn--primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 35px var(--purple-glow);
+  }
+
+  @media (max-width: 768px) {
+    .scorm__grid { grid-template-columns: 1fr; }
+    .metrics { flex-direction: row; flex-wrap: wrap; }
+    .metric__card { flex: 1; min-width: 100px; }
+    .cta__box { flex-direction: column; text-align: center; }
+  }
+</style>
