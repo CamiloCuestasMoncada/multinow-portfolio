@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://multinow-games.web.app/sitemap-index.xml
+Sitemap: https://multinow-games.com/sitemap-index.xml

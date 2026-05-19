@@ -3,7 +3,7 @@ const tabs = [
   { id: 'educativo', label: 'Educativo' },
   { id: 'marca', label: 'Para Marcas' },
   { id: 'campana', label: 'Campañas' },
-  { id: 'proyecto', label: 'Proyectos' },
+  { id: 'proyecto', label: 'A Medida' },
 ];
 
 const educativo = {
@@ -42,7 +42,7 @@ const campana = {
 };
 
 const proyecto = {
-  descripcion: 'Si tienes una idea que no encaja en las categorías anteriores, la desarrollamos. Desde simuladores técnicos hasta experiencias interactivas para eventos.',
+  descripcion: 'Desarrollo de videojuegos y experiencias web interactivas a medida. Si tu idea no encaja en las categorías anteriores, la construimos: simuladores técnicos, experiencias para eventos, minijuegos HTML5 o cualquier mecánica personalizada.',
   juegos: [
     { titulo: 'Simulador Técnico', desc: 'Entrenamiento de personal en procesos industriales dentro de un entorno seguro.', tags: ['Simulación', 'Capacitación'] },
     { titulo: 'Experiencia de Evento', desc: 'Instalación interactiva gamificada para ferias, exposiciones o activaciones presenciales.', tags: ['Evento', 'Instalación'] },
@@ -112,7 +112,7 @@ const proyecto = {
       <div class="scorm">
         <div class="scorm__header">
           <h3 class="scorm__title">+ SCORM a pedido</h3>
-          <p class="scorm__sub">Si tu LMS lo requiere, añadimos integración SCORM. Así luce el reporte de seguimiento que verías en tu plataforma:</p>
+          <p class="scorm__sub">Si tu LMS lo requiere, añadimos integración SCORM. Estos y más reportes de seguimiento que verías en tu plataforma:</p>
         </div>
         <div class="scorm__grid">
           <div class="metrics">
@@ -224,7 +224,7 @@ const proyecto = {
   document.querySelectorAll<HTMLElement>('.card__thumb--yt').forEach((thumb) => {
     thumb.addEventListener('click', () => {
       const vid = thumb.dataset.vid;
-      thumb.innerHTML = `<iframe src="https://www.youtube.com/embed/${vid}?autoplay=1&rel=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+      thumb.innerHTML = `<iframe src="https://www.youtube.com/embed/${vid}?autoplay=1&rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
     });
   });
 
