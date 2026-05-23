@@ -1,0 +1,412 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/Navbar.astro";
+import ServicioHero from "../../components/ServicioHero.astro";
+import Footer from "../../components/Footer.astro";
+import WhatsappFloat from "../../components/WhatsappFloat.astro";
+
+const color = "#0506a6";
+const rgb = "5,6,166";
+const bgFilter =
+  "invert(1) sepia(1) hue-rotate(200deg) saturate(4) brightness(1.5)";
+
+const juegos = [
+  {
+    titulo: "Simulador Técnico",
+    desc: "Entrenamiento de personal en procesos industriales dentro de un entorno seguro.",
+    tags: ["Simulación", "Capacitación"],
+  },
+  {
+    titulo: "Experiencia de Evento",
+    desc: "Instalación interactiva gamificada para ferias, exposiciones o activaciones presenciales.",
+    tags: ["Evento", "Instalación"],
+  },
+];
+
+const posibilidades = [
+  {
+    icon: "🏭",
+    titulo: "Simuladores técnicos",
+    desc: "Entrenamiento de operarios o personal en procesos industriales, médicos o logísticos en un entorno de juego seguro.",
+  },
+  {
+    icon: "🎪",
+    titulo: "Experiencias de evento",
+    desc: "Instalaciones interactivas para ferias, exposiciones y activaciones presenciales que dejan huella.",
+  },
+  {
+    icon: "🌐",
+    titulo: "Minijuegos HTML5",
+    desc: "Juegos embebibles en cualquier web o app, sin necesidad de instalación ni plataformas externas.",
+  },
+  {
+    icon: "🕹️",
+    titulo: "Mecánica personalizada",
+    desc: "Si tu idea no encaja en ninguna categoría, la diseñamos desde cero contigo.",
+  },
+];
+
+const proceso = [
+  {
+    n: "01",
+    titulo: "Briefing",
+    desc: "Nos cuentas tu idea, objetivo y contexto. No necesitas tener todo definido.",
+  },
+  {
+    n: "02",
+    titulo: "Propuesta",
+    desc: "Diseñamos la mecánica, el scope y el presupuesto a medida de tu proyecto.",
+  },
+  {
+    n: "03",
+    titulo: "Prototipo",
+    desc: "Antes de desarrollar el juego completo, validamos la mecánica central contigo.",
+  },
+  {
+    n: "04",
+    titulo: "Entrega final",
+    desc: "Juego completo, documentado y listo para integrarse en tu plataforma o evento.",
+  },
+];
+---
+
+<Layout
+  title="Videojuegos a Medida | Simuladores y Experiencias Interactivas — Multinow"
+  description="Desarrollo de videojuegos y experiencias interactivas completamente a medida. Simuladores técnicos, instalaciones para eventos, minijuegos HTML5 y mecánicas personalizadas."
+  canonical="https://multinow-games.com/servicios/medida"
+>
+  <Navbar />
+  <ServicioHero
+    bg="/bg_engranajes.png"
+    rgb={rgb}
+    bgFilter={bgFilter}
+    title="A Medida"
+    tagline="Tu idea, hecha realidad · Videojuegos y experiencias interactivas completamente personalizadas"
+  />
+
+  <main id="contenido" style={`--accent:${color};--rgb:${rgb};`}>
+    <section class="s-section">
+      <div class="container">
+        <p class="s-desc">
+          Desarrollo de videojuegos y experiencias web interactivas a medida. Si
+          tu idea no encaja en las categorías anteriores, la construimos:
+          simuladores técnicos, experiencias para eventos, minijuegos HTML5 o
+          cualquier mecánica personalizada.
+        </p>
+
+        <h2 class="s-subtitle">Portafolio de algunos de nuestros trabajos</h2>
+        <div class="s-cards">
+          {
+            juegos.map((j) => (
+              <article class="s-card">
+                <div class="s-card__thumb">
+                  <span>▶</span>
+                </div>
+                <div class="s-card__body">
+                  <div class="s-card__tags">
+                    {j.tags.map((t) => (
+                      <span class="tag">{t}</span>
+                    ))}
+                  </div>
+                  <h3 class="s-card__title">{j.titulo}</h3>
+                  <p class="s-card__desc">{j.desc}</p>
+                </div>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="s-section s-section--alt">
+      <div class="container">
+        <h2 class="s-section__title">¿Qué podemos construir?</h2>
+        <p class="s-section__sub">
+          Si lo puedes imaginar, podemos diseñarlo y desarrollarlo.
+        </p>
+        <div class="posibilidades">
+          {
+            posibilidades.map((p) => (
+              <div class="posibilidad__card">
+                <span class="posibilidad__icon">{p.icon}</span>
+                <h3 class="posibilidad__titulo">{p.titulo}</h3>
+                <p class="posibilidad__desc">{p.desc}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="s-section">
+      <div class="container">
+        <h2 class="s-section__title">¿Cómo trabajamos?</h2>
+        <p class="s-section__sub">
+          Un proceso claro de inicio a entrega, sin sorpresas.
+        </p>
+        <div class="proceso">
+          {
+            proceso.map((p) => (
+              <div class="paso">
+                <span class="paso__n">{p.n}</span>
+                <h3 class="paso__titulo">{p.titulo}</h3>
+                <p class="paso__desc">{p.desc}</p>
+              </div>
+            ))
+          }
+        </div>
+
+        <div class="cta__box">
+          <p>¿Listo para convertir tu idea en un videojuego?</p>
+          <a
+            href="https://wa.me/573155521479?text=Hola%20Multinow%2C%20tengo%20una%20idea%20para%20un%20videojuego%20a%20medida.%20%C2%BFPodemos%20hablar%3F"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn--primary">Cuéntanos tu idea</a
+          >
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+  <WhatsappFloat />
+</Layout>
+
+<style>
+  main {
+    background: var(--bg-dark);
+  }
+
+  .s-section {
+    padding: 5rem 0;
+  }
+  .s-section--alt {
+    background: rgba(255, 255, 255, 0.02);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .s-section__title {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    text-align: center;
+    margin-bottom: 0.6rem;
+    background: linear-gradient(135deg, var(--accent), #fff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .s-section__sub {
+    text-align: center;
+    color: var(--text-muted);
+    margin-bottom: 3rem;
+  }
+
+  .s-desc {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    max-width: 720px;
+    line-height: 1.8;
+    margin-bottom: 3rem;
+  }
+  .s-subtitle {
+    font-size: 0.75rem;
+    font-family: var(--font-display);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+    padding-left: 0.75rem;
+    border-left: 2px solid var(--accent);
+  }
+
+  .s-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+  .s-card {
+    background: var(--bg-card);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    overflow: hidden;
+    transition:
+      transform 0.3s,
+      border-color 0.3s,
+      box-shadow 0.3s;
+  }
+  .s-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent);
+    box-shadow: 0 0 28px rgba(var(--rgb), 0.3);
+  }
+  .s-card__thumb {
+    height: 180px;
+    background: linear-gradient(
+      135deg,
+      rgba(var(--rgb), 0.2),
+      rgba(0, 212, 255, 0.08)
+    );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    opacity: 0.4;
+  }
+  .s-card__body {
+    padding: 1.25rem;
+  }
+  .s-card__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 0.6rem;
+  }
+  .tag {
+    font-size: 0.68rem;
+    font-family: var(--font-display);
+    letter-spacing: 0.05em;
+    padding: 0.2rem 0.55rem;
+    border-radius: 4px;
+    background: rgba(var(--rgb), 0.15);
+    border: 1px solid rgba(var(--rgb), 0.35);
+    color: #818cf8;
+  }
+  .s-card__title {
+    font-size: 1rem;
+    margin-bottom: 0.4rem;
+  }
+  .s-card__desc {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  /* POSIBILIDADES */
+  .posibilidades {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+  }
+  .posibilidad__card {
+    background: var(--bg-card);
+    border: 1px solid rgba(var(--rgb), 0.2);
+    border-radius: 14px;
+    padding: 1.75rem 1.5rem;
+    text-align: center;
+    transition:
+      border-color 0.3s,
+      box-shadow 0.3s;
+  }
+  .posibilidad__card:hover {
+    border-color: rgba(var(--rgb), 0.5);
+    box-shadow: 0 0 20px rgba(var(--rgb), 0.15);
+  }
+  .posibilidad__icon {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 0.75rem;
+  }
+  .posibilidad__titulo {
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+    color: #fff;
+  }
+  .posibilidad__desc {
+    font-size: 0.83rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  /* PROCESO */
+  .proceso {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+  .paso {
+    background: var(--bg-card);
+    border: 1px solid rgba(var(--rgb), 0.2);
+    border-radius: 14px;
+    padding: 1.75rem 1.5rem;
+  }
+  .paso__n {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: rgba(var(--rgb), 0.3);
+    line-height: 1;
+    display: block;
+    margin-bottom: 0.75rem;
+  }
+  .paso__titulo {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: #fff;
+  }
+  .paso__desc {
+    font-size: 0.83rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  .cta__box {
+    background: linear-gradient(
+      135deg,
+      rgba(var(--rgb), 0.12),
+      rgba(0, 212, 255, 0.06)
+    );
+    border: 1px solid rgba(var(--rgb), 0.25);
+    border-radius: 12px;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+  .cta__box p {
+    color: var(--text-muted);
+    font-size: 1rem;
+  }
+  .btn--primary {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    border-radius: 6px;
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    background: var(--accent);
+    color: #fff;
+    box-shadow: 0 0 20px rgba(var(--rgb), 0.4);
+    transition: all 0.3s;
+    white-space: nowrap;
+  }
+  .btn--primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 35px rgba(var(--rgb), 0.6);
+  }
+
+  @media (max-width: 900px) {
+    .posibilidades {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .proceso {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 600px) {
+    .posibilidades {
+      grid-template-columns: 1fr;
+    }
+    .proceso {
+      grid-template-columns: 1fr;
+    }
+    .cta__box {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+</style>

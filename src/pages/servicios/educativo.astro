@@ -1,0 +1,413 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import ServicioHero from '../../components/ServicioHero.astro';
+import Footer from '../../components/Footer.astro';
+import WhatsappFloat from '../../components/WhatsappFloat.astro';
+
+const color    = '#9373cb';
+const rgb      = '147,115,203';
+const bgFilter = 'invert(1) sepia(1) hue-rotate(240deg) saturate(3) brightness(1.4)';
+
+const videos = [
+  { titulo: 'Juego de Química',    desc: 'Gameplay: fragmento de un Laboratorio virtual interactivo para aprender química básica.',                                       tags: ['Ciencias', 'Secundaria'], videoId: '7w4wpHoLdf8' },
+  { titulo: 'Finanzas Personales', desc: 'Gameplay: fragmento de un Simulador de decisiones financieras para aprender a gestionar ingresos, gastos y ahorro.',            tags: ['Economía', 'General'],   videoId: 'BW1p48jTwOo' },
+];
+
+const metricas = [
+  { label: 'Progreso', valor: '78%',    color: '#a78bfa' },
+  { label: 'Nota',     valor: '8.4',    color: '#00d4ff' },
+  { label: 'Tiempo',   valor: '2h 14m', color: '#f59e0b' },
+];
+
+const estudiantes = [
+  { nombre: 'Ana García',    progreso: 92, nota: 9.1 },
+  { nombre: 'Carlos López',  progreso: 74, nota: 7.8 },
+  { nombre: 'María Torres',  progreso: 85, nota: 8.5 },
+  { nombre: 'Juan Díaz',     progreso: 61, nota: 6.9 },
+];
+
+const proceso = [
+  { n: '01', titulo: 'Diagnóstico',      desc: 'Entendemos tu currículo, plataforma y objetivos pedagógicos.' },
+  { n: '02', titulo: 'Diseño de juego',  desc: 'Definimos mecánicas, narrativa y niveles alineados al aprendizaje.' },
+  { n: '03', titulo: 'Desarrollo',       desc: 'Construimos el juego en HTML5, optimizado para web y LMS.' },
+  { n: '04', titulo: 'Entrega y SCORM',  desc: 'Exportamos con integración SCORM lista para subir a tu plataforma.' },
+];
+---
+
+<Layout
+  title="Videojuegos Educativos con SCORM | Gamificación Educativa — Multinow"
+  description="Desarrollamos videojuegos pedagógicos 2D en HTML5 para colegios, universidades y plataformas e-learning. Integración SCORM para reportar progreso, notas y tiempo en tu LMS."
+  canonical="https://multinow-games.com/servicios/educativo"
+>
+  <Navbar />
+  <ServicioHero
+    bg="/bg_cultivo.png"
+    rgb={rgb}
+    bgFilter={bgFilter}
+    title="Educativo"
+    tagline="Gamificación educativa · Videojuegos pedagógicos 2D para colegios, universidades y plataformas e-learning"
+  />
+
+  <main id="contenido" style={`--accent:${color};--rgb:${rgb};`}>
+
+    <!-- DESCRIPCIÓN + PORTAFOLIO -->
+    <section class="s-section">
+      <div class="container">
+        <p class="s-desc">
+          Desarrollamos videojuegos pedagógicos en 2D exportados en HTML5, listos para integrarse en cualquier plataforma web o aula virtual. Si tu institución usa un LMS, podemos agregar compatibilidad SCORM a pedido para que el juego reporte progreso, notas y tiempo directamente en tu plataforma.
+        </p>
+
+        <h2 class="s-subtitle">Portafolio de algunos de nuestros trabajos</h2>
+        <div class="s-cards">
+          {videos.map((v) => (
+            <article class="s-card">
+              <div class="s-card__thumb s-card__thumb--yt" data-vid={v.videoId}>
+                <img src={`https://img.youtube.com/vi/${v.videoId}/maxresdefault.jpg`} alt={`Demo: ${v.titulo}`} loading="lazy" />
+                <button class="yt-play" aria-label="Reproducir demo">
+                  <svg viewBox="0 0 68 48" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M66.52 7.74C65.7 4.66 63.27 2.24 60.2 1.42 54.93 0 34 0 34 0S13.07 0 7.8 1.42C4.73 2.24 2.3 4.66 1.48 7.74 0 13.03 0 24 0 24s0 10.97 1.48 16.26c.82 3.08 3.25 5.5 6.32 6.32C13.07 48 34 48 34 48s20.93 0 26.2-1.42c3.07-.82 5.5-3.24 6.32-6.32C68 34.97 68 24 68 24s0-10.97-1.48-16.26z" fill="#ff0000"/>
+                    <path d="M27 34l18-10-18-10v20z" fill="#fff"/>
+                  </svg>
+                </button>
+              </div>
+              <div class="s-card__body">
+                <div class="s-card__tags">{v.tags.map((t) => <span class="tag">{t}</span>)}</div>
+                <h3 class="s-card__title">{v.titulo}</h3>
+                <p class="s-card__desc">{v.desc}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <!-- SCORM -->
+        <div class="scorm">
+          <div class="scorm__header">
+            <h3 class="scorm__title">+ SCORM a pedido</h3>
+            <p class="scorm__sub">Si tu LMS lo requiere, añadimos integración SCORM. Estos y más reportes de seguimiento que verías en tu plataforma:</p>
+          </div>
+          <div class="scorm__grid">
+            <div class="metrics">
+              {metricas.map((m) => (
+                <div class="metric__card">
+                  <span class="metric__label">{m.label}</span>
+                  <span class="metric__valor" style={`color:${m.color}`}>{m.valor}</span>
+                </div>
+              ))}
+            </div>
+            <div class="table__wrapper">
+              <table class="table">
+                <thead>
+                  <tr><th>Estudiante</th><th>Progreso</th><th>Nota</th></tr>
+                </thead>
+                <tbody>
+                  {estudiantes.map((e) => (
+                    <tr>
+                      <td>{e.nombre}</td>
+                      <td>
+                        <div class="progress__bar"><div class="progress__fill" style={`width:${e.progreso}%`}></div></div>
+                        <span class="progress__pct">{e.progreso}%</span>
+                      </td>
+                      <td class="nota">{e.nota}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROFUNDIZAR: PROCESO -->
+    <section class="s-section s-section--alt">
+      <div class="container">
+        <h2 class="s-section__title">¿Cómo es el proceso?</h2>
+        <p class="s-section__sub">Del objetivo pedagógico al juego listo para usar en 4 pasos.</p>
+        <div class="proceso">
+          {proceso.map((p) => (
+            <div class="paso">
+              <span class="paso__n">{p.n}</span>
+              <h3 class="paso__titulo">{p.titulo}</h3>
+              <p class="paso__desc">{p.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- PROFUNDIZAR: PARA QUIÉN -->
+    <section class="s-section">
+      <div class="container">
+        <h2 class="s-section__title">¿Para quién es este servicio?</h2>
+        <div class="targets">
+          <div class="target__card">
+            <span class="target__icon">🏫</span>
+            <h3>Instituciones educativas</h3>
+            <p>Colegios y universidades que buscan reforzar contenidos de forma motivadora y medible.</p>
+          </div>
+          <div class="target__card">
+            <span class="target__icon">💻</span>
+            <h3>Plataformas e-learning</h3>
+            <p>Empresas de educación digital que necesitan contenido interactivo diferenciador para sus cursos.</p>
+          </div>
+          <div class="target__card">
+            <span class="target__icon">🏢</span>
+            <h3>Empresas con capacitación</h3>
+            <p>Organizaciones que capacitan equipos y quieren hacerlo de forma más efectiva y entretenida.</p>
+          </div>
+        </div>
+
+        <div class="cta__box">
+          <p>¿Quieres saber cómo podemos adaptar un videojuego a tu currículo?</p>
+          <a href="https://wa.me/573155521479?text=Hola%20Multinow%2C%20me%20interesa%20un%20videojuego%20educativo.%20%C2%BFPodemos%20hablar%3F" target="_blank" rel="noopener noreferrer" class="btn--primary">Contactar por WhatsApp</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <Footer />
+  <WhatsappFloat />
+</Layout>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.s-card__thumb--yt').forEach((thumb) => {
+    thumb.addEventListener('click', () => {
+      const vid = thumb.dataset.vid;
+      thumb.innerHTML = `<iframe src="https://www.youtube.com/embed/${vid}?autoplay=1&rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
+    });
+  });
+</script>
+
+<style>
+  main { background: var(--bg-dark); }
+
+  /* SECTIONS */
+  .s-section { padding: 5rem 0; }
+  .s-section--alt { background: rgba(255,255,255,0.02); border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); }
+
+  .s-section__title {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    text-align: center;
+    margin-bottom: 0.6rem;
+    background: linear-gradient(135deg, var(--accent), #fff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .s-section__sub {
+    text-align: center;
+    color: var(--text-muted);
+    margin-bottom: 3rem;
+  }
+
+  /* DESCRIPTION */
+  .s-desc {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    max-width: 720px;
+    line-height: 1.8;
+    margin-bottom: 3rem;
+  }
+
+  .s-subtitle {
+    font-size: 0.75rem;
+    font-family: var(--font-display);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+    padding-left: 0.75rem;
+    border-left: 2px solid var(--accent);
+  }
+
+  /* CARDS */
+  .s-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .s-card {
+    background: var(--bg-card);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+  }
+
+  .s-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent);
+    box-shadow: 0 0 28px rgba(var(--rgb), 0.25);
+  }
+
+  .s-card__thumb {
+    height: 180px;
+    background: linear-gradient(135deg, rgba(var(--rgb),0.2), rgba(0,212,255,0.08));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2.5rem; opacity: 0.5;
+  }
+
+  .s-card__thumb--yt {
+    position: relative;
+    height: 180px;
+    overflow: hidden;
+    cursor: pointer;
+    opacity: 1;
+    background: #000;
+  }
+
+  .s-card__thumb--yt img {
+    width: 100%; height: 100%;
+    object-fit: cover; display: block;
+    transition: transform 0.3s ease;
+  }
+
+  .s-card__thumb--yt:hover img { transform: scale(1.04); }
+
+  .yt-play {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    background: transparent; border: none; cursor: pointer;
+  }
+
+  .yt-play svg { width: 56px; height: 40px; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.6)); transition: transform 0.2s; }
+  .s-card__thumb--yt:hover .yt-play svg { transform: scale(1.12); }
+
+  .s-card__thumb--yt iframe { width: 100%; height: 100%; border: none; display: block; }
+
+  .s-card__body { padding: 1.25rem; }
+  .s-card__tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.6rem; }
+  .tag {
+    font-size: 0.68rem; font-family: var(--font-display);
+    letter-spacing: 0.05em; padding: 0.2rem 0.55rem; border-radius: 4px;
+    background: rgba(var(--rgb),0.12); border: 1px solid rgba(var(--rgb),0.3);
+    color: var(--accent);
+  }
+  .s-card__title { font-size: 1rem; margin-bottom: 0.4rem; }
+  .s-card__desc  { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+
+  /* SCORM */
+  .scorm {
+    background: rgba(0,0,0,0.25);
+    border: 1px solid rgba(0,212,255,0.15);
+    border-radius: 16px; padding: 2rem;
+  }
+  .scorm__header { margin-bottom: 1.5rem; }
+  .scorm__title  { font-size: 1.2rem; color: var(--cyan); margin-bottom: 0.3rem; }
+  .scorm__sub    { font-size: 0.85rem; color: var(--text-muted); }
+
+  .scorm__grid {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 1.5rem; align-items: start;
+  }
+
+  .metrics { display: flex; flex-direction: column; gap: 1rem; }
+  .metric__card {
+    background: var(--bg-card);
+    border: 1px solid rgba(var(--rgb),0.2);
+    border-radius: 10px; padding: 1.25rem;
+    display: flex; flex-direction: column; gap: 0.4rem;
+  }
+  .metric__label { font-size: 0.72rem; font-family: var(--font-display); letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); }
+  .metric__valor { font-size: 2rem; font-family: var(--font-display); font-weight: 700; }
+
+  .table__wrapper { background: var(--bg-card); border: 1px solid rgba(var(--rgb),0.2); border-radius: 12px; overflow: hidden; }
+  .table { width: 100%; border-collapse: collapse; }
+  .table th { font-family: var(--font-display); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); padding: 0.9rem 1.25rem; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.05); }
+  .table td { padding: 0.85rem 1.25rem; font-size: 0.875rem; border-bottom: 1px solid rgba(255,255,255,0.04); vertical-align: middle; }
+  .table tr:last-child td { border-bottom: none; }
+  .table tr:hover td { background: rgba(var(--rgb),0.05); }
+  .progress__bar { height: 5px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden; margin-bottom: 3px; }
+  .progress__fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--cyan)); border-radius: 3px; }
+  .progress__pct { font-size: 0.72rem; color: var(--text-muted); }
+  .nota { font-family: var(--font-display); font-weight: 700; color: var(--cyan); }
+
+  /* PROCESO */
+  .proceso {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+
+  .paso {
+    background: var(--bg-card);
+    border: 1px solid rgba(var(--rgb),0.15);
+    border-radius: 14px;
+    padding: 1.75rem 1.5rem;
+    position: relative;
+  }
+
+  .paso__n {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: rgba(var(--rgb),0.25);
+    line-height: 1;
+    display: block;
+    margin-bottom: 0.75rem;
+  }
+
+  .paso__titulo { font-size: 1rem; margin-bottom: 0.5rem; color: #fff; }
+  .paso__desc   { font-size: 0.83rem; color: var(--text-muted); line-height: 1.6; }
+
+  /* TARGETS */
+  .targets {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    margin-bottom: 3rem;
+  }
+
+  .target__card {
+    background: var(--bg-card);
+    border: 1px solid rgba(var(--rgb),0.15);
+    border-radius: 14px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+
+  .target__card:hover {
+    border-color: rgba(var(--rgb),0.4);
+    box-shadow: 0 0 20px rgba(var(--rgb),0.12);
+  }
+
+  .target__icon { font-size: 2rem; display: block; margin-bottom: 0.75rem; }
+  .target__card h3 { font-size: 1rem; margin-bottom: 0.5rem; }
+  .target__card p  { font-size: 0.83rem; color: var(--text-muted); line-height: 1.6; }
+
+  /* CTA */
+  .cta__box {
+    background: linear-gradient(135deg, rgba(var(--rgb),0.12), rgba(0,212,255,0.06));
+    border: 1px solid rgba(var(--rgb),0.25);
+    border-radius: 12px; padding: 2rem;
+    display: flex; align-items: center; justify-content: space-between; gap: 2rem;
+  }
+  .cta__box p { color: var(--text-muted); font-size: 1rem; }
+
+  .btn--primary {
+    display: inline-block; padding: 0.8rem 2rem; border-radius: 6px;
+    font-family: var(--font-display); font-size: 0.8rem; font-weight: 700;
+    letter-spacing: 0.05em; background: var(--accent); color: #fff;
+    box-shadow: 0 0 20px rgba(var(--rgb),0.4); transition: all 0.3s; white-space: nowrap;
+  }
+  .btn--primary:hover { transform: translateY(-2px); box-shadow: 0 0 35px rgba(var(--rgb),0.6); }
+
+  @media (max-width: 900px) {
+    .proceso { grid-template-columns: repeat(2, 1fr); }
+    .targets { grid-template-columns: 1fr; }
+    .scorm__grid { grid-template-columns: 1fr; }
+    .metrics { flex-direction: row; flex-wrap: wrap; }
+    .metric__card { flex: 1; min-width: 100px; }
+  }
+  @media (max-width: 600px) {
+    .proceso { grid-template-columns: 1fr; }
+    .cta__box { flex-direction: column; text-align: center; }
+  }
+</style>

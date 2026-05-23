@@ -1,0 +1,161 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import ServicioHero from '../../components/ServicioHero.astro';
+import Footer from '../../components/Footer.astro';
+import WhatsappFloat from '../../components/WhatsappFloat.astro';
+
+const color    = '#1371ef';
+const rgb      = '19,113,239';
+const bgFilter = 'invert(1) sepia(1) hue-rotate(180deg) saturate(4) brightness(1.6)';
+
+const juegos = [
+  { titulo: 'Aventura de Temporada', desc: 'Juego temático de campaña navideña con mecánicas de colección y premios.', tags: ['Campaña', 'Estacional'] },
+  { titulo: 'Reto Viral',            desc: 'Minijuego competitivo con tabla de posiciones para activaciones digitales.', tags: ['Viral', 'Competitivo'] },
+];
+
+const resultados = [
+  { valor: '3×', label: 'Más tiempo de exposición a la marca vs. un banner estático' },
+  { valor: '↑', label: 'Contenido compartible generado orgánicamente por los usuarios' },
+  { valor: '🏆', label: 'Tablas de posiciones que activan la competencia y el regreso' },
+  { valor: '📊', label: 'Datos de juego para medir el alcance real de la campaña' },
+];
+
+const tipos = [
+  { tag: 'Estacional',   titulo: 'Campaña de temporada', desc: 'Navidad, San Valentín, Halloween — juegos temáticos que refuerzan el momento del año con la identidad de la marca.' },
+  { tag: 'Lanzamiento',  titulo: 'Activación de producto', desc: 'Un videojuego exclusivo para el lanzamiento genera expectativa, prensa y tiempo de atención muy por encima del promedio.' },
+  { tag: 'Siempre activa', titulo: 'Reto viral permanente', desc: 'Minijuegos con ranking público que mantienen el engagement de la comunidad semana tras semana.' },
+  { tag: 'Evento',       titulo: 'Activación presencial', desc: 'Juegos en pantallas gigantes o quioscos en tienda que convierten el punto de venta en una experiencia.' },
+];
+---
+
+<Layout
+  title="Videojuegos para Campañas Publicitarias | Activaciones Gamificadas — Multinow"
+  description="Videojuegos diseñados para amplificar campañas publicitarias. Aumentan el tiempo de exposición a la marca y generan contenido compartible orgánicamente."
+  canonical="https://multinow-games.com/servicios/campanas"
+>
+  <Navbar />
+  <ServicioHero
+    bg="/bgMecanicaTRansportadora.png"
+    rgb={rgb}
+    bgFilter={bgFilter}
+    title="Campañas"
+    tagline="Activaciones digitales gamificadas · Videojuegos que amplifican el alcance de tu campaña"
+  />
+
+  <main id="contenido" style={`--accent:${color};--rgb:${rgb};`}>
+
+    <section class="s-section">
+      <div class="container">
+        <p class="s-desc">
+          Videojuegos diseñados para amplificar campañas publicitarias. Aumentan el tiempo de exposición a la marca y generan contenido compartible orgánicamente.
+        </p>
+
+        <h2 class="s-subtitle">Portafolio de algunos de nuestros trabajos</h2>
+        <div class="s-cards">
+          {juegos.map((j) => (
+            <article class="s-card">
+              <div class="s-card__thumb"><span>▶</span></div>
+              <div class="s-card__body">
+                <div class="s-card__tags">{j.tags.map((t) => <span class="tag">{t}</span>)}</div>
+                <h3 class="s-card__title">{j.titulo}</h3>
+                <p class="s-card__desc">{j.desc}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="s-section s-section--alt">
+      <div class="container">
+        <h2 class="s-section__title">¿Qué resultados puedes esperar?</h2>
+        <p class="s-section__sub">Un videojuego bien diseñado hace lo que ningún banner puede.</p>
+        <div class="resultados">
+          {resultados.map((r) => (
+            <div class="resultado__card">
+              <span class="resultado__valor">{r.valor}</span>
+              <p class="resultado__label">{r.label}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="s-section">
+      <div class="container">
+        <h2 class="s-section__title">Tipos de activación</h2>
+        <p class="s-section__sub">Adaptamos el juego al momento y objetivo de tu campaña.</p>
+        <div class="tipos">
+          {tipos.map((t) => (
+            <div class="tipo__card">
+              <span class="tipo__tag">{t.tag}</span>
+              <h3 class="tipo__titulo">{t.titulo}</h3>
+              <p class="tipo__desc">{t.desc}</p>
+            </div>
+          ))}
+        </div>
+
+        <div class="cta__box">
+          <p>¿Tienes una campaña próxima y quieres potenciarla con un videojuego?</p>
+          <a href="https://wa.me/573155521479?text=Hola%20Multinow%2C%20me%20interesa%20un%20videojuego%20para%20mi%20campa%C3%B1a.%20%C2%BFPodemos%20hablar%3F" target="_blank" rel="noopener noreferrer" class="btn--primary">Contactar por WhatsApp</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <Footer />
+  <WhatsappFloat />
+</Layout>
+
+<style>
+  main { background: var(--bg-dark); }
+
+  .s-section { padding: 5rem 0; }
+  .s-section--alt { background: rgba(255,255,255,0.02); border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); }
+
+  .s-section__title { font-size: clamp(1.6rem, 3vw, 2.2rem); text-align: center; margin-bottom: 0.6rem; background: linear-gradient(135deg, var(--accent), #fff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .s-section__sub { text-align: center; color: var(--text-muted); margin-bottom: 3rem; }
+
+  .s-desc { font-size: 1.05rem; color: var(--text-muted); max-width: 720px; line-height: 1.8; margin-bottom: 3rem; }
+  .s-subtitle { font-size: 0.75rem; font-family: var(--font-display); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1.5rem; padding-left: 0.75rem; border-left: 2px solid var(--accent); }
+
+  .s-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+  .s-card { background: var(--bg-card); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; overflow: hidden; transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s; }
+  .s-card:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: 0 0 28px rgba(var(--rgb),0.25); }
+  .s-card__thumb { height: 180px; background: linear-gradient(135deg, rgba(var(--rgb),0.2), rgba(0,212,255,0.08)); display: flex; align-items: center; justify-content: center; font-size: 2.5rem; opacity: 0.4; }
+  .s-card__body { padding: 1.25rem; }
+  .s-card__tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.6rem; }
+  .tag { font-size: 0.68rem; font-family: var(--font-display); letter-spacing: 0.05em; padding: 0.2rem 0.55rem; border-radius: 4px; background: rgba(var(--rgb),0.12); border: 1px solid rgba(var(--rgb),0.3); color: var(--accent); }
+  .s-card__title { font-size: 1rem; margin-bottom: 0.4rem; }
+  .s-card__desc  { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+
+  /* RESULTADOS */
+  .resultados { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; }
+  .resultado__card { background: var(--bg-card); border: 1px solid rgba(var(--rgb),0.2); border-radius: 14px; padding: 2rem 1.5rem; text-align: center; }
+  .resultado__valor { font-size: 2.2rem; font-family: var(--font-display); font-weight: 800; color: var(--accent); display: block; margin-bottom: 0.75rem; }
+  .resultado__label { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+
+  /* TIPOS */
+  .tipos { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-bottom: 3rem; }
+  .tipo__card { background: var(--bg-card); border: 1px solid rgba(var(--rgb),0.15); border-radius: 14px; padding: 1.75rem; display: flex; flex-direction: column; gap: 0.6rem; transition: border-color 0.3s, box-shadow 0.3s; }
+  .tipo__card:hover { border-color: rgba(var(--rgb),0.4); box-shadow: 0 0 20px rgba(var(--rgb),0.12); }
+  .tipo__tag { display: inline-block; font-size: 0.68rem; font-family: var(--font-display); letter-spacing: 0.08em; text-transform: uppercase; padding: 0.25rem 0.7rem; border-radius: 20px; background: rgba(var(--rgb),0.15); border: 1px solid rgba(var(--rgb),0.3); color: var(--accent); align-self: flex-start; }
+  .tipo__titulo { font-size: 1rem; color: #fff; }
+  .tipo__desc   { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+
+  .cta__box { background: linear-gradient(135deg, rgba(var(--rgb),0.12), rgba(0,212,255,0.06)); border: 1px solid rgba(var(--rgb),0.25); border-radius: 12px; padding: 2rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; }
+  .cta__box p { color: var(--text-muted); font-size: 1rem; }
+  .btn--primary { display: inline-block; padding: 0.8rem 2rem; border-radius: 6px; font-family: var(--font-display); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; background: var(--accent); color: #fff; box-shadow: 0 0 20px rgba(var(--rgb),0.4); transition: all 0.3s; white-space: nowrap; }
+  .btn--primary:hover { transform: translateY(-2px); box-shadow: 0 0 35px rgba(var(--rgb),0.6); }
+
+  @media (max-width: 900px) {
+    .resultados { grid-template-columns: repeat(2, 1fr); }
+    .tipos      { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    .resultados { grid-template-columns: 1fr; }
+    .cta__box   { flex-direction: column; text-align: center; }
+  }
+</style>

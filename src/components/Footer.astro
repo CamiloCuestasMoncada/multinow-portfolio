@@ -1,15 +1,18 @@
 ---
 ---
 <footer class="footer">
+  <div class="footer__bg-img"></div>
+  <div class="footer__bg-color"></div>
+  <div class="footer__bg-overlay"></div>
   <div class="container footer__inner">
     <div class="footer__brand">
       <img src="/logo.png" alt="Multinow" class="footer__logo" />
       <p class="footer__tagline">Videojuegos a medida en 2D</p>
     </div>
     <nav class="footer__nav">
-      <a href="#inicio">Inicio</a>
-      <a href="#servicios">Servicios</a>
-      <a href="#soluciones">Soluciones</a>
+      <a href="/#inicio">Inicio</a>
+      <a href="/#servicios">Servicios</a>
+      <a href="/#soluciones">Soluciones</a>
     </nav>
     <div class="footer__contact">
       <span id="footer-email" class="footer__email"></span>
@@ -22,26 +25,77 @@
 </footer>
 
 <script>
-  const u = 'contacto';
-  const d = 'multinow-games.com';
-  const el = document.getElementById('footer-email');
-  if (el) {
+  function initFooterEmail() {
+    const el = document.getElementById('footer-email');
+    if (!el) return;
+    const u = 'contacto';
+    const d = 'multinow-games.com';
     const a = document.createElement('a');
     a.href = `mailto:${u}@${d}`;
     a.textContent = `${u}@${d}`;
     a.className = 'footer__email';
     el.replaceWith(a);
   }
+
+  document.addEventListener('astro:page-load', initFooterEmail);
 </script>
 
 <style>
   .footer {
-    border-top: 1px solid rgba(123, 47, 247, 0.2);
+    position: relative;
+    overflow: hidden;
+    border-top: 1px solid rgba(123, 47, 247, 0.3);
     padding: 3rem 0 1.5rem;
-    background: rgba(0, 0, 0, 0.3);
+    background: var(--bg-dark);
+  }
+
+  .footer__bg-img {
+    position: absolute;
+    inset: 0;
+    background-image: url('/bgMecanicas.png');
+    background-size: cover;
+    background-position: center;
+    mix-blend-mode: screen;
+    opacity: 0.10;
+    filter: invert(1) sepia(1) hue-rotate(250deg) saturate(5) brightness(0.75) contrast(1.2);
+    z-index: 0;
+  }
+
+  .footer__bg-color {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, #3b95e3, #e871f1, #3b95e3);
+    background-size: 200% 100%;
+    mix-blend-mode: color;
+    opacity: 0.95;
+    z-index: 1;
+    pointer-events: none;
+    animation: footerGradient 15s ease-in-out infinite;
+  }
+
+  /* Fade superior + oscurecimiento uniforme para contraste de textos */
+  .footer__bg-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      var(--bg-dark) 0%,
+      rgba(7,7,26,0.62) 30%,
+      rgba(7,7,26,0.62) 100%
+    );
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  @keyframes footerGradient {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
   }
 
   .footer__inner {
+    position: relative;
+    z-index: 3;
     display: grid;
     grid-template-columns: 1fr auto auto;
     gap: 3rem;
@@ -56,7 +110,8 @@
 
   .footer__tagline {
     font-size: 0.8rem;
-    color: var(--text-muted);
+    color: rgba(255,255,255,0.7);
+    text-shadow: 0 1px 10px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.7);
   }
 
   .footer__nav {
@@ -66,11 +121,12 @@
 
   .footer__nav a {
     font-size: 0.875rem;
-    color: var(--text-muted);
+    color: rgba(255,255,255,0.72);
     transition: color 0.2s;
     font-family: var(--font-display);
     font-size: 0.75rem;
     letter-spacing: 0.05em;
+    text-shadow: 0 1px 8px rgba(0,0,0,0.9);
   }
 
   .footer__nav a:hover {
@@ -81,6 +137,7 @@
     font-size: 0.875rem;
     color: var(--cyan);
     transition: opacity 0.2s;
+    text-shadow: 0 1px 8px rgba(0,0,0,0.9);
   }
 
   .footer__email:hover {
@@ -88,11 +145,14 @@
   }
 
   .footer__bottom {
+    position: relative;
+    z-index: 3;
     text-align: center;
     font-size: 0.75rem;
-    color: var(--text-muted);
+    color: rgba(255,255,255,0.55);
+    text-shadow: 0 1px 8px rgba(0,0,0,0.9);
     padding-top: 1.5rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
     display: flex;
     flex-direction: column;
     gap: 0.35rem;
@@ -100,7 +160,8 @@
 
   .footer__location {
     font-size: 0.72rem;
-    color: rgba(148, 163, 184, 0.6);
+    color: rgba(200, 210, 230, 0.55);
+    text-shadow: 0 1px 6px rgba(0,0,0,0.9);
   }
 
   @media (max-width: 768px) {

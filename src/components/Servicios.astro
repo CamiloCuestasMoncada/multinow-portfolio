@@ -1,53 +1,66 @@
 ---
-const tabs = [
-  { id: 'educativo', label: 'Educativo' },
-  { id: 'marca', label: 'Para Marcas' },
-  { id: 'campana', label: 'Campañas' },
-  { id: 'proyecto', label: 'A Medida' },
+const servicios = [
+  {
+    id: 'educativo',
+    label: 'Educativo',
+    tagline: 'Gamificación educativa · Aprendizaje a través del juego',
+    desc: 'Videojuegos pedagógicos 2D para colegios, universidades y LMS. Integración SCORM para reportar progreso y notas.',
+    bg: '/bg_cultivo.png',
+    c1: 'rgba(147,115,203,0.96)',
+    c2: 'rgba(147,115,203,0.62)',
+    c3: 'rgba(147,115,203,0.08)',
+    glow: 'rgba(147,115,203,0.55)',
+    borderHover: 'rgba(147,115,203,0.75)',
+    bgFilter: 'invert(1) sepia(1) hue-rotate(240deg) saturate(3) brightness(1.4)',
+    href: '/servicios/educativo',
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 9L12 4 2 9l10 5 10-5z"/><path d="M6 11.5V17s2.5 3 6 3 6-3 6-3v-5.5"/><line x1="22" y1="9" x2="22" y2="15"/></svg>`,
+  },
+  {
+    id: 'marcas',
+    label: 'Para Marcas',
+    tagline: 'Branded gaming experiences',
+    desc: 'Juegos que integran tu identidad de marca de forma natural, generando recordación y engagement real con tu audiencia.',
+    bg: '/bg_cafe.png',
+    c1: 'rgba(101,31,207,0.96)',
+    c2: 'rgba(101,31,207,0.62)',
+    c3: 'rgba(101,31,207,0.08)',
+    glow: 'rgba(101,31,207,0.55)',
+    borderHover: 'rgba(101,31,207,0.75)',
+    bgFilter: 'invert(1) sepia(1) hue-rotate(220deg) saturate(4) brightness(1.6)',
+    href: '/servicios/marcas',
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>`,
+  },
+  {
+    id: 'campanas',
+    label: 'Campañas',
+    tagline: 'Activaciones digitales gamificadas',
+    desc: 'Videojuegos que amplifican campañas publicitarias, aumentan la exposición a tu marca y generan contenido compartible.',
+    bg: '/bgMecanicaTRansportadora.png',
+    c1: 'rgba(19,113,239,0.96)',
+    c2: 'rgba(19,113,239,0.62)',
+    c3: 'rgba(19,113,239,0.08)',
+    glow: 'rgba(19,113,239,0.55)',
+    borderHover: 'rgba(19,113,239,0.75)',
+    bgFilter: 'invert(1) sepia(1) hue-rotate(180deg) saturate(4) brightness(1.6)',
+    href: '/servicios/campanas',
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>`,
+  },
+  {
+    id: 'medida',
+    label: 'A Medida',
+    tagline: 'Tu idea, hecha realidad',
+    desc: 'Simuladores técnicos, instalaciones para eventos, minijuegos HTML5 o cualquier mecánica completamente personalizada.',
+    bg: '/bg_engranajes.png',
+    c1: 'rgba(5,6,166,0.96)',
+    c2: 'rgba(5,6,166,0.62)',
+    c3: 'rgba(5,6,166,0.08)',
+    glow: 'rgba(5,6,166,0.55)',
+    borderHover: 'rgba(5,6,166,0.75)',
+    bgFilter: 'invert(1) sepia(1) hue-rotate(200deg) saturate(4) brightness(1.5)',
+    href: '/servicios/medida',
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l9-9"/><path d="M12.5 2.5l1 2 2 1-2 1-1 2-1-2-2-1 2-1z"/><path d="M20 8.5l.5 1 1 .5-1 .5-.5 1-.5-1-1-.5 1-.5z"/><path d="M8 7.5l.5 1 1 .5-1 .5-.5 1-.5-1-1-.5 1-.5z"/></svg>`,
+  },
 ];
-
-const educativo = {
-  descripcion: 'Desarrollamos videojuegos pedagógicos en 2D exportados en HTML5, listos para integrarse en cualquier plataforma web o aula virtual. Si tu institución usa un LMS, podemos agregar compatibilidad SCORM a pedido para que el juego reporte progreso, notas y tiempo directamente en tu plataforma.',
-  juegos: [
-    { titulo: 'Juego de Química', desc: 'Gameplay: fragmento de un Laboratorio virtual interactivo para aprender química básica.', tags: ['Ciencias', 'Secundaria'], videoId: '7w4wpHoLdf8' },
-    { titulo: 'Finanzas Personales', desc: 'Gameplay: fragmento de un Simulador de decisiones financieras para aprender a gestionar ingresos, gastos y ahorro.', tags: ['Economía', 'General'], videoId: 'BW1p48jTwOo' },
-  ],
-  metricas: [
-    { label: 'Progreso', valor: '78%', color: 'var(--purple-light)' },
-    { label: 'Nota', valor: '8.4', color: 'var(--cyan)' },
-    { label: 'Tiempo', valor: '2h 14m', color: '#f59e0b' },
-  ],
-  estudiantes: [
-    { nombre: 'Ana García', progreso: 92, nota: 9.1 },
-    { nombre: 'Carlos López', progreso: 74, nota: 7.8 },
-    { nombre: 'María Torres', progreso: 85, nota: 8.5 },
-    { nombre: 'Juan Díaz', progreso: 61, nota: 6.9 },
-  ],
-};
-
-const marca = {
-  descripcion: 'Experiencias de juego que integran la identidad de tu marca de forma natural. Generan recordación, engagement y conexión emocional con tu audiencia.',
-  juegos: [
-    { titulo: 'Brand Runner', desc: 'Endless runner con la estética y personajes de la marca para redes sociales.', tags: ['Branded', 'Social'] },
-    { titulo: 'Quiz de Producto', desc: 'Trivia interactiva que educa al usuario sobre los beneficios del producto.', tags: ['Educación', 'Ventas'] },
-  ],
-};
-
-const campana = {
-  descripcion: 'Videojuegos diseñados para amplificar campañas publicitarias. Aumentan el tiempo de exposición a la marca y generan contenido compartible orgánicamente.',
-  juegos: [
-    { titulo: 'Aventura de Temporada', desc: 'Juego temático de campaña navideña con mecánicas de colección y premios.', tags: ['Campaña', 'Estacional'] },
-    { titulo: 'Reto Viral', desc: 'Minijuego competitivo con tabla de posiciones para activaciones digitales.', tags: ['Viral', 'Competitivo'] },
-  ],
-};
-
-const proyecto = {
-  descripcion: 'Desarrollo de videojuegos y experiencias web interactivas a medida. Si tu idea no encaja en las categorías anteriores, la construimos: simuladores técnicos, experiencias para eventos, minijuegos HTML5 o cualquier mecánica personalizada.',
-  juegos: [
-    { titulo: 'Simulador Técnico', desc: 'Entrenamiento de personal en procesos industriales dentro de un entorno seguro.', tags: ['Simulación', 'Capacitación'] },
-    { titulo: 'Experiencia de Evento', desc: 'Instalación interactiva gamificada para ferias, exposiciones o activaciones presenciales.', tags: ['Evento', 'Instalación'] },
-  ],
-};
 ---
 
 <section class="servicios" id="servicios">
@@ -55,195 +68,34 @@ const proyecto = {
     <h2 class="section__title">Nuestros Servicios</h2>
     <p class="section__sub">Videojuegos 2D personalizados para cada objetivo</p>
 
-    <div class="tabs__wrapper">
-      <div class="tabs" role="tablist">
-        {tabs.map((tab, i) => (
-          <button
-            class={`tab${i === 0 ? ' tab--active' : ''}`}
-            role="tab"
-            data-tab={tab.id}
-            aria-selected={i === 0 ? 'true' : 'false'}
-          >
-            {tab.label}
-          </button>
-        ))}
-      </div>
-      <div class="tabs__scroll-hint" aria-hidden="true">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="9 18 15 12 9 6"/>
-        </svg>
-      </div>
-    </div>
-
-    <!-- EDUCATIVO -->
-    <div class="panel panel--active" id="panel-educativo" role="tabpanel">
-      <p class="panel__desc">{educativo.descripcion}</p>
-      <h3 class="portfolio__subtitle">Portafolio de algunos de nuestros trabajos</h3>
-      <div class="cards">
-        {educativo.juegos.map((j) => (
-          <article class="card">
-            {j.videoId ? (
-              <div class="card__thumb card__thumb--yt" data-vid={j.videoId}>
-                <img
-                  src={`https://img.youtube.com/vi/${j.videoId}/maxresdefault.jpg`}
-                  alt={`Demo: ${j.titulo}`}
-                  loading="lazy"
-                  class="card__thumb-img"
-                />
-                <button class="yt-play" aria-label="Reproducir demo">
-                  <svg viewBox="0 0 68 48" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M66.52 7.74C65.7 4.66 63.27 2.24 60.2 1.42 54.93 0 34 0 34 0S13.07 0 7.8 1.42C4.73 2.24 2.3 4.66 1.48 7.74 0 13.03 0 24 0 24s0 10.97 1.48 16.26c.82 3.08 3.25 5.5 6.32 6.32C13.07 48 34 48 34 48s20.93 0 26.2-1.42c3.07-.82 5.5-3.24 6.32-6.32C68 34.97 68 24 68 24s0-10.97-1.48-16.26z" fill="#ff0000"/>
-                    <path d="M27 34l18-10-18-10v20z" fill="#fff"/>
-                  </svg>
-                </button>
-              </div>
-            ) : (
-              <div class="card__thumb"><span>▶</span></div>
-            )}
-            <div class="card__body">
-              <div class="card__tags">{j.tags.map((t) => <span class="tag">{t}</span>)}</div>
-              <h3 class="card__title">{j.titulo}</h3>
-              <p class="card__desc">{j.desc}</p>
+    <div class="scards">
+      {servicios.map((s) => (
+        <a
+          href={s.href}
+          class="scard"
+          style={`--c1:${s.c1};--c2:${s.c2};--c3:${s.c3};--glow:${s.glow};--border-h:${s.borderHover};--bg-filter:${s.bgFilter};`}
+        >
+          <div class="scard__bg" style={`background-image:url('${s.bg}')`}></div>
+          <div class="scard__overlay"></div>
+          <div class="scard__content">
+            <span class="scard__icon" set:html={s.icon} />
+            <div class="scard__bottom">
+              <p class="scard__tagline">{s.tagline}</p>
+              <h3 class="scard__title">{s.label}</h3>
+              <p class="scard__desc">{s.desc}</p>
+              <span class="scard__cta">
+                Ver servicio
+                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M4 10h12M10 4l6 6-6 6"/>
+                </svg>
+              </span>
             </div>
-          </article>
-        ))}
-      </div>
-
-      <div class="scorm">
-        <div class="scorm__header">
-          <h3 class="scorm__title">+ SCORM a pedido</h3>
-          <p class="scorm__sub">Si tu LMS lo requiere, añadimos integración SCORM. Estos y más reportes de seguimiento que verías en tu plataforma:</p>
-        </div>
-        <div class="scorm__grid">
-          <div class="metrics">
-            {educativo.metricas.map((m) => (
-              <div class="metric__card">
-                <span class="metric__label">{m.label}</span>
-                <span class="metric__valor" style={`color: ${m.color}`}>{m.valor}</span>
-              </div>
-            ))}
           </div>
-          <div class="table__wrapper">
-            <table class="table">
-              <thead>
-                <tr><th>Estudiante</th><th>Progreso</th><th>Nota</th></tr>
-              </thead>
-              <tbody>
-                {educativo.estudiantes.map((e) => (
-                  <tr>
-                    <td>{e.nombre}</td>
-                    <td>
-                      <div class="progress__bar"><div class="progress__fill" style={`width: ${e.progreso}%`}></div></div>
-                      <span class="progress__pct">{e.progreso}%</span>
-                    </td>
-                    <td class="nota">{e.nota}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- MARCA -->
-    <div class="panel" id="panel-marca" role="tabpanel">
-      <p class="panel__desc">{marca.descripcion}</p>
-      <h3 class="portfolio__subtitle">Portafolio de algunos de nuestros trabajos</h3>
-      <div class="cards">
-        {marca.juegos.map((j) => (
-          <article class="card">
-            <div class="card__thumb"><span>▶</span></div>
-            <div class="card__body">
-              <div class="card__tags">{j.tags.map((t) => <span class="tag tag--cyan">{t}</span>)}</div>
-              <h3 class="card__title">{j.titulo}</h3>
-              <p class="card__desc">{j.desc}</p>
-            </div>
-          </article>
-        ))}
-      </div>
-    </div>
-
-    <!-- CAMPAÑA -->
-    <div class="panel" id="panel-campana" role="tabpanel">
-      <p class="panel__desc">{campana.descripcion}</p>
-      <h3 class="portfolio__subtitle">Portafolio de algunos de nuestros trabajos</h3>
-      <div class="cards">
-        {campana.juegos.map((j) => (
-          <article class="card">
-            <div class="card__thumb"><span>▶</span></div>
-            <div class="card__body">
-              <div class="card__tags">{j.tags.map((t) => <span class="tag tag--amber">{t}</span>)}</div>
-              <h3 class="card__title">{j.titulo}</h3>
-              <p class="card__desc">{j.desc}</p>
-            </div>
-          </article>
-        ))}
-      </div>
-    </div>
-
-    <!-- PROYECTO -->
-    <div class="panel" id="panel-proyecto" role="tabpanel">
-      <p class="panel__desc">{proyecto.descripcion}</p>
-      <h3 class="portfolio__subtitle">Portafolio de algunos de nuestros trabajos</h3>
-      <div class="cards">
-        {proyecto.juegos.map((j) => (
-          <article class="card">
-            <div class="card__thumb"><span>▶</span></div>
-            <div class="card__body">
-              <div class="card__tags">{j.tags.map((t) => <span class="tag tag--green">{t}</span>)}</div>
-              <h3 class="card__title">{j.titulo}</h3>
-              <p class="card__desc">{j.desc}</p>
-            </div>
-          </article>
-        ))}
-      </div>
-      <div class="cta__box">
-        <p>¿Tienes un proyecto en mente? Cuéntanos y lo hacemos realidad.</p>
-        <a href="https://wa.me/573155521479?text=Hola%20Multinow%2C%20tengo%20un%20proyecto%20personalizado.%20%C2%BFPodemos%20hablar%3F" target="_blank" rel="noopener noreferrer" class="btn btn--primary">Contactar por WhatsApp</a>
-      </div>
+        </a>
+      ))}
     </div>
   </div>
 </section>
-
-<script>
-  const tabButtons = document.querySelectorAll<HTMLButtonElement>('.tab');
-  const panels = document.querySelectorAll<HTMLElement>('.panel');
-  const tabsEl = document.querySelector<HTMLElement>('.tabs');
-  const wrapper = document.querySelector<HTMLElement>('.tabs__wrapper');
-
-  const updateFade = () => {
-    if (!tabsEl || !wrapper) return;
-    const atEnd = tabsEl.scrollLeft + tabsEl.clientWidth >= tabsEl.scrollWidth - 4;
-    wrapper.style.setProperty('--fade-opacity', atEnd ? '0' : '1');
-  };
-
-  tabsEl?.addEventListener('scroll', updateFade, { passive: true });
-  updateFade();
-
-  document.querySelectorAll<HTMLElement>('.card__thumb--yt').forEach((thumb) => {
-    thumb.addEventListener('click', () => {
-      const vid = thumb.dataset.vid;
-      thumb.innerHTML = `<iframe src="https://www.youtube.com/embed/${vid}?autoplay=1&rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
-    });
-  });
-
-  tabButtons.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const target = btn.dataset.tab;
-
-      tabButtons.forEach((b) => {
-        b.classList.remove('tab--active');
-        b.setAttribute('aria-selected', 'false');
-      });
-      panels.forEach((p) => p.classList.remove('panel--active'));
-
-      btn.classList.add('tab--active');
-      btn.setAttribute('aria-selected', 'true');
-      document.getElementById(`panel-${target}`)?.classList.add('panel--active');
-    });
-  });
-</script>
 
 <style>
   .servicios {
@@ -263,423 +115,175 @@ const proyecto = {
   .section__sub {
     text-align: center;
     color: var(--text-muted);
-    margin-bottom: 2.5rem;
-  }
-
-  /* TABS */
-  .tabs__wrapper {
-    position: relative;
-    margin-bottom: 2.5rem;
-  }
-
-  .tabs__wrapper::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 60px;
-    height: 100%;
-    background: linear-gradient(to right, transparent, var(--bg-dark));
-    pointer-events: none;
-    border-radius: 0 8px 8px 0;
-    opacity: var(--fade-opacity, 1);
-    transition: opacity 0.3s ease;
-  }
-
-  .tabs {
-    display: flex;
-    gap: 0.75rem;
-    overflow-x: auto;
-    scrollbar-width: none;
-    padding-bottom: 0.25rem;
-    padding-right: 3rem;
-  }
-
-  .tabs::-webkit-scrollbar { display: none; }
-
-  .tabs__scroll-hint {
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 36px;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(123, 47, 247, 0.2);
-    border: 1px solid var(--purple-light);
-    border-radius: 50%;
-    color: #fff;
-    opacity: var(--fade-opacity, 1);
-    transition: opacity 0.3s ease;
-    animation: nudge 1.2s ease-in-out infinite;
-    pointer-events: none;
-    box-shadow: 0 0 12px rgba(168, 85, 247, 0.7), 0 0 28px rgba(168, 85, 247, 0.3);
-  }
-
-  .tabs__scroll-hint svg {
-    width: 18px;
-    height: 18px;
-    filter: drop-shadow(0 0 4px rgba(168, 85, 247, 1));
-  }
-
-  @keyframes nudge {
-    0%, 100% { transform: translateY(-50%) translateX(0);   box-shadow: 0 0 12px rgba(168,85,247,0.7), 0 0 28px rgba(168,85,247,0.3); }
-    50%       { transform: translateY(-50%) translateX(5px); box-shadow: 0 0 20px rgba(168,85,247,0.9), 0 0 40px rgba(168,85,247,0.5); }
-  }
-
-  @media (min-width: 769px) {
-    .tabs__scroll-hint { display: none; }
-  }
-
-  .tab {
-    font-family: var(--font-display);
-    font-size: 0.8rem;
-    letter-spacing: 0.07em;
-    text-transform: uppercase;
-    padding: 0.8rem 2rem;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(123,47,247,0.2);
-    border-radius: 8px;
-    color: var(--text-muted);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    white-space: nowrap;
-    appearance: none;
-    -webkit-appearance: none;
-    -webkit-tap-highlight-color: transparent;
-  }
-
-  .tab:hover {
-    color: var(--text);
-    border-color: rgba(123,47,247,0.5);
-    background: rgba(123,47,247,0.1);
-  }
-
-  .tab--active {
-    background: linear-gradient(135deg, #6d28d9, #7c3aed, #4f46e5);
-    border-color: transparent;
-    color: #fff;
-    box-shadow:
-      0 0 16px rgba(109,40,217,0.6),
-      0 0 40px rgba(109,40,217,0.25),
-      inset 0 1px 0 rgba(255,255,255,0.15);
-  }
-
-  /* PANELS */
-  .panel { display: none; }
-  .panel--active { display: block; }
-
-  .panel__desc {
-    color: var(--text-muted);
-    font-size: 1rem;
-    max-width: 680px;
-    margin-bottom: 2rem;
-    line-height: 1.7;
-  }
-
-  /* PORTFOLIO SUBTITLE */
-  .portfolio__subtitle {
-    font-size: 0.75rem;
-    font-family: var(--font-display);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    margin-bottom: 1.25rem;
-    padding-left: 0.75rem;
-    border-left: 2px solid var(--purple-light);
-  }
-
-  /* CARDS */
-  .cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
     margin-bottom: 3rem;
   }
 
-  .card {
-    background: var(--bg-card);
-    border: 1px solid rgba(123, 47, 247, 0.2);
-    border-radius: 12px;
-    overflow: hidden;
-    transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+  /* GRID */
+  .scards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
   }
 
-  .card:hover {
-    transform: translateY(-5px);
-    border-color: var(--purple-light);
-    box-shadow: 0 0 28px var(--purple-glow);
-  }
-
-  .card__thumb {
-    height: 160px;
-    background: linear-gradient(135deg, rgba(123,47,247,0.25), rgba(0,212,255,0.1));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2.5rem;
-    opacity: 0.5;
-  }
-
-  .card__thumb--yt {
+  /* CARD */
+  .scard {
     position: relative;
-    height: 160px;
+    height: 420px;
+    border-radius: 18px;
     overflow: hidden;
-    cursor: pointer;
-    opacity: 1;
-    background: #000;
-  }
-
-  .card__thumb-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    border: 1px solid rgba(255, 255, 255, 0.07);
     display: block;
-    transition: transform 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
   }
 
-  .card__thumb--yt:hover .card__thumb-img {
-    transform: scale(1.04);
+  .scard:hover {
+    transform: translateY(-8px) scale(1.015);
+    box-shadow:
+      0 24px 64px var(--glow),
+      0 0 0 1px var(--border-h);
+    border-color: var(--border-h);
   }
 
-  .yt-play {
+  /* BACKGROUND IMAGE — inverted sketch lines tinted to card color */
+  .scard__bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center top;
+    filter: var(--bg-filter);
+    opacity: 0.18;
+    transition: transform 0.55s ease, opacity 0.35s ease;
+  }
+
+  .scard:hover .scard__bg {
+    transform: scale(1.06);
+    opacity: 0.26;
+  }
+
+  /* COLOR OVERLAY — color tint + dark scrim at bottom for text contrast */
+  .scard__overlay {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.15) 38%, transparent 60%),
+      linear-gradient(to top, var(--c1) 0%, var(--c2) 42%, var(--c3) 100%);
+  }
+
+  /* CONTENT */
+  .scard__content {
     position: absolute;
     inset: 0;
     display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1.5rem;
+  }
+
+  /* ICON — top left */
+  .scard__icon {
+    width: 46px;
+    height: 46px;
+    background: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 12px;
+    display: flex;
     align-items: center;
     justify-content: center;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-  }
-
-  .yt-play svg {
-    width: 56px;
-    height: 40px;
-    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.6));
-    transition: transform 0.2s ease;
-  }
-
-  .card__thumb--yt:hover .yt-play svg {
-    transform: scale(1.12);
-  }
-
-  .card__thumb--yt iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-    display: block;
-  }
-
-  .card__body { padding: 1.25rem; }
-
-  .card__tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-    margin-bottom: 0.6rem;
-  }
-
-  .tag {
-    font-size: 0.68rem;
-    font-family: var(--font-display);
-    letter-spacing: 0.05em;
-    padding: 0.2rem 0.55rem;
-    border-radius: 4px;
-    background: rgba(123,47,247,0.12);
-    border: 1px solid rgba(123,47,247,0.3);
-    color: var(--purple-light);
-  }
-
-  .tag--cyan {
-    background: rgba(0,212,255,0.08);
-    border-color: rgba(0,212,255,0.3);
-    color: var(--cyan);
-  }
-
-  .tag--amber {
-    background: rgba(245,158,11,0.08);
-    border-color: rgba(245,158,11,0.3);
-    color: #f59e0b;
-  }
-
-  .tag--green {
-    background: rgba(52,211,153,0.08);
-    border-color: rgba(52,211,153,0.3);
-    color: #34d399;
-  }
-
-  .card__title {
-    font-size: 1rem;
-    margin-bottom: 0.4rem;
-  }
-
-  .card__desc {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    line-height: 1.6;
-  }
-
-  /* SCORM */
-  .scorm {
-    background: rgba(0,0,0,0.2);
-    border: 1px solid rgba(0,212,255,0.15);
-    border-radius: 16px;
-    padding: 2rem;
-  }
-
-  .scorm__header { margin-bottom: 1.5rem; }
-
-  .scorm__title {
-    font-size: 1.2rem;
-    color: var(--cyan);
-    margin-bottom: 0.3rem;
-  }
-
-  .scorm__sub {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-  }
-
-  .scorm__grid {
-    display: grid;
-    grid-template-columns: 240px 1fr;
-    gap: 1.5rem;
-    align-items: start;
-  }
-
-  .metrics {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .metric__card {
-    background: var(--bg-card);
-    border: 1px solid rgba(123,47,247,0.2);
-    border-radius: 10px;
-    padding: 1.25rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-  }
-
-  .metric__label {
-    font-size: 0.72rem;
-    font-family: var(--font-display);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-  }
-
-  .metric__valor {
-    font-size: 2rem;
-    font-family: var(--font-display);
-    font-weight: 700;
-  }
-
-  .table__wrapper {
-    background: var(--bg-card);
-    border: 1px solid rgba(123,47,247,0.2);
-    border-radius: 12px;
-    overflow: hidden;
-  }
-
-  .table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-
-  .table th {
-    font-family: var(--font-display);
-    font-size: 0.7rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    padding: 0.9rem 1.25rem;
-    text-align: left;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-  }
-
-  .table td {
-    padding: 0.85rem 1.25rem;
-    font-size: 0.875rem;
-    border-bottom: 1px solid rgba(255,255,255,0.04);
-    vertical-align: middle;
-  }
-
-  .table tr:last-child td { border-bottom: none; }
-  .table tr:hover td { background: rgba(123,47,247,0.05); }
-
-  .progress__bar {
-    height: 5px;
-    background: rgba(255,255,255,0.08);
-    border-radius: 3px;
-    overflow: hidden;
-    margin-bottom: 3px;
-  }
-
-  .progress__fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--purple), var(--cyan));
-    border-radius: 3px;
-  }
-
-  .progress__pct {
-    font-size: 0.72rem;
-    color: var(--text-muted);
-  }
-
-  .nota {
-    font-family: var(--font-display);
-    font-weight: 700;
-    color: var(--cyan);
-  }
-
-  /* CTA */
-  .cta__box {
-    background: linear-gradient(135deg, rgba(123,47,247,0.15), rgba(0,212,255,0.08));
-    border: 1px solid rgba(123,47,247,0.3);
-    border-radius: 12px;
-    padding: 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
-  }
-
-  .cta__box p {
-    color: var(--text-muted);
-    font-size: 1rem;
-  }
-
-  .btn--primary {
-    display: inline-block;
-    padding: 0.8rem 2rem;
-    border-radius: 6px;
-    font-family: var(--font-display);
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    background: linear-gradient(135deg, var(--purple), var(--purple-light));
+    backdrop-filter: blur(10px);
     color: #fff;
-    box-shadow: 0 0 20px var(--purple-glow);
-    transition: all 0.3s;
-    white-space: nowrap;
+    flex-shrink: 0;
   }
 
-  .btn--primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 0 35px var(--purple-glow);
+  .scard__icon :global(svg) {
+    width: 22px;
+    height: 22px;
   }
 
-  @media (max-width: 768px) {
-    .scorm__grid { grid-template-columns: 1fr; }
-    .metrics { flex-direction: row; flex-wrap: wrap; }
-    .metric__card { flex: 1; min-width: 100px; }
-    .cta__box { flex-direction: column; text-align: center; }
+  /* BOTTOM TEXT */
+  .scard__bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .scard__tagline {
+    font-size: 0.75rem;
+    font-family: var(--font-display);
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 0.35rem;
+    text-shadow: 0 1px 6px rgba(0,0,0,0.7);
+  }
+
+  .scard__title {
+    font-size: 1.45rem;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.15;
+    margin-bottom: 0.6rem;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.8), 0 1px 3px rgba(0,0,0,0.9);
+  }
+
+  .scard__desc {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.92);
+    line-height: 1.6;
+    margin-bottom: 1.1rem;
+    text-shadow: 0 1px 6px rgba(0,0,0,0.7);
+  }
+
+  /* CTA PILL */
+  .scard__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.7rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    backdrop-filter: blur(10px);
+    align-self: flex-start;
+    transition: background 0.3s, border-color 0.3s;
+  }
+
+  .scard:hover .scard__cta {
+    background: rgba(255, 255, 255, 0.24);
+    border-color: rgba(255, 255, 255, 0.4);
+  }
+
+  .scard__cta :global(svg) {
+    width: 14px;
+    height: 14px;
+    transition: transform 0.3s ease;
+  }
+
+  .scard:hover .scard__cta :global(svg) {
+    transform: translateX(4px);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 1100px) {
+    .scards {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 580px) {
+    .scards {
+      grid-template-columns: 1fr;
+    }
+
+    .scard {
+      height: 340px;
+    }
   }
 </style>

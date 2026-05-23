@@ -1,0 +1,201 @@
+---
+interface Props {
+  bg: string;
+  rgb: string;
+  bgFilter: string;
+  title: string;
+  tagline: string;
+}
+
+const { bg, rgb, bgFilter, title, tagline } = Astro.props;
+---
+
+<section class="shero" style={`--rgb:${rgb};--bg-filter:${bgFilter};`}>
+  <div class="shero__bg" id="sheroBg" style={`background-image:url('${bg}')`}></div>
+  <div class="shero__overlay"></div>
+  <div class="shero__content container">
+    <nav class="shero__bread" aria-label="Breadcrumb">
+      <a href="/">Inicio</a>
+      <span aria-hidden="true">›</span>
+      <a href="/#servicios">Servicios</a>
+      <span aria-hidden="true">›</span>
+      <span>{title}</span>
+    </nav>
+    <h1 class="shero__title">{title}</h1>
+    <p class="shero__tagline">{tagline}</p>
+  </div>
+  <button class="shero__scroll" id="sheroScroll" aria-label="Ver contenido" type="button">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M12 5v14M5 12l7 7 7-7"/>
+    </svg>
+  </button>
+</section>
+
+<script>
+  let cleanup: (() => void) | null = null;
+
+  document.addEventListener('astro:page-load', () => {
+    cleanup?.();
+
+    // Parallax
+    const bg = document.getElementById('sheroBg');
+    if (bg) {
+      const onScroll = () => {
+        bg.style.transform = `translateY(${window.scrollY * 0.55}px)`;
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      cleanup = () => window.removeEventListener('scroll', onScroll);
+    }
+
+    // Scroll lento al contenido — desactiva CSS smooth durante rAF para que no compita
+    const btn = document.getElementById('sheroScroll');
+    const target = document.getElementById('contenido');
+    if (btn && target) {
+      btn.addEventListener('click', () => {
+        const from = window.scrollY;
+        const to = target.getBoundingClientRect().top + window.scrollY;
+        const duration = 1500;
+        const startTime = performance.now();
+
+        const html = document.documentElement;
+        const prevBehavior = html.style.scrollBehavior;
+        html.style.scrollBehavior = 'auto';
+
+        const ease = (t: number) =>
+          t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+        const step = (now: number) => {
+          const progress = Math.min((now - startTime) / duration, 1);
+          window.scrollTo(0, from + (to - from) * ease(progress));
+          if (progress < 1) {
+            requestAnimationFrame(step);
+          } else {
+            html.style.scrollBehavior = prevBehavior;
+          }
+        };
+
+        requestAnimationFrame(step);
+      });
+    }
+  });
+</script>
+
+<style>
+  .shero {
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+  }
+
+  .shero__bg {
+    position: absolute;
+    inset: -30% 0;
+    background-size: cover;
+    background-position: center;
+    filter: var(--bg-filter);
+    opacity: 0.20;
+    will-change: transform;
+  }
+
+  .shero__overlay {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, transparent 25%, transparent 65%, rgba(0,0,0,0.55) 100%),
+      rgba(var(--rgb), 0.82);
+  }
+
+  .shero__content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding-top: 5rem;
+  }
+
+  .shero__bread {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.72rem;
+    font-family: var(--font-display);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+  }
+
+  .shero__bread a {
+    color: rgba(255,255,255,0.55);
+    transition: color 0.2s;
+  }
+
+  .shero__bread a:hover { color: #fff; }
+
+  .shero__bread span:last-child { color: rgba(255,255,255,0.9); }
+
+  .shero__title {
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.05;
+    text-shadow: 0 4px 24px rgba(0,0,0,0.5);
+    max-width: 700px;
+  }
+
+  .shero__tagline {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: rgba(255,255,255,0.82);
+    max-width: 560px;
+    line-height: 1.6;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+  }
+
+  .shero__scroll {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border: 1.5px solid rgba(255,255,255,0.45);
+    border-radius: 50%;
+    color: rgba(255,255,255,0.85);
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(6px);
+    cursor: pointer;
+    transition: border-color 0.3s, color 0.3s, box-shadow 0.3s;
+    animation: bounce 2.2s ease-in-out infinite, glow 2.8s ease-in-out infinite;
+    z-index: 3;
+  }
+
+  .shero__scroll:hover {
+    border-color: #fff;
+    color: #fff;
+    box-shadow: 0 0 24px rgba(255,255,255,0.5), 0 0 48px rgba(255,255,255,0.2);
+  }
+
+  .shero__scroll svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50%       { transform: translateX(-50%) translateY(8px); }
+  }
+
+  @keyframes glow {
+    0%, 100% {
+      box-shadow: 0 0 8px rgba(255,255,255,0.2), 0 0 20px rgba(255,255,255,0.08);
+    }
+    50% {
+      box-shadow: 0 0 18px rgba(255,255,255,0.55), 0 0 40px rgba(255,255,255,0.22), 0 0 70px rgba(255,255,255,0.1);
+    }
+  }
+</style>

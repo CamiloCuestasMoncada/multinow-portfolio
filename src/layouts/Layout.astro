@@ -1,4 +1,6 @@
 ---
+import { ViewTransitions } from 'astro:transitions';
+
 interface Props {
   title?: string;
   description?: string;
@@ -100,6 +102,8 @@ const jsonLd = {
 
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+    <ViewTransitions />
   </head>
   <body>
     <slot />
