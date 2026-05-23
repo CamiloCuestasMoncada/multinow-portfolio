@@ -32,7 +32,7 @@ const tipos = [
 <Layout
   title="Videojuegos para Campañas Publicitarias | Activaciones Gamificadas — Multinow"
   description="Videojuegos diseñados para amplificar campañas publicitarias. Aumentan el tiempo de exposición a la marca y generan contenido compartible orgánicamente."
-  canonical="https://multinow-games.com/servicios/campanas"
+  canonical="https://multinow-games.com/servicios/campaigns"
 >
   <Navbar />
   <ServicioHero
@@ -55,7 +55,9 @@ const tipos = [
         <div class="s-cards">
           {juegos.map((j) => (
             <article class="s-card">
-              <div class="s-card__thumb"><span>▶</span></div>
+              <div class="s-card__thumb">
+                <div class="ph-tags">{j.tags.map((t) => <span>{t}</span>)}</div>
+              </div>
               <div class="s-card__body">
                 <div class="s-card__tags">{j.tags.map((t) => <span class="tag">{t}</span>)}</div>
                 <h3 class="s-card__title">{j.titulo}</h3>
@@ -124,7 +126,55 @@ const tipos = [
   .s-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
   .s-card { background: var(--bg-card); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; overflow: hidden; transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s; }
   .s-card:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: 0 0 28px rgba(var(--rgb),0.25); }
-  .s-card__thumb { height: 180px; background: linear-gradient(135deg, rgba(var(--rgb),0.2), rgba(0,212,255,0.08)); display: flex; align-items: center; justify-content: center; font-size: 2.5rem; opacity: 0.4; }
+  .s-card__thumb {
+    height: 180px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+      linear-gradient(135deg, rgba(var(--rgb),0.38) 0%, transparent 65%),
+      linear-gradient(315deg, rgba(var(--rgb),0.22) 0%, transparent 55%),
+      var(--bg-card);
+  }
+  .s-card__thumb::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(var(--rgb),0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(var(--rgb),0.07) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+  .s-card__thumb::after {
+    content: '';
+    position: absolute;
+    inset: 14px;
+    border: 1px solid rgba(var(--rgb),0.22);
+    border-radius: 2px;
+    pointer-events: none;
+  }
+  .ph-tags {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    padding: 0 1rem;
+  }
+  .ph-tags span {
+    font-size: 0.68rem;
+    font-family: var(--font-display);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.9rem;
+    border-radius: 20px;
+    background: rgba(var(--rgb),0.18);
+    border: 1px solid rgba(var(--rgb),0.45);
+    color: rgba(255,255,255,0.82);
+  }
   .s-card__body { padding: 1.25rem; }
   .s-card__tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.6rem; }
   .tag { font-size: 0.68rem; font-family: var(--font-display); letter-spacing: 0.05em; padding: 0.2rem 0.55rem; border-radius: 4px; background: rgba(var(--rgb),0.12); border: 1px solid rgba(var(--rgb),0.3); color: var(--accent); }

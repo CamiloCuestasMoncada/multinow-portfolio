@@ -14,7 +14,7 @@ const navServices = [
   },
   {
     label: 'Campañas',
-    href: '/servicios/campanas',
+    href: '/servicios/campaigns',
     color: '#1371ef',
     icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>`,
   },
@@ -362,8 +362,10 @@ const navServices = [
     .nav__dropdown { position: static; }
 
     .nav__dropdown-menu {
+      display: none;
       position: static;
       transform: none !important;
+      opacity: 1;
       box-shadow: none;
       border: none;
       border-radius: 0;
@@ -371,6 +373,11 @@ const navServices = [
       border-top: 1px solid rgba(123, 47, 247, 0.1);
       padding: 0.25rem 0;
       min-width: unset;
+    }
+
+    .nav__dropdown--open .nav__dropdown-menu {
+      display: block;
+      pointer-events: auto;
     }
 
     .nav__dropdown-menu::before { display: none; }

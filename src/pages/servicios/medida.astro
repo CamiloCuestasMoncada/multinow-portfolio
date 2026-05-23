@@ -100,7 +100,7 @@ const proceso = [
             juegos.map((j) => (
               <article class="s-card">
                 <div class="s-card__thumb">
-                  <span>▶</span>
+                  <div class="ph-tags">{j.tags.map((t) => <span>{t}</span>)}</div>
                 </div>
                 <div class="s-card__body">
                   <div class="s-card__tags">
@@ -243,16 +243,52 @@ const proceso = [
   }
   .s-card__thumb {
     height: 180px;
-    background: linear-gradient(
-      135deg,
-      rgba(var(--rgb), 0.2),
-      rgba(0, 212, 255, 0.08)
-    );
+    position: relative;
+    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 2.5rem;
-    opacity: 0.4;
+    background:
+      linear-gradient(135deg, rgba(var(--rgb),0.38) 0%, transparent 65%),
+      linear-gradient(315deg, rgba(var(--rgb),0.22) 0%, transparent 55%),
+      var(--bg-card);
+  }
+  .s-card__thumb::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(var(--rgb),0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(var(--rgb),0.07) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+  .s-card__thumb::after {
+    content: '';
+    position: absolute;
+    inset: 14px;
+    border: 1px solid rgba(var(--rgb),0.22);
+    border-radius: 2px;
+    pointer-events: none;
+  }
+  .ph-tags {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    padding: 0 1rem;
+  }
+  .ph-tags span {
+    font-size: 0.68rem;
+    font-family: var(--font-display);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.9rem;
+    border-radius: 20px;
+    background: rgba(var(--rgb),0.18);
+    border: 1px solid rgba(var(--rgb),0.45);
+    color: rgba(255,255,255,0.82);
   }
   .s-card__body {
     padding: 1.25rem;
