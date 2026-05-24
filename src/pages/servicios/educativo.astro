@@ -67,32 +67,10 @@ const proceso = [
     <!-- DESCRIPCIÓN + PORTAFOLIO -->
     <section class="s-section">
       <div class="container">
-        <h2 class="s-intro__title">Gamificación educativa: videojuegos 2D pedagógicos con SCORM</h2>
+        <h2 class="s-intro__title">Gamificación educativa: videojuegos pedagógicos con SCORM</h2>
         <p class="s-desc">
           Desarrollamos videojuegos pedagógicos en 2D exportados en HTML5, listos para integrarse en cualquier plataforma web o aula virtual. Si tu institución usa un LMS, podemos agregar compatibilidad SCORM a pedido para que el juego reporte progreso, notas y tiempo directamente en tu plataforma.
         </p>
-
-        <p class="s-subtitle">Portafolio de algunos de nuestros trabajos</p>
-        <div class="s-cards">
-          {videos.map((v) => (
-            <article class="s-card">
-              <div class="s-card__thumb s-card__thumb--yt" data-vid={v.videoId}>
-                <img src={`https://img.youtube.com/vi/${v.videoId}/maxresdefault.jpg`} alt={`Demo: ${v.titulo}`} loading="lazy" />
-                <button class="yt-play" aria-label="Reproducir demo">
-                  <svg viewBox="0 0 68 48" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M66.52 7.74C65.7 4.66 63.27 2.24 60.2 1.42 54.93 0 34 0 34 0S13.07 0 7.8 1.42C4.73 2.24 2.3 4.66 1.48 7.74 0 13.03 0 24 0 24s0 10.97 1.48 16.26c.82 3.08 3.25 5.5 6.32 6.32C13.07 48 34 48 34 48s20.93 0 26.2-1.42c3.07-.82 5.5-3.24 6.32-6.32C68 34.97 68 24 68 24s0-10.97-1.48-16.26z" fill="#ff0000"/>
-                    <path d="M27 34l18-10-18-10v20z" fill="#fff"/>
-                  </svg>
-                </button>
-              </div>
-              <div class="s-card__body">
-                <div class="s-card__tags">{v.tags.map((t) => <span class="tag">{t}</span>)}</div>
-                <h3 class="s-card__title">{v.titulo}</h3>
-                <p class="s-card__desc">{v.desc}</p>
-              </div>
-            </article>
-          ))}
-        </div>
 
         <!-- SCORM -->
         <div class="scorm">
@@ -175,6 +153,32 @@ const proceso = [
         <div class="cta__box">
           <p>¿Quieres saber cómo podemos adaptar un videojuego a tu currículo?</p>
           <a href="https://wa.me/573155521479?text=Hola%20Multinow%2C%20me%20interesa%20un%20videojuego%20educativo.%20%C2%BFPodemos%20hablar%3F" target="_blank" rel="noopener noreferrer" class="btn--primary">Contactar por WhatsApp</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="s-section s-section--alt">
+      <div class="container">
+        <p class="s-subtitle">Ejemplos de algunos de nuestros trabajos</p>
+        <div class="s-cards">
+          {videos.map((v) => (
+            <article class="s-card">
+              <div class="s-card__thumb s-card__thumb--yt" data-vid={v.videoId}>
+                <img src={`https://img.youtube.com/vi/${v.videoId}/maxresdefault.jpg`} alt={`Demo: ${v.titulo}`} loading="lazy" />
+                <button class="yt-play" aria-label="Reproducir demo">
+                  <svg viewBox="0 0 68 48" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M66.52 7.74C65.7 4.66 63.27 2.24 60.2 1.42 54.93 0 34 0 34 0S13.07 0 7.8 1.42C4.73 2.24 2.3 4.66 1.48 7.74 0 13.03 0 24 0 24s0 10.97 1.48 16.26c.82 3.08 3.25 5.5 6.32 6.32C13.07 48 34 48 34 48s20.93 0 26.2-1.42c3.07-.82 5.5-3.24 6.32-6.32C68 34.97 68 24 68 24s0-10.97-1.48-16.26z" fill="#ff0000"/>
+                    <path d="M27 34l18-10-18-10v20z" fill="#fff"/>
+                  </svg>
+                </button>
+              </div>
+              <div class="s-card__body">
+                <div class="s-card__tags">{v.tags.map((t) => <span class="tag">{t}</span>)}</div>
+                <h3 class="s-card__title">{v.titulo}</h3>
+                <p class="s-card__desc">{v.desc}</p>
+              </div>
+            </article>
+          ))}
         </div>
       </div>
     </section>

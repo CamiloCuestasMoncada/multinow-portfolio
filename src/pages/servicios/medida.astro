@@ -108,27 +108,6 @@ const proceso = [
           cualquier mecánica personalizada.
         </p>
 
-        <p class="s-subtitle">Ideas de algunos proyectos</p>
-        <div class="s-cards">
-          {
-            juegos.map((j) => (
-              <article class="s-card">
-                <div class="s-card__thumb">
-                  <div class="ph-tags">{j.tags.map((t) => <span>{t}</span>)}</div>
-                </div>
-                <div class="s-card__body">
-                  <div class="s-card__tags">
-                    {j.tags.map((t) => (
-                      <span class="tag">{t}</span>
-                    ))}
-                  </div>
-                  <h3 class="s-card__title">{j.titulo}</h3>
-                  <p class="s-card__desc">{j.desc}</p>
-                </div>
-              </article>
-            ))
-          }
-        </div>
       </div>
     </section>
 
@@ -178,6 +157,31 @@ const proceso = [
             rel="noopener noreferrer"
             class="btn--primary">Cuéntanos tu idea</a
           >
+        </div>
+      </div>
+    </section>
+    <section class="s-section s-section--alt">
+      <div class="container">
+        <p class="s-subtitle">Ideas de algunos proyectos</p>
+        <div class="s-cards">
+          {
+            juegos.map((j) => (
+              <article class="s-card">
+                <div class="s-card__thumb">
+                  <div class="ph-tags">{j.tags.map((t) => <span>{t}</span>)}</div>
+                </div>
+                <div class="s-card__body">
+                  <div class="s-card__tags">
+                    {j.tags.map((t) => (
+                      <span class="tag">{t}</span>
+                    ))}
+                  </div>
+                  <h3 class="s-card__title">{j.titulo}</h3>
+                  <p class="s-card__desc">{j.desc}</p>
+                </div>
+              </article>
+            ))
+          }
         </div>
       </div>
     </section>
