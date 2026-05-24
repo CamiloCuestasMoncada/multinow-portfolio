@@ -4,6 +4,18 @@ import Navbar from '../../components/Navbar.astro';
 import ServicioHero from '../../components/ServicioHero.astro';
 import Footer from '../../components/Footer.astro';
 import WhatsappFloat from '../../components/WhatsappFloat.astro';
+import RelatedServices from '../../components/RelatedServices.astro';
+
+const serviceJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Videojuegos Educativos con SCORM',
+  description: 'Videojuegos pedagógicos 2D en HTML5 con integración SCORM para reportar progreso, notas y tiempo en plataformas LMS.',
+  provider: { '@type': 'Organization', name: 'Multinow', url: 'https://multinow-games.com' },
+  url: 'https://multinow-games.com/servicios/educativo',
+  serviceType: 'Gamificación educativa',
+  areaServed: { '@type': 'Country', name: 'Colombia' },
+};
 
 const color    = '#9373cb';
 const rgb      = '147,115,203';
@@ -39,13 +51,14 @@ const proceso = [
   title="Videojuegos Educativos con SCORM | Gamificación Educativa — Multinow"
   description="Desarrollamos videojuegos pedagógicos 2D en HTML5 para colegios, universidades y plataformas e-learning. Integración SCORM para reportar progreso, notas y tiempo en tu LMS."
   canonical="https://multinow-games.com/servicios/educativo"
+  jsonLdService={serviceJsonLd}
 >
   <Navbar />
   <ServicioHero
     bg="/bg_cultivo.png"
     rgb={rgb}
     bgFilter={bgFilter}
-    title="Educativo"
+    title="Videojuegos Educativos con SCORM"
     tagline="Gamificación educativa · Videojuegos pedagógicos 2D para colegios, universidades y plataformas e-learning"
   />
 
@@ -54,11 +67,12 @@ const proceso = [
     <!-- DESCRIPCIÓN + PORTAFOLIO -->
     <section class="s-section">
       <div class="container">
+        <h2 class="s-intro__title">Gamificación educativa: videojuegos 2D pedagógicos con SCORM</h2>
         <p class="s-desc">
           Desarrollamos videojuegos pedagógicos en 2D exportados en HTML5, listos para integrarse en cualquier plataforma web o aula virtual. Si tu institución usa un LMS, podemos agregar compatibilidad SCORM a pedido para que el juego reporte progreso, notas y tiempo directamente en tu plataforma.
         </p>
 
-        <h2 class="s-subtitle">Portafolio de algunos de nuestros trabajos</h2>
+        <p class="s-subtitle">Portafolio de algunos de nuestros trabajos</p>
         <div class="s-cards">
           {videos.map((v) => (
             <article class="s-card">
@@ -167,6 +181,7 @@ const proceso = [
 
   </main>
 
+  <RelatedServices current="educativo" />
   <Footer />
   <WhatsappFloat />
 </Layout>
@@ -201,6 +216,16 @@ const proceso = [
     text-align: center;
     color: var(--text-muted);
     margin-bottom: 3rem;
+  }
+
+  /* INTRO HEADING */
+  .s-intro__title {
+    font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, var(--accent), #fff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   /* DESCRIPTION */

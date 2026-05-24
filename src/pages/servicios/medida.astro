@@ -4,6 +4,18 @@ import Navbar from "../../components/Navbar.astro";
 import ServicioHero from "../../components/ServicioHero.astro";
 import Footer from "../../components/Footer.astro";
 import WhatsappFloat from "../../components/WhatsappFloat.astro";
+import RelatedServices from "../../components/RelatedServices.astro";
+
+const serviceJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Videojuegos a Medida — Simuladores y Experiencias Interactivas',
+  description: 'Desarrollo de videojuegos y experiencias interactivas completamente a medida. Simuladores técnicos, instalaciones para eventos, minijuegos HTML5 y mecánicas personalizadas.',
+  provider: { '@type': 'Organization', name: 'Multinow', url: 'https://multinow-games.com' },
+  url: 'https://multinow-games.com/servicios/medida',
+  serviceType: 'Videojuegos personalizados',
+  areaServed: { '@type': 'Country', name: 'Colombia' },
+};
 
 const color = "#0506a6";
 const rgb = "5,6,166";
@@ -74,19 +86,21 @@ const proceso = [
   title="Videojuegos a Medida | Simuladores y Experiencias Interactivas — Multinow"
   description="Desarrollo de videojuegos y experiencias interactivas completamente a medida. Simuladores técnicos, instalaciones para eventos, minijuegos HTML5 y mecánicas personalizadas."
   canonical="https://multinow-games.com/servicios/medida"
+  jsonLdService={serviceJsonLd}
 >
   <Navbar />
   <ServicioHero
     bg="/bg_engranajes.png"
     rgb={rgb}
     bgFilter={bgFilter}
-    title="A Medida"
+    title="Videojuegos a Medida"
     tagline="Tu idea, hecha realidad · Videojuegos y experiencias interactivas completamente personalizadas"
   />
 
   <main id="contenido" style={`--accent:${color};--rgb:${rgb};`}>
     <section class="s-section">
       <div class="container">
+        <h2 class="s-intro__title">Videojuegos y experiencias interactivas completamente personalizadas</h2>
         <p class="s-desc">
           Desarrollo de videojuegos y experiencias web interactivas a medida. Si
           tu idea no encaja en las categorías anteriores, la construimos:
@@ -94,7 +108,7 @@ const proceso = [
           cualquier mecánica personalizada.
         </p>
 
-        <h2 class="s-subtitle">Portafolio de algunos de nuestros trabajos</h2>
+        <p class="s-subtitle">Portafolio de algunos de nuestros trabajos</p>
         <div class="s-cards">
           {
             juegos.map((j) => (
@@ -169,6 +183,7 @@ const proceso = [
     </section>
   </main>
 
+  <RelatedServices current="medida" />
   <Footer />
   <WhatsappFloat />
 </Layout>
@@ -200,6 +215,15 @@ const proceso = [
     text-align: center;
     color: var(--text-muted);
     margin-bottom: 3rem;
+  }
+
+  .s-intro__title {
+    font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, var(--accent), #fff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   .s-desc {

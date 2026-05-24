@@ -4,6 +4,18 @@ import Navbar from '../../components/Navbar.astro';
 import ServicioHero from '../../components/ServicioHero.astro';
 import Footer from '../../components/Footer.astro';
 import WhatsappFloat from '../../components/WhatsappFloat.astro';
+import RelatedServices from '../../components/RelatedServices.astro';
+
+const serviceJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Videojuegos para Campañas Publicitarias',
+  description: 'Videojuegos diseñados para amplificar campañas publicitarias. Aumentan el tiempo de exposición a la marca y generan contenido compartible orgánicamente.',
+  provider: { '@type': 'Organization', name: 'Multinow', url: 'https://multinow-games.com' },
+  url: 'https://multinow-games.com/servicios/campaigns',
+  serviceType: 'Videojuegos publicitarios',
+  areaServed: { '@type': 'Country', name: 'Colombia' },
+};
 
 const color    = '#1371ef';
 const rgb      = '19,113,239';
@@ -33,13 +45,14 @@ const tipos = [
   title="Videojuegos para Campañas Publicitarias | Activaciones Gamificadas — Multinow"
   description="Videojuegos diseñados para amplificar campañas publicitarias. Aumentan el tiempo de exposición a la marca y generan contenido compartible orgánicamente."
   canonical="https://multinow-games.com/servicios/campaigns"
+  jsonLdService={serviceJsonLd}
 >
   <Navbar />
   <ServicioHero
     bg="/bgMecanicaTRansportadora.png"
     rgb={rgb}
     bgFilter={bgFilter}
-    title="Campañas"
+    title="Videojuegos para Campañas"
     tagline="Activaciones digitales gamificadas · Videojuegos que amplifican el alcance de tu campaña"
   />
 
@@ -47,11 +60,12 @@ const tipos = [
 
     <section class="s-section">
       <div class="container">
+        <h2 class="s-intro__title">Videojuegos publicitarios para activaciones gamificadas</h2>
         <p class="s-desc">
           Videojuegos diseñados para amplificar campañas publicitarias. Aumentan el tiempo de exposición a la marca y generan contenido compartible orgánicamente.
         </p>
 
-        <h2 class="s-subtitle">Portafolio de algunos de nuestros trabajos</h2>
+        <p class="s-subtitle">Portafolio de algunos de nuestros trabajos</p>
         <div class="s-cards">
           {juegos.map((j) => (
             <article class="s-card">
@@ -107,6 +121,7 @@ const tipos = [
 
   </main>
 
+  <RelatedServices current="campaigns" />
   <Footer />
   <WhatsappFloat />
 </Layout>
@@ -119,6 +134,8 @@ const tipos = [
 
   .s-section__title { font-size: clamp(1.6rem, 3vw, 2.2rem); text-align: center; margin-bottom: 0.6rem; background: linear-gradient(135deg, var(--accent), #fff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
   .s-section__sub { text-align: center; color: var(--text-muted); margin-bottom: 3rem; }
+
+  .s-intro__title { font-size: clamp(1.3rem, 2.5vw, 1.8rem); margin-bottom: 1rem; background: linear-gradient(135deg, var(--accent), #fff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 
   .s-desc { font-size: 1.05rem; color: var(--text-muted); max-width: 720px; line-height: 1.8; margin-bottom: 3rem; }
   .s-subtitle { font-size: 0.75rem; font-family: var(--font-display); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1.5rem; padding-left: 0.75rem; border-left: 2px solid var(--accent); }
