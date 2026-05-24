@@ -22,8 +22,8 @@ const rgb      = '19,113,239';
 const bgFilter = 'invert(1) sepia(1) hue-rotate(180deg) saturate(4) brightness(1.6)';
 
 const juegos = [
-  { titulo: 'Aventura de Temporada', desc: 'Juego temático de campaña navideña con mecánicas de colección y premios.', tags: ['Campaña', 'Estacional'] },
-  { titulo: 'Reto Viral',            desc: 'Minijuego competitivo con tabla de posiciones para activaciones digitales.', tags: ['Viral', 'Competitivo'] },
+  { titulo: 'Aventura de Temporada', desc: 'Juego temático de campaña navideña con mecánicas de colección y premios.', tags: ['Campaña', 'Estacional'], img: '/aventura_navidad.png', imgAlt: 'Aventura de Temporada: juego de campaña navideña con mecánicas de colección y premios' },
+  { titulo: 'Reto Viral',            desc: 'Minijuego competitivo con tabla de posiciones para activaciones digitales.', tags: ['Viral', 'Competitivo'], img: '/bolos.png', imgAlt: 'Reto Viral: minijuego competitivo de bolos con tabla de posiciones para activaciones digitales' },
 ];
 
 const resultados = [
@@ -69,7 +69,9 @@ const tipos = [
         <div class="s-cards">
           {juegos.map((j) => (
             <article class="s-card">
-              <div class="s-card__thumb">
+              <div class={`s-card__thumb${j.img ? ' s-card__thumb--real' : ''}`}>
+                {j.img && <img src={j.img} alt={j.imgAlt} class="s-card__real-img" loading="lazy" />}
+                {j.img && <div class="s-card__color-overlay"></div>}
                 <div class="ph-tags">{j.tags.map((t) => <span>{t}</span>)}</div>
               </div>
               <div class="s-card__body">
@@ -172,6 +174,29 @@ const tipos = [
     border-radius: 2px;
     pointer-events: none;
   }
+  /* REAL IMAGE CARD */
+  .s-card__thumb--real .s-card__real-img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: saturate(0.35) brightness(0.6);
+    z-index: 0;
+  }
+  .s-card__thumb--real .s-card__color-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(var(--rgb), 0.55) 0%, rgba(var(--rgb), 0.2) 100%);
+    z-index: 1;
+  }
+  .s-card__thumb--real::before {
+    z-index: 2;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.12) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.12) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+  .s-card__thumb--real::after  { z-index: 3; }
+  .s-card__thumb--real .ph-tags { z-index: 4; }
+
   .ph-tags {
     position: relative;
     z-index: 1;
