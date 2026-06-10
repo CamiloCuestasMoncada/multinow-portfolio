@@ -25,6 +25,16 @@ const navServices = [
     icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l9-9"/><path d="M12.5 2.5l1 2 2 1-2 1-1 2-1-2-2-1 2-1z"/><path d="M20 8.5l.5 1 1 .5-1 .5-.5 1-.5-1-1-.5 1-.5z"/><path d="M8 7.5l.5 1 1 .5-1 .5-.5 1-.5-1-1-.5 1-.5z"/></svg>`,
   },
 ];
+
+const navOwn = [
+  {
+    label: 'Honey, I\'m an Agent',
+    href: '/games/Honey_Im_an_Agent',
+    color: '#f5c542',
+    badge: 'Próximamente',
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/><path d="M17 3l2 2-2 2"/><path d="M7 3L5 5l2 2"/></svg>`,
+  },
+];
 ---
 <header class="navbar">
   <div class="container navbar__inner">
@@ -56,6 +66,27 @@ const navServices = [
       </div>
 
       <a href="/#soluciones" class="nav__link">Soluciones</a>
+
+      <!-- Desarrollos Propios dropdown -->
+      <div class="nav__dropdown" id="ownDropdown">
+        <button class="nav__link nav__dropdown-toggle" aria-expanded="false" aria-haspopup="true" id="ownToggle">
+          Desarrollos Propios
+          <svg class="nav__chevron" viewBox="0 0 12 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <path d="M1 1l5 5 5-5"/>
+          </svg>
+        </button>
+        <div class="nav__dropdown-menu" role="menu">
+          {navOwn.map((g) => (
+            <a href={g.href} class="nav__dropdown-item" role="menuitem">
+              <span class="nav__dropdown-icon" style={`color:${g.color}`} set:html={g.icon} />
+              <span class="nav__own-label">
+                {g.label}
+                {g.badge && <span class="nav__own-badge">{g.badge}</span>}
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
     </nav>
     <button class="navbar__toggle" aria-label="Abrir menú" id="menuToggle">
       <span></span><span></span><span></span>
@@ -67,10 +98,8 @@ const navServices = [
   function initNavbar() {
     const menuToggle = document.getElementById('menuToggle');
     const nav = document.getElementById('mainNav');
-    const servToggle = document.getElementById('servToggle');
-    const servDropdown = document.getElementById('servDropdown');
 
-    if (!menuToggle || !nav || !servToggle || !servDropdown) return;
+    if (!menuToggle || !nav) return;
 
     // Mobile hamburger
     menuToggle.addEventListener('click', () => {
@@ -78,36 +107,53 @@ const navServices = [
       menuToggle.classList.toggle('navbar__toggle--open');
     });
 
-    // Close mobile menu on link click
+    // Handle all dropdowns generically
+    const dropdowns = document.querySelectorAll('.nav__dropdown');
+
+    dropdowns.forEach((dropdown) => {
+      const toggle = dropdown.querySelector('.nav__dropdown-toggle') as HTMLButtonElement | null;
+      if (!toggle) return;
+
+      toggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = dropdown.classList.toggle('nav__dropdown--open');
+        toggle.setAttribute('aria-expanded', String(isOpen));
+        // Close other dropdowns
+        dropdowns.forEach((other) => {
+          if (other !== dropdown) {
+            other.classList.remove('nav__dropdown--open');
+            const otherToggle = other.querySelector('.nav__dropdown-toggle') as HTMLButtonElement | null;
+            otherToggle?.setAttribute('aria-expanded', 'false');
+          }
+        });
+      });
+
+      dropdown.addEventListener('click', (e) => { e.stopPropagation(); });
+    });
+
+    // Close all dropdowns on outside click
+    document.addEventListener('click', () => {
+      dropdowns.forEach((dropdown) => {
+        dropdown.classList.remove('nav__dropdown--open');
+        const toggle = dropdown.querySelector('.nav__dropdown-toggle') as HTMLButtonElement | null;
+        toggle?.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // Close mobile menu on nav link click
     document.querySelectorAll('.nav__link:not(.nav__dropdown-toggle), .nav__dropdown-item, .nav__dropdown-all').forEach(link => {
       link.addEventListener('click', () => {
         nav.classList.remove('navbar__nav--open');
         menuToggle.classList.remove('navbar__toggle--open');
-        servDropdown.classList.remove('nav__dropdown--open');
-        servToggle.setAttribute('aria-expanded', 'false');
+        dropdowns.forEach((dropdown) => {
+          dropdown.classList.remove('nav__dropdown--open');
+          const toggle = dropdown.querySelector('.nav__dropdown-toggle') as HTMLButtonElement | null;
+          toggle?.setAttribute('aria-expanded', 'false');
+        });
       });
-    });
-
-    // Dropdown toggle — stopPropagation evita que el click llegue al documento
-    servToggle.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const isOpen = servDropdown.classList.toggle('nav__dropdown--open');
-      servToggle.setAttribute('aria-expanded', String(isOpen));
-    });
-
-    // Cerrar al hacer click fuera
-    document.addEventListener('click', () => {
-      servDropdown.classList.remove('nav__dropdown--open');
-      servToggle.setAttribute('aria-expanded', 'false');
-    });
-
-    // Evitar que clicks dentro del menu lo cierren
-    servDropdown.addEventListener('click', (e) => {
-      e.stopPropagation();
     });
   }
 
-  // Inicializar en carga normal y en cada transición de View Transitions
   document.addEventListener('astro:page-load', initNavbar);
 </script>
 
@@ -307,6 +353,24 @@ const navServices = [
 
   .nav__dropdown-all:hover {
     opacity: 1;
+  }
+
+  .nav__own-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .nav__own-badge {
+    font-size: 0.55rem;
+    letter-spacing: 0.08em;
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+    background: rgba(245, 197, 66, 0.15);
+    color: #f5c542;
+    border: 1px solid rgba(245, 197, 66, 0.3);
+    text-transform: uppercase;
+    flex-shrink: 0;
   }
 
   /* HAMBURGER */

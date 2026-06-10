@@ -1,0 +1,1029 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+
+const screenshots = [
+  { src: '/Screenshot_2.png', alt: 'Honey Im an Agent — captura 1' },
+  { src: '/Screenshot_game_8.png', alt: 'Honey Im an Agent — captura 2' },
+  { src: '/Screenshot_game_9.png', alt: 'Honey Im an Agent — captura 3' },
+  { src: '/Screenshot%20_5.png', alt: 'Honey Im an Agent — captura 4' },
+  { src: '/Screenshot_1.png', alt: 'Honey Im an Agent — captura 5' },
+  { src: '/Screenshot_4.png', alt: 'Honey Im an Agent — captura 6' },
+];
+
+const features = [
+  {
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>`,
+    title: 'Doble Vida y Humor Ácido',
+    desc: 'Narrativa donde el peligro criminal y los secretos domésticos se mezclan con situaciones hilarantes.',
+  },
+  {
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>`,
+    title: 'Mecánica de Gancho y Paraguas',
+    desc: 'Domina las físicas del grappling hook para desplazarte dinámicamente y usa tu paraguas como paracaídas y arma.',
+  },
+  {
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>`,
+    title: 'Sigilo Táctico y Tensión',
+    desc: 'Estudia los patrones, evade los conos de visión y planifica tu ruta con precisión milimétrica.',
+  },
+  {
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>`,
+    title: 'Acertijos y Puzzles Ligeros',
+    desc: 'Rompe la tensión del espionaje resolviendo ingeniosos desafíos lógicos tanto en casa como en el campo.',
+  },
+  {
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/></svg>`,
+    title: 'Estética Noir Pixelada',
+    desc: 'Un apartado visual clásico que rinde homenaje a la vieja escuela del pixel art, ideal para jugar con mando.',
+  },
+  {
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>`,
+    title: 'Infiltración Casera',
+    desc: 'Escápate de tu propio hogar en mitad de la noche llevando el sigilo a otro nivel: ¡que tu esposa no note tu ausencia!',
+  },
+];
+
+const jsonLdGame = {
+  '@context': 'https://schema.org',
+  '@type': 'VideoGame',
+  name: 'Honey, I\'m an Agent',
+  description: 'Acción, sigilo y comedia noir en 2D. Un hombre inofensivo termina por accidente como agente secreto.',
+  genre: ['Action', 'Adventure', 'Indie'],
+  gamePlatform: 'PC',
+  applicationCategory: 'Game',
+  author: { '@type': 'Organization', name: 'Multinow' },
+  publisher: { '@type': 'Organization', name: 'Multinow' },
+  datePublished: '2026-09-01',
+  image: 'https://multinow-games.com/capsula_promocion_748.png',
+};
+---
+
+<Layout
+  title="Honey, I'm an Agent | Multinow — Próximo Lanzamiento Sep 2026"
+  description="Acción, sigilo y comedia noir en 2D. Un hombre inofensivo termina por accidente como agente secreto. Próximo lanzamiento 1 de septiembre 2026."
+  canonical="https://multinow-games.com/games/Honey_Im_an_Agent"
+  image="https://multinow-games.com/capsula_promocion_748.png"
+  jsonLdService={jsonLdGame}
+>
+  <Navbar />
+
+  <main class="game-page">
+
+    <!-- ═══════════════ HERO ═══════════════ -->
+    <section class="game-hero">
+      <div class="game-hero__bg">
+        <div class="game-hero__noise"></div>
+        <div class="game-hero__gradient"></div>
+      </div>
+      <div class="container game-hero__inner">
+        <div class="game-hero__logo-wrap">
+          <img src="/logo_honey_grande.png" alt="Honey, I'm an Agent" class="game-hero__logo" />
+        </div>
+        <div class="game-hero__content">
+          <div class="game-hero__badges">
+            <span class="badge badge--coming">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" width="12" height="12"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 1.5"/></svg>
+              Próximo Lanzamiento
+            </span>
+            <span class="badge badge--date">1 · Sep · 2026</span>
+          </div>
+          <p class="game-hero__tagline">Acción, sigilo y comedia noir en 2D</p>
+          <p class="game-hero__sub">
+            Un hombre inofensivo termina por accidente como agente secreto.<br />
+            ¡Cumple misiones, balancéate con tu gancho y haz brillar tu arma secreta: un paraguas!
+          </p>
+          <div class="game-hero__cta">
+            <a href="https://store.steampowered.com" target="_blank" rel="noopener noreferrer" class="btn-steam">
+              <span class="btn-steam__top">Agregar a Wishlist</span>
+              <span class="btn-steam__bottom">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20" aria-hidden="true"><path d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.188.006l2.861-4.142V8.91c0-2.495 2.028-4.524 4.524-4.524 2.494 0 4.524 2.031 4.524 4.527s-2.03 4.525-4.524 4.525h-.105l-4.076 2.911c0 .052.004.105.004.159 0 1.875-1.515 3.396-3.39 3.396-1.635 0-3.016-1.173-3.331-2.727L.436 15.27C1.862 20.307 6.486 24 11.979 24c6.627 0 11.999-5.373 11.999-12S18.606 0 11.979 0zM7.54 18.21l-1.473-.61c.262.543.714.999 1.314 1.25 1.297.539 2.793-.076 3.332-1.375.263-.63.264-1.319.005-1.949s-.75-1.121-1.377-1.383c-.624-.26-1.29-.249-1.878-.03l1.523.63c.956.4 1.409 1.5 1.009 2.455-.397.957-1.497 1.41-2.455 1.012H7.54zm11.415-9.303c0-1.662-1.353-3.015-3.015-3.015-1.665 0-3.015 1.353-3.015 3.015 0 1.665 1.35 3.015 3.015 3.015 1.662 0 3.015-1.35 3.015-3.015zm-5.273-.005c0-1.252 1.013-2.266 2.265-2.266 1.249 0 2.266 1.014 2.266 2.266 0 1.251-1.017 2.265-2.266 2.265-1.252 0-2.265-1.014-2.265-2.265z"/></svg>
+                Steam
+              </span>
+            </a>
+            <a href="#acerca" class="btn-secondary">Saber más</a>
+          </div>
+        </div>
+        <div class="game-hero__capsule-wrap">
+          <img src="/capsula_promocion_748.png" alt="Honey Im an Agent — arte promocional" class="game-hero__capsule" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ SCREENSHOTS ═══════════════ -->
+    <section class="screenshots">
+      <div class="container">
+        <h2 class="section-title">
+          <span class="section-title__line"></span>
+          Imágenes del Juego
+          <span class="section-title__line"></span>
+        </h2>
+        <div class="screenshots__grid" id="screenshotsGrid">
+          {screenshots.map((s, i) => (
+            <button
+              class="screenshot-item"
+              data-lightbox-src={s.src}
+              data-lightbox-alt={s.alt}
+              data-lightbox-index={String(i)}
+              aria-label={`Ver ${s.alt}`}
+            >
+              <img src={s.src} alt={s.alt} loading="lazy" />
+              <div class="screenshot-item__overlay">
+                <svg class="screenshot-item__zoom" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35M11 8v6M8 11h6"/>
+                </svg>
+              </div>
+            </button>
+          ))}
+        </div>
+
+        <!-- Lightbox -->
+        <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Vista de imagen" hidden>
+          <div class="lightbox__backdrop"></div>
+          <div class="lightbox__content">
+            <button class="lightbox__close" id="lbClose" aria-label="Cerrar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="20" height="20"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
+            <button class="lightbox__nav lightbox__nav--prev" id="lbPrev" aria-label="Anterior">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="22" height="22"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            <img id="lbImg" src="" alt="" class="lightbox__img" />
+            <button class="lightbox__nav lightbox__nav--next" id="lbNext" aria-label="Siguiente">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="22" height="22"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+            <div class="lightbox__counter" id="lbCounter"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ ABOUT + SIDEBAR ═══════════════ -->
+    <section class="game-body" id="acerca">
+      <div class="container game-body__inner">
+
+        <!-- Main content -->
+        <div class="game-body__main">
+          <h2 class="acerca-title">Acerca de este juego</h2>
+          <p class="acerca-text">
+            <strong>Honey, I'm an Agent</strong> es una aventura en 2D de sigilo táctico y comedia envuelta en una marcada atmósfera de cine noir y pixel art.
+          </p>
+          <p class="acerca-text">
+            Acompaña a un hombre común de apariencia inofensiva que, por un absoluto accidente, termina envuelto en peligrosas misiones de agente secreto. A lo largo de esta aventura vivirás el verdadero desafío de un héroe encubierto: <em>¡lograr que su esposa jamás descubra en lo que está metido!</em>
+          </p>
+
+          <div class="mission-phases">
+            <div class="mission-phase">
+              <span class="mission-phase__num">01</span>
+              <div>
+                <h3 class="mission-phase__title">La Infiltración Casera</h3>
+                <p class="mission-phase__desc">Escápate de casa en mitad de la noche llevando el sigilo a otro nivel, para que tu esposa no note tu ausencia.</p>
+              </div>
+            </div>
+            <div class="mission-phase">
+              <span class="mission-phase__num">02</span>
+              <div>
+                <h3 class="mission-phase__title">La Misión de Campo</h3>
+                <p class="mission-phase__desc">Sal a las peligrosas calles del bajo mundo usando tu fiel gancho de agarre para balancearte por los escenarios, resolver acertijos y defenderte con tu única arma: ¡un paraguas!</p>
+              </div>
+            </div>
+          </div>
+
+          <h2 class="features-title">Características Clave</h2>
+          <div class="features-grid">
+            {features.map((f) => (
+              <div class="feature-card">
+                <div class="feature-card__icon" set:html={f.icon} />
+                <div>
+                  <h3 class="feature-card__title">{f.title}</h3>
+                  <p class="feature-card__desc">{f.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="game-sidebar">
+          <div class="sidebar-card">
+            <img src="/icono_acceso_directo.png" alt="Honey Im an Agent — icono" class="sidebar-card__icon" />
+            <dl class="game-meta">
+              <div class="game-meta__row">
+                <dt>Título</dt>
+                <dd>Honey, I'm an Agent</dd>
+              </div>
+              <div class="game-meta__row">
+                <dt>Género</dt>
+                <dd>Acción · Aventura · Indie</dd>
+              </div>
+              <div class="game-meta__row">
+                <dt>Desarrollador</dt>
+                <dd>Multinow</dd>
+              </div>
+              <div class="game-meta__row">
+                <dt>Editor</dt>
+                <dd>Multinow</dd>
+              </div>
+              <div class="game-meta__row">
+                <dt>Jugadores</dt>
+                <dd>Single Player</dd>
+              </div>
+              <div class="game-meta__row game-meta__row--release">
+                <dt>Lanzamiento</dt>
+                <dd class="game-meta__release-date">1 Sep 2026</dd>
+              </div>
+            </dl>
+            <a href="https://store.steampowered.com" target="_blank" rel="noopener noreferrer" class="sidebar-btn-steam">
+              <span class="btn-steam__top">Agregar a Wishlist</span>
+              <span class="btn-steam__bottom">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.188.006l2.861-4.142V8.91c0-2.495 2.028-4.524 4.524-4.524 2.494 0 4.524 2.031 4.524 4.527s-2.03 4.525-4.524 4.525h-.105l-4.076 2.911c0 .052.004.105.004.159 0 1.875-1.515 3.396-3.39 3.396-1.635 0-3.016-1.173-3.331-2.727L.436 15.27C1.862 20.307 6.486 24 11.979 24c6.627 0 11.999-5.373 11.999-12S18.606 0 11.979 0zM7.54 18.21l-1.473-.61c.262.543.714.999 1.314 1.25 1.297.539 2.793-.076 3.332-1.375.263-.63.264-1.319.005-1.949s-.75-1.121-1.377-1.383c-.624-.26-1.29-.249-1.878-.03l1.523.63c.956.4 1.409 1.5 1.009 2.455-.397.957-1.497 1.41-2.455 1.012H7.54zm11.415-9.303c0-1.662-1.353-3.015-3.015-3.015-1.665 0-3.015 1.353-3.015 3.015 0 1.665 1.35 3.015 3.015 3.015 1.662 0 3.015-1.35 3.015-3.015zm-5.273-.005c0-1.252 1.013-2.266 2.265-2.266 1.249 0 2.266 1.014 2.266 2.266 0 1.251-1.017 2.265-2.266 2.265-1.252 0-2.265-1.014-2.265-2.265z"/></svg>
+                Steam
+              </span>
+            </a>
+          </div>
+        </aside>
+
+      </div>
+    </section>
+
+  </main>
+
+  <Footer />
+</Layout>
+
+<script>
+  function initLightbox() {
+    const grid = document.getElementById('screenshotsGrid');
+    const lightbox = document.getElementById('lightbox') as HTMLElement | null;
+    const lbImg = document.getElementById('lbImg') as HTMLImageElement | null;
+    const lbClose = document.getElementById('lbClose');
+    const lbPrev = document.getElementById('lbPrev');
+    const lbNext = document.getElementById('lbNext');
+    const lbCounter = document.getElementById('lbCounter');
+    const backdrop = lightbox?.querySelector('.lightbox__backdrop');
+
+    if (!grid || !lightbox || !lbImg) return;
+
+    const items = Array.from(grid.querySelectorAll<HTMLButtonElement>('[data-lightbox-src]'));
+    let current = 0;
+
+    function open(index: number) {
+      current = index;
+      const item = items[current];
+      lbImg!.src = item.dataset.lightboxSrc!;
+      lbImg!.alt = item.dataset.lightboxAlt ?? '';
+      if (lbCounter) lbCounter.textContent = `${current + 1} / ${items.length}`;
+      lightbox!.hidden = false;
+      document.body.style.overflow = 'hidden';
+      lbImg!.classList.remove('lightbox__img--loaded');
+      lbImg!.onload = () => lbImg!.classList.add('lightbox__img--loaded');
+    }
+
+    function close() {
+      lightbox!.hidden = true;
+      document.body.style.overflow = '';
+    }
+
+    function prev() { open((current - 1 + items.length) % items.length); }
+    function next() { open((current + 1) % items.length); }
+
+    items.forEach((btn, i) => btn.addEventListener('click', () => open(i)));
+    lbClose?.addEventListener('click', close);
+    lbPrev?.addEventListener('click', prev);
+    lbNext?.addEventListener('click', next);
+    backdrop?.addEventListener('click', close);
+
+    document.addEventListener('keydown', (e) => {
+      if (lightbox!.hidden) return;
+      if (e.key === 'Escape') close();
+      if (e.key === 'ArrowLeft') prev();
+      if (e.key === 'ArrowRight') next();
+    });
+
+    // Touch swipe
+    let touchStartX = 0;
+    lightbox.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    lightbox.addEventListener('touchend', (e) => {
+      const delta = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(delta) > 50) delta > 0 ? next() : prev();
+    });
+  }
+
+  document.addEventListener('astro:page-load', initLightbox);
+</script>
+
+<style>
+  /* ═══════ BASE ═══════ */
+  .game-page {
+    padding-top: 72px;
+    background: var(--bg-dark);
+    min-height: 100vh;
+  }
+
+  /* ═══════ HERO ═══════ */
+  .game-hero {
+    position: relative;
+    overflow: hidden;
+    padding: 5rem 0 4rem;
+  }
+
+  .game-hero__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .game-hero__gradient {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 60% 40%, rgba(123, 47, 247, 0.18) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 50% at 20% 80%, rgba(0, 212, 255, 0.08) 0%, transparent 60%),
+      linear-gradient(180deg, rgba(7,7,26,0) 0%, rgba(7,7,26,0.9) 100%);
+  }
+
+  .game-hero__noise {
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    opacity: 0.4;
+  }
+
+  .game-hero__inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr;
+    gap: 2rem 4rem;
+    align-items: center;
+  }
+
+  .game-hero__logo-wrap {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .game-hero__logo {
+    max-width: 340px;
+    width: 100%;
+    filter: drop-shadow(0 0 32px rgba(123, 47, 247, 0.5));
+  }
+
+  .game-hero__content {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .game-hero__capsule-wrap {
+    grid-column: 2;
+    grid-row: 1 / 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .game-hero__capsule {
+    width: 100%;
+    max-width: 460px;
+    border-radius: 12px;
+    box-shadow:
+      0 0 0 1px rgba(123, 47, 247, 0.3),
+      0 24px 64px rgba(0, 0, 0, 0.6),
+      0 0 48px rgba(123, 47, 247, 0.2);
+    image-rendering: pixelated;
+  }
+
+  .game-hero__badges {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-family: var(--font-display);
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.35rem 0.75rem;
+    border-radius: 6px;
+  }
+
+  .badge--coming {
+    background: rgba(245, 197, 66, 0.12);
+    color: #f5c542;
+    border: 1px solid rgba(245, 197, 66, 0.3);
+  }
+
+  .badge--date {
+    background: rgba(123, 47, 247, 0.15);
+    color: var(--purple-light);
+    border: 1px solid rgba(123, 47, 247, 0.35);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+  }
+
+  .badge--date::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #f5c542;
+    box-shadow: 0 0 6px rgba(245, 197, 66, 0.6);
+    animation: pulse-dot 2s infinite;
+    flex-shrink: 0;
+  }
+
+  .game-hero__tagline {
+    font-family: var(--font-display);
+    font-size: clamp(1rem, 2.5vw, 1.35rem);
+    color: var(--cyan);
+    letter-spacing: 0.04em;
+    margin-bottom: 0.85rem;
+    line-height: 1.3;
+  }
+
+  .game-hero__sub {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 2rem;
+    max-width: 520px;
+  }
+
+  .game-hero__cta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-steam {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.9rem 2rem;
+    background: linear-gradient(135deg, #1b2838 0%, #2a475e 100%);
+    color: #c6d4df;
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    border-radius: 8px;
+    border: 1px solid rgba(198, 212, 223, 0.2);
+    transition: all 0.25s;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+  }
+
+  .btn-steam__top {
+    font-size: 0.9rem;
+    letter-spacing: 0.08em;
+    line-height: 1;
+  }
+
+  .btn-steam__bottom {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    opacity: 0.75;
+    line-height: 1;
+  }
+
+  .btn-steam:hover {
+    background: linear-gradient(135deg, #2a475e 0%, #3d6d8a 100%);
+    color: #fff;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.5);
+    transform: translateY(-2px);
+  }
+
+  .btn-steam:hover .btn-steam__bottom {
+    opacity: 1;
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+    background: transparent;
+    color: var(--text-muted);
+    font-family: var(--font-display);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-radius: 8px;
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    transition: all 0.25s;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--cyan);
+    color: var(--cyan);
+  }
+
+  /* ═══════ SCREENSHOTS ═══════ */
+  .screenshots {
+    padding: 4rem 0;
+    background: rgba(15, 15, 46, 0.5);
+    border-top: 1px solid rgba(123, 47, 247, 0.1);
+    border-bottom: 1px solid rgba(123, 47, 247, 0.1);
+  }
+
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+    justify-content: center;
+  }
+
+  .section-title__line {
+    flex: 1;
+    max-width: 120px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(123, 47, 247, 0.4));
+  }
+
+  .section-title__line:last-child {
+    background: linear-gradient(90deg, rgba(123, 47, 247, 0.4), transparent);
+  }
+
+  .screenshots__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+  }
+
+  .screenshot-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    border: 1px solid rgba(123, 47, 247, 0.15);
+    background: #0a0a20;
+    aspect-ratio: 16 / 9;
+    cursor: pointer;
+    padding: 0;
+    display: block;
+    width: 100%;
+  }
+
+  .screenshot-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    image-rendering: pixelated;
+    transition: transform 0.4s ease, filter 0.4s ease;
+    filter: saturate(0.9) brightness(0.95);
+  }
+
+  .screenshot-item__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(7, 7, 26, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+
+  .screenshot-item__zoom {
+    width: 40px;
+    height: 40px;
+    color: #fff;
+    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.6));
+    transform: scale(0.8);
+    transition: transform 0.25s;
+  }
+
+  .screenshot-item:hover img {
+    transform: scale(1.04);
+    filter: saturate(1.1) brightness(1.0);
+  }
+
+  .screenshot-item:hover .screenshot-item__overlay {
+    opacity: 1;
+  }
+
+  .screenshot-item:hover .screenshot-item__zoom {
+    transform: scale(1);
+  }
+
+  /* ═══════ LIGHTBOX ═══════ */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .lightbox[hidden] { display: none; }
+
+  .lightbox__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(4, 4, 18, 0.93);
+    backdrop-filter: blur(8px);
+  }
+
+  .lightbox__content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 3rem 4rem;
+  }
+
+  .lightbox__img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 0 64px rgba(0,0,0,0.8), 0 0 0 1px rgba(123,47,247,0.2);
+    image-rendering: pixelated;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .lightbox__img--loaded { opacity: 1; }
+
+  .lightbox__close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.15);
+    background: rgba(15,15,46,0.8);
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+  }
+
+  .lightbox__close:hover {
+    background: rgba(123,47,247,0.3);
+    color: #fff;
+    border-color: var(--purple);
+  }
+
+  .lightbox__nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(15,15,46,0.8);
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+  }
+
+  .lightbox__nav:hover {
+    background: rgba(123,47,247,0.3);
+    color: #fff;
+    border-color: var(--purple);
+  }
+
+  .lightbox__nav--prev { left: 1rem; }
+  .lightbox__nav--next { right: 1rem; }
+
+  .lightbox__counter {
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-display);
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    color: rgba(148,163,184,0.6);
+  }
+
+  @media (max-width: 640px) {
+    .lightbox__content { padding: 3.5rem 1rem 2rem; }
+    .lightbox__nav--prev { left: 0.25rem; }
+    .lightbox__nav--next { right: 0.25rem; }
+    .lightbox__nav { width: 38px; height: 38px; }
+  }
+
+  /* ═══════ BODY ═══════ */
+  .game-body {
+    padding: 5rem 0;
+  }
+
+  .game-body__inner {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  /* ═══════ ABOUT ═══════ */
+  .acerca-title,
+  .features-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    color: #fff;
+    letter-spacing: 0.04em;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(123, 47, 247, 0.2);
+  }
+
+  .features-title {
+    margin-top: 3rem;
+  }
+
+  .acerca-text {
+    font-size: 0.97rem;
+    line-height: 1.8;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+  }
+
+  .acerca-text strong {
+    color: var(--text);
+  }
+
+  .acerca-text em {
+    color: #f5c542;
+    font-style: normal;
+  }
+
+  /* ═══════ MISSION PHASES ═══════ */
+  .mission-phases {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin: 2rem 0;
+  }
+
+  .mission-phase {
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+    padding: 1.25rem;
+    background: rgba(15, 15, 46, 0.8);
+    border: 1px solid rgba(123, 47, 247, 0.15);
+    border-left: 3px solid var(--purple);
+    border-radius: 0 10px 10px 0;
+  }
+
+  .mission-phase__num {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: rgba(123, 47, 247, 0.35);
+    line-height: 1;
+    flex-shrink: 0;
+    padding-top: 0.1rem;
+  }
+
+  .mission-phase__title {
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 0.4rem;
+  }
+
+  .mission-phase__desc {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  /* ═══════ FEATURES ═══════ */
+  .features-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .feature-card {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    padding: 1.1rem;
+    background: rgba(15, 15, 46, 0.6);
+    border: 1px solid rgba(123, 47, 247, 0.12);
+    border-radius: 10px;
+    transition: border-color 0.25s, background 0.25s;
+  }
+
+  .feature-card:hover {
+    border-color: rgba(123, 47, 247, 0.35);
+    background: rgba(15, 15, 46, 0.9);
+  }
+
+  .feature-card__icon {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(123, 47, 247, 0.12);
+    border-radius: 8px;
+    color: var(--purple-light);
+    padding: 8px;
+  }
+
+  .feature-card__icon :global(svg) {
+    width: 20px;
+    height: 20px;
+  }
+
+  .feature-card__title {
+    font-family: var(--font-display);
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text);
+    margin-bottom: 0.3rem;
+  }
+
+  .feature-card__desc {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  /* ═══════ SIDEBAR ═══════ */
+  .sidebar-card {
+    position: sticky;
+    top: 96px;
+    background: rgba(15, 15, 46, 0.9);
+    border: 1px solid rgba(123, 47, 247, 0.2);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow:
+      0 16px 48px rgba(0, 0, 0, 0.4),
+      0 0 32px rgba(123, 47, 247, 0.08);
+  }
+
+  .sidebar-card__icon {
+    width: 100%;
+    display: block;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    image-rendering: pixelated;
+    border-bottom: 1px solid rgba(123, 47, 247, 0.15);
+  }
+
+  .game-meta {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .game-meta__row {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 0.75rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    align-items: start;
+  }
+
+  .game-meta__row:last-child {
+    border-bottom: none;
+  }
+
+  .game-meta__row dt {
+    font-family: var(--font-display);
+    font-size: 0.58rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(148, 163, 184, 0.6);
+    padding-top: 0.15rem;
+  }
+
+  .game-meta__row dd {
+    font-size: 0.82rem;
+    color: var(--text);
+    line-height: 1.4;
+  }
+
+  .game-meta__row--release dd {
+    color: #f5c542;
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+  }
+
+  .game-meta__release-date {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .game-meta__release-date::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #f5c542;
+    box-shadow: 0 0 6px rgba(245, 197, 66, 0.6);
+    animation: pulse-dot 2s infinite;
+  }
+
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  .sidebar-btn-steam {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    margin: 0 1.25rem 1.25rem;
+    padding: 1rem 1rem;
+    background: linear-gradient(135deg, #1b2838 0%, #2a475e 100%);
+    color: #c6d4df;
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    border-radius: 8px;
+    border: 1px solid rgba(198, 212, 223, 0.2);
+    transition: all 0.25s;
+  }
+
+  .sidebar-btn-steam:hover {
+    background: linear-gradient(135deg, #2a475e 0%, #3d6d8a 100%);
+    color: #fff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+  }
+
+  .sidebar-btn-steam:hover .btn-steam__bottom {
+    opacity: 1;
+  }
+
+  /* ═══════ RESPONSIVE ═══════ */
+  @media (max-width: 900px) {
+    .game-hero__inner {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto auto;
+      gap: 2rem;
+    }
+
+    .game-hero__logo-wrap { grid-column: 1; grid-row: 1; }
+    .game-hero__content  { grid-column: 1; grid-row: 3; }
+    .game-hero__capsule-wrap { grid-column: 1; grid-row: 2; }
+
+    .game-hero__capsule { max-width: 400px; margin: 0 auto; display: block; }
+
+    .game-body__inner {
+      grid-template-columns: 1fr;
+    }
+
+    .sidebar-card {
+      position: static;
+      max-width: 420px;
+    }
+
+    .features-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .screenshots__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .game-hero { padding: 3rem 0 2.5rem; }
+
+    .game-hero__logo { max-width: 240px; }
+  }
+</style>
