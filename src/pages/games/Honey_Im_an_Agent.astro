@@ -3,45 +3,41 @@ import Layout from '../../layouts/Layout.astro';
 import Navbar from '../../components/Navbar.astro';
 import Footer from '../../components/Footer.astro';
 
-const screenshots = [
-  { src: '/Screenshot_2.png', alt: 'Honey Im an Agent — captura 1' },
-  { src: '/Screenshot_game_8.png', alt: 'Honey Im an Agent — captura 2' },
-  { src: '/Screenshot_game_9.png', alt: 'Honey Im an Agent — captura 3' },
-  { src: '/Screenshot%20_5.png', alt: 'Honey Im an Agent — captura 4' },
-  { src: '/Screenshot_1.png', alt: 'Honey Im an Agent — captura 5' },
-  { src: '/Screenshot_4.png', alt: 'Honey Im an Agent — captura 6' },
-];
+const screenshots = Array.from({ length: 8 }, (_, i) => ({
+  src: `/screenshots/honey-im-an-agent-${i + 1}.webp`,
+  alt: `Honey, I'm an Agent - captura de pantalla ${i + 1}`,
+}));
 
 const features = [
   {
     icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>`,
     title: 'Doble Vida y Humor Ácido',
-    desc: 'Narrativa donde el peligro criminal y los secretos domésticos se mezclan con situaciones hilarantes.',
+    desc: 'La historia junta el riesgo de enfrentarse a criminales con los secretos que hay que guardar en casa, y de esa mezcla sale el humor.',
   },
   {
     icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>`,
     title: 'Mecánica de Gancho y Paraguas',
-    desc: 'Domina las físicas del grappling hook para desplazarte dinámicamente y usa tu paraguas como paracaídas y arma.',
+    desc: 'Muévete por los escenarios balanceándote con el gancho de agarre. El paraguas cumple dos funciones: paracaídas y arma de combate.',
   },
   {
     icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>`,
     title: 'Sigilo Táctico y Tensión',
-    desc: 'Estudia los patrones, evade los conos de visión y planifica tu ruta con precisión milimétrica.',
+    desc: 'Aprende los patrones de movimiento, mantente fuera de los conos de visión y decide bien tu camino, tanto en la calle como dentro de casa.',
   },
   {
     icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>`,
     title: 'Acertijos y Puzzles Ligeros',
-    desc: 'Rompe la tensión del espionaje resolviendo ingeniosos desafíos lógicos tanto en casa como en el campo.',
+    desc: 'Entre momentos de tensión aparecen desafíos de lógica, tanto en casa como durante la misión de campo.',
   },
   {
     icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/></svg>`,
     title: 'Estética Noir Pixelada',
-    desc: 'Un apartado visual clásico que rinde homenaje a la vieja escuela del pixel art, ideal para jugar con mando.',
+    desc: 'Pixel art con ambientación noir, en homenaje a los juegos de la vieja escuela. Pensado para disfrutarse con mando.',
   },
   {
     icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>`,
     title: 'Infiltración Casera',
-    desc: 'Escápate de tu propio hogar en mitad de la noche llevando el sigilo a otro nivel: ¡que tu esposa no note tu ausencia!',
+    desc: 'Antes de cada misión hay que salir de casa a escondidas en plena noche, con todo el sigilo posible para que tu esposa no se dé cuenta.',
   },
 ];
 
@@ -49,20 +45,22 @@ const jsonLdGame = {
   '@context': 'https://schema.org',
   '@type': 'VideoGame',
   name: 'Honey, I\'m an Agent',
-  description: 'Acción, sigilo y comedia noir en 2D. Un hombre inofensivo termina por accidente como agente secreto.',
+  url: 'https://multinow-games.com/games/Honey_Im_an_Agent/',
+  sameAs: ['https://store.steampowered.com/app/4826960/Honey_Im_an_Agent/'],
+  inLanguage: ['es', 'en'],
+  description: 'Juego indie 2D de Multinow que mezcla acción, sigilo y comedia noir: un hombre inofensivo se convierte por accidente en agente secreto y debe ocultárselo a su esposa.',
   genre: ['Action', 'Adventure', 'Indie'],
   gamePlatform: 'PC',
   applicationCategory: 'Game',
   author: { '@type': 'Organization', name: 'Multinow' },
   publisher: { '@type': 'Organization', name: 'Multinow' },
-  datePublished: '2026-09-01',
   image: 'https://multinow-games.com/capsula_promocion_748.png',
 };
 ---
 
 <Layout
-  title="Honey, I'm an Agent | Multinow — Próximo Lanzamiento Sep 2026"
-  description="Acción, sigilo y comedia noir en 2D. Un hombre inofensivo termina por accidente como agente secreto. Próximo lanzamiento 1 de septiembre 2026."
+  title="Honey, I'm an Agent | Multinow | Demo Disponible 6 Oct 2026"
+  description="Honey, I'm an Agent es un juego indie 2D de Multinow: acción, sigilo y comedia noir protagonizados por un hombre que se vuelve agente secreto por accidente. Demo disponible desde el 6 de octubre de 2026."
   canonical="https://multinow-games.com/games/Honey_Im_an_Agent/"
   image="https://multinow-games.com/capsula_promocion_748.png"
   jsonLdService={jsonLdGame}
@@ -85,14 +83,14 @@ const jsonLdGame = {
           <div class="game-hero__badges">
             <span class="badge badge--coming">
               <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" width="12" height="12"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 1.5"/></svg>
-              Próximo Lanzamiento
+              Demo disponible
             </span>
-            <span class="badge badge--date">1 · Sep · 2026</span>
+            <span class="badge badge--date">6 · Oct · 2026</span>
           </div>
           <h1 class="game-hero__h1">Honey, I'm an Agent</h1>
-          <p class="game-hero__tagline">Acción, sigilo y comedia noir en 2D</p>
+          <p class="game-hero__tagline">Un agente secreto por accidente con una esposa que no debe enterarse</p>
           <p class="game-hero__sub">
-            Un hombre inofensivo termina por accidente como agente secreto. Oculta su doble vida escapando de su esposa por las noches: ¡cumple misiones, balancéate con tu gancho de agarre y haz brillar tu súper arma: un paraguas que sirve de paracaídas y combate!
+            Un hombre inofensivo se convierte, sin quererlo, en agente secreto. Para mantener su doble vida tiene que escaparse de casa por las noches sin que su esposa lo note, cumplir misiones, balancearse con su gancho de agarre y defenderse con un paraguas que también le sirve de paracaídas.
           </p>
           <div class="game-hero__cta">
             <a href="https://store.steampowered.com/app/4826960/Honey_Im_an_Agent/" target="_blank" rel="noopener noreferrer" class="btn-steam">
@@ -106,7 +104,7 @@ const jsonLdGame = {
           </div>
         </div>
         <div class="game-hero__capsule-wrap">
-          <img src="/capsula_promocion_748.png" alt="Honey Im an Agent — arte promocional" class="game-hero__capsule" />
+          <img src="/capsula_promocion_748.png" alt="Honey Im an Agent - arte promocional" class="game-hero__capsule" />
         </div>
       </div>
     </section>
@@ -166,10 +164,13 @@ const jsonLdGame = {
         <div class="game-body__main">
           <h2 class="acerca-title">Acerca de este juego</h2>
           <p class="acerca-text">
-            <strong>Honey, I'm an Agent</strong> es una aventura en 2D de sigilo táctico y comedia envuelta en una marcada atmósfera de cine noir y pixel art.
+            <strong>Honey, I'm an Agent</strong> es un juego original de Multinow: una aventura 2D en pixel art que combina sigilo táctico y comedia con ambientación de cine noir.
           </p>
           <p class="acerca-text">
-            Acompaña a un hombre común de apariencia inofensiva que, por un absoluto accidente, termina envuelto en peligrosas misiones de agente secreto. A lo largo de esta aventura vivirás el verdadero desafío de un héroe encubierto: <em>¡lograr que su esposa jamás descubra en lo que está metido!</em>
+            El protagonista es un hombre común y de aspecto inofensivo que, por accidente, termina metido en misiones peligrosas como agente secreto. Durante el juego lo verás evolucionar como personaje, pero su reto más grande sigue siendo el mismo: <em>que su esposa nunca descubra a qué se dedica.</em>
+          </p>
+          <p class="acerca-text">
+            Cada misión tiene dos partes, las dos con sigilo, acertijos ligeros y humor:
           </p>
 
           <div class="mission-phases">
@@ -177,14 +178,14 @@ const jsonLdGame = {
               <span class="mission-phase__num">01</span>
               <div>
                 <h3 class="mission-phase__title">La Infiltración Casera</h3>
-                <p class="mission-phase__desc">Escápate de casa en mitad de la noche llevando el sigilo a otro nivel, para que tu esposa no note tu ausencia.</p>
+                <p class="mission-phase__desc">En plena noche, sal de tu casa a escondidas usando el sigilo para que tu esposa no se dé cuenta de que no estás.</p>
               </div>
             </div>
             <div class="mission-phase">
               <span class="mission-phase__num">02</span>
               <div>
                 <h3 class="mission-phase__title">La Misión de Campo</h3>
-                <p class="mission-phase__desc">Sal a las peligrosas calles del bajo mundo usando tu fiel gancho de agarre para balancearte por los escenarios, resolver acertijos y defenderte con tu única arma: ¡un paraguas!</p>
+                <p class="mission-phase__desc">Ya en las calles del bajo mundo, recorre los escenarios balanceándote con el gancho de agarre, resuelve acertijos y enfréntate a los enemigos con la única arma que tienes: un paraguas.</p>
               </div>
             </div>
           </div>
@@ -206,7 +207,7 @@ const jsonLdGame = {
         <!-- Sidebar -->
         <aside class="game-sidebar">
           <div class="sidebar-card">
-            <img src="/icono_acceso_directo.png" alt="Honey Im an Agent — icono" class="sidebar-card__icon" />
+            <img src="/icono_acceso_directo.png" alt="Honey Im an Agent - icono" class="sidebar-card__icon" />
             <dl class="game-meta">
               <div class="game-meta__row">
                 <dt>Título</dt>
@@ -229,8 +230,8 @@ const jsonLdGame = {
                 <dd>Single Player</dd>
               </div>
               <div class="game-meta__row game-meta__row--release">
-                <dt>Lanzamiento</dt>
-                <dd class="game-meta__release-date">1 Sep 2026</dd>
+                <dt>Demo</dt>
+                <dd class="game-meta__release-date">6 Oct 2026</dd>
               </div>
             </dl>
             <a href="https://store.steampowered.com/app/4826960/Honey_Im_an_Agent/" target="_blank" rel="noopener noreferrer" class="sidebar-btn-steam">
@@ -571,7 +572,7 @@ const jsonLdGame = {
 
   .screenshots__grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 0.75rem;
   }
 
@@ -1001,6 +1002,9 @@ const jsonLdGame = {
 
   /* ═══════ RESPONSIVE ═══════ */
   @media (max-width: 900px) {
+    .screenshots__grid {
+      grid-template-columns: 1fr 1fr;
+    }
     .game-hero__inner {
       grid-template-columns: 1fr;
       grid-template-rows: auto auto auto;
