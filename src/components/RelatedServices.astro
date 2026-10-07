@@ -1,39 +1,51 @@
 ---
+import { getLangFromUrl, localizePath } from '../i18n/utils';
+
 interface Props {
   current: 'educativo' | 'marcas' | 'campaigns' | 'medida';
 }
 
 const { current } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
 
-const all = [
+const t = {
+  es: {
+    heading: 'También te puede interesar',
+    educativo: { label: 'Videojuegos Educativos', tagline: 'Gamificación educativa · SCORM' },
+    marcas: { label: 'Videojuegos para Marcas', tagline: 'Branded gaming experiences' },
+    campaigns: { label: 'Videojuegos para Campañas', tagline: 'Activaciones digitales gamificadas' },
+    medida: { label: 'Videojuegos a Medida', tagline: 'Tu idea, hecha realidad' },
+  },
+  en: {
+    heading: 'You may also be interested in',
+    educativo: { label: 'Educational Video Games', tagline: 'Educational gamification · SCORM' },
+    marcas: { label: 'Video Games for Brands', tagline: 'Branded gaming experiences' },
+    campaigns: { label: 'Video Games for Campaigns', tagline: 'Gamified digital activations' },
+    medida: { label: 'Custom Video Games', tagline: 'Your idea, made real' },
+  },
+}[lang];
+
+const all: { id: Props['current']; href: string; color: string; rgb: string }[] = [
   {
     id: 'educativo',
-    label: 'Videojuegos Educativos',
-    tagline: 'Gamificación educativa · SCORM',
     href: '/servicios/educativo',
     color: '#9373cb',
     rgb: '147,115,203',
   },
   {
     id: 'marcas',
-    label: 'Videojuegos para Marcas',
-    tagline: 'Branded gaming experiences',
     href: '/servicios/marcas',
     color: '#651fcf',
     rgb: '101,31,207',
   },
   {
     id: 'campaigns',
-    label: 'Videojuegos para Campañas',
-    tagline: 'Activaciones digitales gamificadas',
     href: '/servicios/campaigns',
     color: '#1371ef',
     rgb: '19,113,239',
   },
   {
     id: 'medida',
-    label: 'Videojuegos a Medida',
-    tagline: 'Tu idea, hecha realidad',
     href: '/servicios/medida',
     color: '#0506a6',
     rgb: '5,6,166',
@@ -45,16 +57,16 @@ const related = all.filter((s) => s.id !== current);
 
 <section class="related">
   <div class="container">
-    <p class="related__label">También te puede interesar</p>
+    <p class="related__label">{t.heading}</p>
     <div class="related__grid">
       {related.map((s) => (
         <a
-          href={s.href}
+          href={localizePath(s.href, lang)}
           class="related__card"
           style={`--c:${s.color};--rgb:${s.rgb};`}
         >
-          <span class="related__tagline">{s.tagline}</span>
-          <span class="related__title">{s.label}</span>
+          <span class="related__tagline">{t[s.id].tagline}</span>
+          <span class="related__title">{t[s.id].label}</span>
           <span class="related__arrow" aria-hidden="true">→</span>
         </a>
       ))}

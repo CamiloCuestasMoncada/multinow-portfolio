@@ -1,26 +1,51 @@
 ---
+import { getLangFromUrl, localizePath, stripLang } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const l = (path: string) => localizePath(path, lang);
+
+const t = {
+  es: {
+    home: 'Inicio', services: 'Servicios', solutions: 'Soluciones', own: 'Autoría Propia',
+    allServices: 'Ver todos los servicios →', openMenu: 'Abrir menú', langLabel: 'Idioma',
+    educativo: 'Educativo', marcas: 'Para Marcas', campaigns: 'Campañas', medida: 'A Medida',
+  },
+  en: {
+    home: 'Home', services: 'Services', solutions: 'Solutions', own: 'Original Games',
+    allServices: 'See all services →', openMenu: 'Open menu', langLabel: 'Language',
+    educativo: 'Educational', marcas: 'For Brands', campaigns: 'Campaigns', medida: 'Custom',
+  },
+}[lang];
+
+// Misma página en el otro idioma
+const neutralPath = stripLang(Astro.url.pathname);
+const langLinks = [
+  { code: 'es', label: 'ES', href: localizePath(neutralPath, 'es') },
+  { code: 'en', label: 'EN', href: localizePath(neutralPath, 'en') },
+];
+
 const navServices = [
   {
-    label: 'Educativo',
-    href: '/servicios/educativo',
+    label: t.educativo,
+    href: l('/servicios/educativo'),
     color: '#9373cb',
     icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 9L12 4 2 9l10 5 10-5z"/><path d="M6 11.5V17s2.5 3 6 3 6-3 6-3v-5.5"/><line x1="22" y1="9" x2="22" y2="15"/></svg>`,
   },
   {
-    label: 'Para Marcas',
-    href: '/servicios/marcas',
+    label: t.marcas,
+    href: l('/servicios/marcas'),
     color: '#651fcf',
     icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>`,
   },
   {
-    label: 'Campañas',
-    href: '/servicios/campaigns',
+    label: t.campaigns,
+    href: l('/servicios/campaigns'),
     color: '#1371ef',
     icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>`,
   },
   {
-    label: 'A Medida',
-    href: '/servicios/medida',
+    label: t.medida,
+    href: l('/servicios/medida'),
     color: '#0506a6',
     icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l9-9"/><path d="M12.5 2.5l1 2 2 1-2 1-1 2-1-2-2-1 2-1z"/><path d="M20 8.5l.5 1 1 .5-1 .5-.5 1-.5-1-1-.5 1-.5z"/><path d="M8 7.5l.5 1 1 .5-1 .5-.5 1-.5-1-1-.5 1-.5z"/></svg>`,
   },
@@ -29,7 +54,7 @@ const navServices = [
 const navOwn = [
   {
     label: 'Honey, I\'m an Agent',
-    href: '/games/Honey_Im_an_Agent/',
+    href: l('/games/Honey_Im_an_Agent/'),
     color: '#f5c542',
     badge: 'Demo',
     icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/><path d="M17 3l2 2-2 2"/><path d="M7 3L5 5l2 2"/></svg>`,
@@ -38,16 +63,16 @@ const navOwn = [
 ---
 <header class="navbar">
   <div class="container navbar__inner">
-    <a href="/#inicio" class="navbar__brand">
+    <a href={l('/#inicio')} class="navbar__brand">
       <img src="/logo.png" alt="Multinow" class="navbar__logo" />
     </a>
     <nav class="navbar__nav" id="mainNav">
-      <a href="/#inicio" class="nav__link">Inicio</a>
+      <a href={l('/#inicio')} class="nav__link">{t.home}</a>
 
       <!-- Servicios dropdown -->
       <div class="nav__dropdown" id="servDropdown">
         <button class="nav__link nav__dropdown-toggle" aria-expanded="false" aria-haspopup="true" id="servToggle">
-          Servicios
+          {t.services}
           <svg class="nav__chevron" viewBox="0 0 12 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
             <path d="M1 1l5 5 5-5"/>
           </svg>
@@ -60,17 +85,17 @@ const navOwn = [
             </a>
           ))}
           <div class="nav__dropdown-footer">
-            <a href="/#servicios" class="nav__dropdown-all">Ver todos los servicios →</a>
+            <a href={l('/#servicios')} class="nav__dropdown-all">{t.allServices}</a>
           </div>
         </div>
       </div>
 
-      <a href="/#soluciones" class="nav__link">Soluciones</a>
+      <a href={l('/#soluciones')} class="nav__link">{t.solutions}</a>
 
       <!-- Autoría Propia dropdown -->
       <div class="nav__dropdown" id="ownDropdown">
         <button class="nav__link nav__dropdown-toggle" aria-expanded="false" aria-haspopup="true" id="ownToggle">
-          Autoría Propia
+          {t.own}
           <svg class="nav__chevron" viewBox="0 0 12 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
             <path d="M1 1l5 5 5-5"/>
           </svg>
@@ -87,8 +112,21 @@ const navOwn = [
           ))}
         </div>
       </div>
+
+      <div class="nav__lang" role="group" aria-label={t.langLabel}>
+        {langLinks.map((o) => (
+          <a
+            href={o.href}
+            hreflang={o.code}
+            lang={o.code}
+            class:list={['nav__lang-opt', { 'nav__lang-opt--active': o.code === lang }]}
+            aria-current={o.code === lang ? 'true' : undefined}
+            data-lang-switch={o.code}
+          >{o.label}</a>
+        ))}
+      </div>
     </nav>
-    <button class="navbar__toggle" aria-label="Abrir menú" id="menuToggle">
+    <button class="navbar__toggle" aria-label={t.openMenu} id="menuToggle">
       <span></span><span></span><span></span>
     </button>
   </div>
@@ -137,6 +175,13 @@ const navOwn = [
         dropdown.classList.remove('nav__dropdown--open');
         const toggle = dropdown.querySelector('.nav__dropdown-toggle') as HTMLButtonElement | null;
         toggle?.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // Guardar el idioma elegido para no volver a redirigir según el navegador
+    document.querySelectorAll<HTMLAnchorElement>('[data-lang-switch]').forEach((link) => {
+      link.addEventListener('click', () => {
+        try { localStorage.setItem('lang', link.dataset.langSwitch!); } catch {}
       });
     });
 
@@ -373,6 +418,35 @@ const navOwn = [
     flex-shrink: 0;
   }
 
+  /* LANGUAGE SWITCH */
+  .nav__lang {
+    display: flex;
+    align-items: center;
+    padding: 2px;
+    border: 1px solid rgba(123, 47, 247, 0.3);
+    border-radius: 999px;
+  }
+
+  .nav__lang-opt {
+    font-family: var(--font-display);
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    padding: 0.3rem 0.6rem;
+    border-radius: 999px;
+    color: var(--text-muted);
+    transition: color 0.2s, background 0.2s;
+  }
+
+  .nav__lang-opt:hover {
+    color: var(--cyan);
+  }
+
+  .nav__lang-opt--active {
+    background: rgba(123, 47, 247, 0.25);
+    color: #fff;
+    pointer-events: none;
+  }
+
   /* HAMBURGER */
   .navbar__toggle {
     display: none;
@@ -455,6 +529,11 @@ const navOwn = [
 
     .nav__dropdown-all {
       padding: 0.75rem 2rem;
+    }
+
+    .nav__lang {
+      align-self: flex-start;
+      margin: 0.75rem 1.5rem 0;
     }
 
     .navbar__toggle { display: flex; }

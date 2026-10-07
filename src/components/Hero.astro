@@ -1,26 +1,47 @@
 ---
+import { getLangFromUrl } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+
+const t = {
+  es: {
+    before: 'Desarrollamos',
+    highlight: 'videojuegos personalizados',
+    after: 'para tu marca, campaña o proyecto',
+    sub1: 'Videojuegos a la medida, para Educación, publicidad, entretenimiento o capacitación corporativa.',
+    sub2: 'Gamificación empresarial, creamos experiencias interactivas únicas adaptadas a tus objetivos.',
+    chips: ['🎓 Educativos', '📢 Campañas', '🏷️ Branded', '🎮 Personalizados'],
+    logoAlt: 'Multinow - Desarrollo de videojuegos personalizados en Godot',
+  },
+  en: {
+    before: 'We develop',
+    highlight: 'custom video games',
+    after: 'for your brand, campaign or project',
+    sub1: 'Tailor-made video games for education, advertising, entertainment or corporate training.',
+    sub2: 'Corporate gamification: we create unique interactive experiences adapted to your goals.',
+    chips: ['🎓 Educational', '📢 Campaigns', '🏷️ Branded', '🎮 Custom'],
+    logoAlt: 'Multinow - Custom video game development in Godot',
+  },
+}[lang];
 ---
 <section class="hero" id="inicio">
   <div class="container hero__inner">
     <div class="hero__text">
       <h1 class="hero__title">
-        Desarrollamos
-        <span class="hero__highlight">videojuegos personalizados</span>
-        para tu marca, campaña o proyecto
+        {t.before}
+        <span class="hero__highlight">{t.highlight}</span>
+        {t.after}
       </h1>
       <p class="hero__sub">
-        Videojuegos 2D a la medida, para Educación, publicidad, entretenimiento o capacitación corporativa.
-        Gamificación empresarial, creamos experiencias interactivas únicas adaptadas a tus objetivos.
+        {t.sub1}
+        {t.sub2}
       </p>
       <div class="hero__chips">
-        <span class="chip">🎓 Educativos</span>
-        <span class="chip">📢 Campañas</span>
-        <span class="chip">🏷️ Branded</span>
-        <span class="chip">🎮 Personalizados</span>
+        {t.chips.map((c) => <span class="chip">{c}</span>)}
       </div>
     </div>
     <div class="hero__graphic">
-      <img src="/logo.png" alt="Multinow - Desarrollo de videojuegos 2D personalizados en Godot" class="hero__logo" />
+      <img src="/logo.png" alt={t.logoAlt} class="hero__logo" />
     </div>
   </div>
 </section>

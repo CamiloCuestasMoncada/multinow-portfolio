@@ -1,10 +1,36 @@
 ---
-const servicios = [
+import { getLangFromUrl, localizePath } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+
+const t = {
+  es: {
+    title: 'Nuestros Servicios',
+    sub: 'Videojuegos personalizados para cada objetivo',
+    cta: 'Ver servicio',
+    items: {
+      educativo: { label: 'Educativo', tagline: 'Gamificación educativa · Aprendizaje a través del juego', desc: 'Videojuegos pedagógicos para colegios, universidades y LMS. Integración SCORM para reportar progreso y notas.' },
+      marcas: { label: 'Para Marcas', tagline: 'Branded gaming experiences', desc: 'Juegos que integran tu identidad de marca de forma natural, generando recordación y engagement real con tu audiencia.' },
+      campaigns: { label: 'Campañas', tagline: 'Activaciones digitales gamificadas', desc: 'Videojuegos que amplifican campañas publicitarias, aumentan la exposición a tu marca y generan contenido compartible.' },
+      medida: { label: 'A Medida', tagline: 'Tu idea, hecha realidad', desc: 'Simuladores técnicos, instalaciones para eventos, minijuegos HTML5 o cualquier mecánica completamente personalizada.' },
+    },
+  },
+  en: {
+    title: 'Our Services',
+    sub: 'Custom video games for every goal',
+    cta: 'View service',
+    items: {
+      educativo: { label: 'Educational', tagline: 'Educational gamification · Learning through play', desc: 'Learning games for schools, universities and LMS platforms. SCORM integration to report progress and grades.' },
+      marcas: { label: 'For Brands', tagline: 'Branded gaming experiences', desc: 'Games that naturally integrate your brand identity, building brand recall and real engagement with your audience.' },
+      campaigns: { label: 'Campaigns', tagline: 'Gamified digital activations', desc: 'Video games that amplify advertising campaigns, increase exposure to your brand and generate shareable content.' },
+      medida: { label: 'Custom', tagline: 'Your idea, made real', desc: 'Technical simulators, event installations, HTML5 mini-games or any fully custom mechanic.' },
+    },
+  },
+}[lang];
+
+const servicios: { id: keyof typeof t.items; [k: string]: string }[] = [
   {
     id: 'educativo',
-    label: 'Educativo',
-    tagline: 'Gamificación educativa · Aprendizaje a través del juego',
-    desc: 'Videojuegos pedagógicos 2D para colegios, universidades y LMS. Integración SCORM para reportar progreso y notas.',
     bg: '/bg_cultivo.png',
     c1: 'rgba(147,115,203,0.96)',
     c2: 'rgba(147,115,203,0.62)',
@@ -17,9 +43,6 @@ const servicios = [
   },
   {
     id: 'marcas',
-    label: 'Para Marcas',
-    tagline: 'Branded gaming experiences',
-    desc: 'Juegos que integran tu identidad de marca de forma natural, generando recordación y engagement real con tu audiencia.',
     bg: '/bg_cafe.png',
     c1: 'rgba(101,31,207,0.96)',
     c2: 'rgba(101,31,207,0.62)',
@@ -32,9 +55,6 @@ const servicios = [
   },
   {
     id: 'campaigns',
-    label: 'Campañas',
-    tagline: 'Activaciones digitales gamificadas',
-    desc: 'Videojuegos que amplifican campañas publicitarias, aumentan la exposición a tu marca y generan contenido compartible.',
     bg: '/bgMecanicaTRansportadora.png',
     c1: 'rgba(19,113,239,0.96)',
     c2: 'rgba(19,113,239,0.62)',
@@ -47,9 +67,6 @@ const servicios = [
   },
   {
     id: 'medida',
-    label: 'A Medida',
-    tagline: 'Tu idea, hecha realidad',
-    desc: 'Simuladores técnicos, instalaciones para eventos, minijuegos HTML5 o cualquier mecánica completamente personalizada.',
     bg: '/bg_engranajes.png',
     c1: 'rgba(5,6,166,0.96)',
     c2: 'rgba(5,6,166,0.62)',
@@ -65,13 +82,13 @@ const servicios = [
 
 <section class="servicios" id="servicios">
   <div class="container">
-    <h2 class="section__title">Nuestros Servicios</h2>
-    <p class="section__sub">Videojuegos 2D personalizados para cada objetivo</p>
+    <h2 class="section__title">{t.title}</h2>
+    <p class="section__sub">{t.sub}</p>
 
     <div class="scards">
       {servicios.map((s) => (
         <a
-          href={s.href}
+          href={localizePath(s.href, lang)}
           class="scard"
           style={`--c1:${s.c1};--c2:${s.c2};--c3:${s.c3};--glow:${s.glow};--border-h:${s.borderHover};--bg-filter:${s.bgFilter};`}
         >
@@ -80,11 +97,11 @@ const servicios = [
           <div class="scard__content">
             <span class="scard__icon" set:html={s.icon} />
             <div class="scard__bottom">
-              <p class="scard__tagline">{s.tagline}</p>
-              <h3 class="scard__title">{s.label}</h3>
-              <p class="scard__desc">{s.desc}</p>
+              <p class="scard__tagline">{t.items[s.id].tagline}</p>
+              <h3 class="scard__title">{t.items[s.id].label}</h3>
+              <p class="scard__desc">{t.items[s.id].desc}</p>
               <span class="scard__cta">
-                Ver servicio
+                {t.cta}
                 <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <path d="M4 10h12M10 4l6 6-6 6"/>
                 </svg>

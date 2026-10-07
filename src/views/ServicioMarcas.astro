@@ -1,0 +1,343 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import ServicioHero from '../components/ServicioHero.astro';
+import Footer from '../components/Footer.astro';
+import WhatsappFloat from '../components/WhatsappFloat.astro';
+import RelatedServices from '../components/RelatedServices.astro';
+
+import { SITE, getLangFromUrl, localizePath, whatsappLink } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+
+const t = {
+  es: {
+    metaTitle: 'Videojuegos para Marcas | Branded Games | Multinow',
+    metaDesc: 'Creamos experiencias de juego que integran la identidad de tu marca de forma natural. Branded games que generan recordación, engagement y conexión emocional con tu audiencia.',
+    ldName: 'Videojuegos para Marcas | Branded Games',
+    ldDesc: 'Experiencias de juego que integran la identidad de tu marca. Branded games que generan recordación, engagement y conexión emocional con tu audiencia.',
+    title: 'Videojuegos para Marcas',
+    tagline: 'Branded gaming experiences · Juegos que integran tu identidad y generan engagement real',
+    introTitle: 'Branded games: videojuegos con la identidad de tu marca',
+    intro: 'Experiencias de juego que integran la identidad de tu marca de forma natural. Generan recordación, engagement y conexión emocional con tu audiencia.',
+    mechTitle: 'Mecánicas que usamos',
+    mechSub: 'Elegimos la mecánica que mejor conecta con el mensaje de tu marca, entre estas y muchas más.',
+    mecanicas: [
+      { icon: '🗺️', titulo: 'Aventura de Marca',     desc: 'Narrativa guiada donde el usuario vive la historia y valores de la marca.' },
+      { icon: '🏃', titulo: 'Endless Runner',        desc: 'Personajes y estética de la marca en mecánicas atractivas de avance continuo.' },
+      { icon: '🧠', titulo: 'Trivia & Quiz',         desc: 'Preguntas sobre el producto o campaña con feedback inmediato y puntuación.' },
+      { icon: '🧩', titulo: 'Puzzle & Rompecabezas', desc: 'Desafíos de lógica que refuerzan el mensaje de la marca de forma memorable.' },
+    ],
+    whenTitle: '¿Cuándo tiene sentido un branded game?',
+    momentos: [
+      { tag: 'Lanzamiento',        desc: 'Genera ruido y tiempo de atención en el momento en que más importa destacar.' },
+      { tag: 'Fidelización',       desc: 'Premia a tu comunidad con experiencias únicas que refuerzan el vínculo emocional.' },
+      { tag: 'Activación digital', desc: 'Campañas en redes sociales con mecánicas virales y tabla de posiciones en tiempo real.' },
+      { tag: 'Evento presencial',  desc: 'Instalaciones interactivas que convierten tu stand o activación en una experiencia memorable.' },
+    ],
+    ctaText: '¿Tienes una marca y quieres crear una experiencia de juego única?',
+    ctaBtn: 'Contactar por WhatsApp',
+    waMessage: 'Hola Multinow, me interesa un branded game para mi marca. ¿Podemos hablar?',
+    examples: 'Ejemplos de algunos de nuestros trabajos',
+    juegos: [
+      { titulo: 'Brand Runner',     desc: 'Endless runner con la estética y personajes de la marca para redes sociales.', tags: ['Branded', 'Social'],    imgAlt: 'Brand Runner: endless runner con estética y personajes de marca para redes sociales' },
+      { titulo: 'Quiz de Producto', desc: 'Trivia interactiva que educa al usuario sobre los beneficios del producto.',  tags: ['Educación', 'Ventas'], imgAlt: 'Quiz de Producto: trivia interactiva con identidad de marca para educar sobre beneficios del producto' },
+    ],
+  },
+  en: {
+    metaTitle: 'Video Games for Brands | Branded Games | Multinow',
+    metaDesc: 'We create game experiences that naturally integrate your brand identity. Branded games that build brand recall, engagement and an emotional connection with your audience.',
+    ldName: 'Video Games for Brands | Branded Games',
+    ldDesc: 'Game experiences that integrate your brand identity. Branded games that build brand recall, engagement and an emotional connection with your audience.',
+    title: 'Video Games for Brands',
+    tagline: 'Branded gaming experiences · Games that integrate your identity and drive real engagement',
+    introTitle: 'Branded games: video games with your brand identity',
+    intro: 'Game experiences that naturally integrate your brand identity. They build brand recall, engagement and an emotional connection with your audience.',
+    mechTitle: 'Mechanics we use',
+    mechSub: 'We choose the mechanic that best connects with your brand message, from these and many more.',
+    mecanicas: [
+      { icon: '🗺️', titulo: 'Brand Adventure',  desc: 'A guided narrative where users live the brand\'s story and values.' },
+      { icon: '🏃', titulo: 'Endless Runner',   desc: 'The brand\'s characters and look in engaging, continuous-progress mechanics.' },
+      { icon: '🧠', titulo: 'Trivia & Quiz',    desc: 'Questions about the product or campaign with instant feedback and scoring.' },
+      { icon: '🧩', titulo: 'Puzzles',          desc: 'Logic challenges that reinforce the brand message in a memorable way.' },
+    ],
+    whenTitle: 'When does a branded game make sense?',
+    momentos: [
+      { tag: 'Launch',             desc: 'Create buzz and capture attention at the moment when standing out matters most.' },
+      { tag: 'Loyalty',            desc: 'Reward your community with unique experiences that strengthen the emotional bond.' },
+      { tag: 'Digital activation', desc: 'Social media campaigns with viral mechanics and real-time leaderboards.' },
+      { tag: 'In-person event',    desc: 'Interactive installations that turn your booth or activation into a memorable experience.' },
+    ],
+    ctaText: 'Have a brand and want to create a unique game experience?',
+    ctaBtn: 'Contact us on WhatsApp',
+    waMessage: 'Hi Multinow, I\'m interested in a branded game for my brand. Can we talk?',
+    examples: 'Examples of some of our work',
+    juegos: [
+      { titulo: 'Brand Runner', desc: 'An endless runner with the brand\'s look and characters for social media.', tags: ['Branded', 'Social'],    imgAlt: 'Brand Runner: endless runner with brand look and characters for social media' },
+      { titulo: 'Product Quiz', desc: 'An interactive trivia game that teaches users about the product\'s benefits.', tags: ['Education', 'Sales'], imgAlt: 'Product Quiz: interactive branded trivia game that teaches about the product\'s benefits' },
+    ],
+  },
+}[lang];
+
+const serviceJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: t.ldName,
+  description: t.ldDesc,
+  provider: { '@type': 'Organization', name: 'Multinow', url: SITE },
+  url: `${SITE}${localizePath('/servicios/marcas/', lang)}`,
+  serviceType: 'Branded games',
+  areaServed: { '@type': 'Country', name: 'Colombia' },
+};
+
+const color    = '#651fcf';
+const rgb      = '101,31,207';
+const bgFilter = 'invert(1) sepia(1) hue-rotate(220deg) saturate(4) brightness(1.6)';
+
+const images = ['/endless_runner.png', '/quiz_brand.png'];
+const juegos = t.juegos.map((j, i) => ({ ...j, img: images[i] }));
+---
+
+<Layout
+  title={t.metaTitle}
+  description={t.metaDesc}
+  path="/servicios/marcas/"
+  jsonLdService={serviceJsonLd}
+>
+  <Navbar />
+  <ServicioHero
+    bg="/bg_cafe.png"
+    rgb={rgb}
+    bgFilter={bgFilter}
+    title={t.title}
+    tagline={t.tagline}
+  />
+
+  <main id="contenido" style={`--accent:${color};--rgb:${rgb};`}>
+
+    <section class="s-section">
+      <div class="container">
+        <h2 class="s-intro__title">{t.introTitle}</h2>
+        <p class="s-desc">
+          {t.intro}
+        </p>
+
+      </div>
+    </section>
+
+    <section class="s-section s-section--alt">
+      <div class="container">
+        <h2 class="s-section__title">{t.mechTitle}</h2>
+        <p class="s-section__sub">{t.mechSub}</p>
+        <div class="mecanicas">
+          {t.mecanicas.map((m) => (
+            <div class="mecanica__card">
+              <span class="mecanica__icon">{m.icon}</span>
+              <h3 class="mecanica__titulo">{m.titulo}</h3>
+              <p class="mecanica__desc">{m.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="s-section">
+      <div class="container">
+        <h2 class="s-section__title">{t.whenTitle}</h2>
+        <div class="momentos">
+          {t.momentos.map((m) => (
+            <div class="momento">
+              <span class="momento__tag">{m.tag}</span>
+              <p>{m.desc}</p>
+            </div>
+          ))}
+        </div>
+
+        <div class="cta__box">
+          <p>{t.ctaText}</p>
+          <a href={whatsappLink(t.waMessage)} target="_blank" rel="noopener noreferrer" class="btn--primary">{t.ctaBtn}</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="s-section s-section--alt">
+      <div class="container">
+        <p class="s-subtitle">{t.examples}</p>
+        <div class="s-cards">
+          {juegos.map((j) => (
+            <article class="s-card">
+              <div class={`s-card__thumb${j.img ? ' s-card__thumb--real' : ''}`}>
+                {j.img && <img src={j.img} alt={j.imgAlt} class="s-card__real-img" loading="lazy" />}
+                {j.img && <div class="s-card__color-overlay"></div>}
+                <div class="ph-tags">{j.tags.map((t) => <span>{t}</span>)}</div>
+              </div>
+              <div class="s-card__body">
+                <div class="s-card__tags">{j.tags.map((t) => <span class="tag">{t}</span>)}</div>
+                <h3 class="s-card__title">{j.titulo}</h3>
+                <p class="s-card__desc">{j.desc}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <RelatedServices current="marcas" />
+  <Footer />
+  <WhatsappFloat />
+</Layout>
+
+<style>
+  main { background: var(--bg-dark); }
+
+  .s-section { padding: 5rem 0; }
+  .s-section--alt { background: rgba(255,255,255,0.02); border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); }
+
+  .s-section__title {
+    font-size: clamp(1.6rem, 3vw, 2.2rem); text-align: center; margin-bottom: 0.6rem;
+    background: linear-gradient(135deg, var(--accent), #fff);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .s-section__sub { text-align: center; color: var(--text-muted); margin-bottom: 3rem; }
+
+  .s-intro__title { font-size: clamp(1.3rem, 2.5vw, 1.8rem); margin-bottom: 1rem; background: linear-gradient(135deg, var(--accent), #fff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+  .s-desc { font-size: 1.05rem; color: var(--text-muted); max-width: 720px; line-height: 1.8; margin-bottom: 3rem; }
+
+  .s-subtitle {
+    font-size: 0.75rem; font-family: var(--font-display); letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--text-muted); margin-bottom: 1.5rem;
+    padding-left: 0.75rem; border-left: 2px solid var(--accent);
+  }
+
+  .s-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+
+  .s-card { background: var(--bg-card); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; overflow: hidden; transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s; }
+  .s-card:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: 0 0 28px rgba(var(--rgb),0.25); }
+
+  .s-card__thumb {
+    height: 180px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+      linear-gradient(135deg, rgba(var(--rgb),0.38) 0%, transparent 65%),
+      linear-gradient(315deg, rgba(var(--rgb),0.22) 0%, transparent 55%),
+      var(--bg-card);
+  }
+  .s-card__thumb::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(var(--rgb),0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(var(--rgb),0.07) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+  .s-card__thumb::after {
+    content: '';
+    position: absolute;
+    inset: 14px;
+    border: 1px solid rgba(var(--rgb),0.22);
+    border-radius: 2px;
+    pointer-events: none;
+  }
+  /* REAL IMAGE CARD */
+  .s-card__thumb--real .s-card__real-img {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: saturate(0.35) brightness(0.6);
+    z-index: 0;
+  }
+
+  .s-card__thumb--real .s-card__color-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(var(--rgb), 0.55) 0%, rgba(var(--rgb), 0.2) 100%);
+    z-index: 1;
+  }
+
+  .s-card__thumb--real::before {
+    z-index: 2;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.12) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.12) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+  .s-card__thumb--real::after  { z-index: 3; }
+  .s-card__thumb--real .ph-tags { z-index: 4; }
+
+  .ph-tags {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    padding: 0 1rem;
+  }
+  .ph-tags span {
+    font-size: 0.68rem;
+    font-family: var(--font-display);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.9rem;
+    border-radius: 20px;
+    background: rgba(var(--rgb),0.18);
+    border: 1px solid rgba(var(--rgb),0.45);
+    color: rgba(255,255,255,0.82);
+  }
+  .s-card__body  { padding: 1.25rem; }
+  .s-card__tags  { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.6rem; }
+  .tag { font-size: 0.68rem; font-family: var(--font-display); letter-spacing: 0.05em; padding: 0.2rem 0.55rem; border-radius: 4px; background: rgba(var(--rgb),0.12); border: 1px solid rgba(var(--rgb),0.3); color: var(--accent); }
+  .s-card__title { font-size: 1rem; margin-bottom: 0.4rem; }
+  .s-card__desc  { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+
+  /* MECÁNICAS */
+  .mecanicas { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; }
+  .mecanica__card {
+    background: var(--bg-card); border: 1px solid rgba(var(--rgb),0.15); border-radius: 14px;
+    padding: 1.75rem 1.5rem; text-align: center;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  .mecanica__card:hover { border-color: rgba(var(--rgb),0.4); box-shadow: 0 0 20px rgba(var(--rgb),0.12); }
+  .mecanica__icon   { font-size: 2rem; display: block; margin-bottom: 0.75rem; }
+  .mecanica__titulo { font-size: 0.95rem; margin-bottom: 0.5rem; color: #fff; }
+  .mecanica__desc   { font-size: 0.83rem; color: var(--text-muted); line-height: 1.6; }
+
+  /* MOMENTOS */
+  .momentos { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-bottom: 3rem; }
+  .momento {
+    background: var(--bg-card); border: 1px solid rgba(var(--rgb),0.15); border-radius: 14px;
+    padding: 1.75rem; display: flex; flex-direction: column; gap: 0.6rem;
+  }
+  .momento__tag {
+    display: inline-block; font-size: 0.68rem; font-family: var(--font-display);
+    letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 0.25rem 0.7rem; border-radius: 20px;
+    background: rgba(var(--rgb),0.15); border: 1px solid rgba(var(--rgb),0.3); color: #b584ff;
+    align-self: flex-start;
+  }
+  .momento p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; }
+
+  /* CTA */
+  .cta__box { background: linear-gradient(135deg, rgba(var(--rgb),0.12), rgba(0,212,255,0.06)); border: 1px solid rgba(var(--rgb),0.25); border-radius: 12px; padding: 2rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; }
+  .cta__box p { color: var(--text-muted); font-size: 1rem; }
+  .btn--primary { display: inline-block; padding: 0.8rem 2rem; border-radius: 6px; font-family: var(--font-display); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; background: var(--accent); color: #fff; box-shadow: 0 0 20px rgba(var(--rgb),0.4); transition: all 0.3s; white-space: nowrap; }
+  .btn--primary:hover { transform: translateY(-2px); box-shadow: 0 0 35px rgba(var(--rgb),0.6); }
+
+  @media (max-width: 900px) {
+    .mecanicas { grid-template-columns: repeat(2, 1fr); }
+    .momentos  { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    .mecanicas { grid-template-columns: 1fr; }
+    .cta__box  { flex-direction: column; text-align: center; }
+  }
+</style>

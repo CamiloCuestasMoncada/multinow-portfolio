@@ -1,4 +1,6 @@
 ---
+import { getLangFromUrl, localizePath } from '../i18n/utils';
+
 interface Props {
   bg: string;
   rgb: string;
@@ -8,6 +10,12 @@ interface Props {
 }
 
 const { bg, rgb, bgFilter, title, tagline } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+
+const t = {
+  es: { home: 'Inicio', services: 'Servicios', scroll: 'Ver contenido' },
+  en: { home: 'Home', services: 'Services', scroll: 'View content' },
+}[lang];
 ---
 
 <section class="shero" style={`--rgb:${rgb};--bg-filter:${bgFilter};`}>
@@ -15,16 +23,16 @@ const { bg, rgb, bgFilter, title, tagline } = Astro.props;
   <div class="shero__overlay"></div>
   <div class="shero__content container">
     <nav class="shero__bread" aria-label="Breadcrumb">
-      <a href="/">Inicio</a>
+      <a href={localizePath('/', lang)}>{t.home}</a>
       <span aria-hidden="true">›</span>
-      <a href="/#servicios">Servicios</a>
+      <a href={localizePath('/#servicios', lang)}>{t.services}</a>
       <span aria-hidden="true">›</span>
       <span>{title}</span>
     </nav>
     <h1 class="shero__title">{title}</h1>
     <p class="shero__tagline">{tagline}</p>
   </div>
-  <button class="shero__scroll" id="sheroScroll" aria-label="Ver contenido" type="button">
+  <button class="shero__scroll" id="sheroScroll" aria-label={t.scroll} type="button">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
       <path d="M12 5v14M5 12l7 7 7-7"/>
     </svg>

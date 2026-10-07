@@ -1,72 +1,100 @@
 ---
 import { ViewTransitions } from 'astro:transitions';
+import { SITE, getLangFromUrl, localizePath } from '../i18n/utils';
 
 interface Props {
   title?: string;
   description?: string;
   image?: string;
-  canonical?: string;
+  /** Ruta sin prefijo de idioma, p. ej. '/servicios/educativo/' */
+  path?: string;
   jsonLdService?: object;
 }
 
+const lang = getLangFromUrl(Astro.url);
+
+const copy = {
+  es: {
+    title: 'Multinow | Estudio de Videojuegos en Colombia, Personalizados para Educación, Marcas y Campañas',
+    description: 'Estudio de videojuegos personalizados para educación, marcas y campañas publicitarias. Gamificación, integración SCORM y experiencias interactivas únicas.',
+    keywords: 'videojuegos educativos personalizados, videojuegos a medida, videojuegos 2D y 3D, desarrollo videojuegos Godot, gamificación empresarial, branded games, videojuegos publicitarios, SCORM videojuegos, gamificación educativa, videojuegos para marcas, juegos interactivos corporativos, videojuegos Colombia',
+    ogLocale: 'es_CO',
+    ogLocaleAlt: 'en_US',
+    knowsAbout: [
+      'Videojuegos educativos',
+      'Gamificación empresarial',
+      'Desarrollo en Godot',
+      'SCORM',
+      'Videojuegos publicitarios',
+      'Branded games',
+      'Videojuegos personalizados',
+    ],
+    offers: [
+      { name: 'Videojuegos Educativos con SCORM', description: 'Juegos pedagógicos integrados con LMS vía SCORM para seguimiento de progreso.' },
+      { name: 'Branded Games', description: 'Videojuegos personalizados con la identidad de tu marca para campañas y engagement.' },
+      { name: 'Videojuegos para Campañas Publicitarias', description: 'Experiencias interactivas que amplifican campañas y aumentan el tiempo de exposición.' },
+      { name: 'Desarrollo de videojuegos y experiencias web interactivas a medida', description: 'Videojuegos personalizados, simuladores, minijuegos HTML5 y experiencias interactivas para cualquier industria o propósito.' },
+    ],
+  },
+  en: {
+    title: 'Multinow | Custom Video Game Studio in Colombia for Education, Brands and Campaigns',
+    description: 'Custom video game studio for education, brands and advertising campaigns. Gamification, SCORM integration and unique interactive experiences.',
+    keywords: 'custom educational video games, custom video games, 2D and 3D video games, Godot game development, corporate gamification, branded games, advergames, SCORM games, educational gamification, video games for brands, corporate interactive games, game studio Colombia',
+    ogLocale: 'en_US',
+    ogLocaleAlt: 'es_CO',
+    knowsAbout: [
+      'Educational video games',
+      'Corporate gamification',
+      'Godot development',
+      'SCORM',
+      'Advergames',
+      'Branded games',
+      'Custom video games',
+    ],
+    offers: [
+      { name: 'Educational Video Games with SCORM', description: 'Learning games integrated with LMS platforms via SCORM for progress tracking.' },
+      { name: 'Branded Games', description: 'Custom video games built around your brand identity for campaigns and engagement.' },
+      { name: 'Video Games for Advertising Campaigns', description: 'Interactive experiences that amplify campaigns and increase exposure time.' },
+      { name: 'Custom video game and interactive web experience development', description: 'Custom video games, simulators, HTML5 mini-games and interactive experiences for any industry or purpose.' },
+    ],
+  },
+}[lang];
+
 const {
-  title = 'Multinow | Estudio de Videojuegos en Colombia, Personalizados para Educación, Marcas y Campañas',
-  description = 'Estudio de videojuegos 2D personalizados para educación, marcas y campañas publicitarias. Gamificación, integración SCORM y experiencias interactivas únicas.',
-  image = 'https://multinow-games.com/og-image.png',
-  canonical = 'https://multinow-games.com',
+  title = copy.title,
+  description = copy.description,
+  image = `${SITE}/og-image.png`,
+  path = '/',
   jsonLdService,
 } = Astro.props;
+
+const canonical = `${SITE}${localizePath(path, lang)}`;
+const alternates = {
+  es: `${SITE}${localizePath(path, 'es')}`,
+  en: `${SITE}${localizePath(path, 'en')}`,
+};
 
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   name: 'Multinow',
-  url: 'https://multinow-games.com',
-  logo: 'https://multinow-games.com/logo.png',
-  description: 'Estudio de videojuegos 2D personalizados para educación, marcas y campañas publicitarias. Gamificación, integración SCORM y experiencias interactivas únicas.',
+  url: SITE,
+  logo: `${SITE}/logo.png`,
+  description: copy.description,
   email: 'contacto@multinow-games.com',
   foundingDate: '2023',
-  knowsAbout: [
-    'Videojuegos educativos 2D',
-    'Gamificación empresarial',
-    'Desarrollo en Godot',
-    'SCORM',
-    'Videojuegos publicitarios',
-    'Branded games',
-    'Videojuegos personalizados',
-  ],
-  offers: [
-    {
-      '@type': 'Offer',
-      name: 'Videojuegos Educativos con SCORM',
-      description: 'Juegos 2D pedagógicos integrados con LMS vía SCORM para seguimiento de progreso.',
-    },
-    {
-      '@type': 'Offer',
-      name: 'Branded Games',
-      description: 'Videojuegos personalizados con la identidad de tu marca para campañas y engagement.',
-    },
-    {
-      '@type': 'Offer',
-      name: 'Videojuegos para Campañas Publicitarias',
-      description: 'Experiencias interactivas que amplifican campañas y aumentan el tiempo de exposición.',
-    },
-    {
-      '@type': 'Offer',
-      name: 'Desarrollo de videojuegos y experiencias web interactivas a medida',
-      description: 'Videojuegos 2D personalizados, simuladores, minijuegos HTML5 y experiencias interactivas para cualquier industria o propósito.',
-    },
-  ],
+  knowsAbout: copy.knowsAbout,
+  offers: copy.offers.map((o) => ({ '@type': 'Offer', ...o })),
   contactPoint: {
     '@type': 'ContactPoint',
     email: 'contacto@multinow-games.com',
     contactType: 'customer service',
-    availableLanguage: 'Spanish',
+    availableLanguage: ['Spanish', 'English'],
   },
 };
 ---
 <!doctype html>
-<html lang="es">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -77,10 +105,34 @@ const jsonLd = {
     <!-- Primary SEO -->
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="keywords" content="videojuegos educativos personalizados, videojuegos 2D a medida, desarrollo videojuegos Godot, gamificación empresarial, branded games, videojuegos publicitarios, SCORM videojuegos, gamificación educativa, videojuegos para marcas, juegos interactivos corporativos, videojuegos Colombia" />
+    <meta name="keywords" content={copy.keywords} />
     <meta name="author" content="Multinow" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="es" href={alternates.es} />
+    <link rel="alternate" hreflang="en" href={alternates.en} />
+    <link rel="alternate" hreflang="x-default" href={alternates.es} />
+
+    <!-- Idioma: la primera visita sigue el idioma del navegador; luego manda la elección del usuario -->
+    <script is:inline>
+      (function () {
+        try {
+          if (/bot|crawl|spider|slurp|lighthouse/i.test(navigator.userAgent)) return;
+          var path = location.pathname;
+          var isEn = path === '/en' || path.indexOf('/en/') === 0;
+          var wanted = localStorage.getItem('lang');
+          if (!wanted) {
+            if (sessionStorage.getItem('langChecked')) return;
+            sessionStorage.setItem('langChecked', '1');
+            var nav = (navigator.languages && navigator.languages[0]) || navigator.language || 'es';
+            wanted = nav.toLowerCase().indexOf('es') === 0 ? 'es' : 'en';
+          }
+          if (wanted === (isEn ? 'en' : 'es')) return;
+          var base = isEn ? path.slice(3) || '/' : path;
+          location.replace((wanted === 'en' ? '/en' + base : base) + location.search + location.hash);
+        } catch (e) {}
+      })();
+    </script>
 
     <!-- Open Graph (Facebook, LinkedIn, WhatsApp) -->
     <meta property="og:type" content="website" />
@@ -90,7 +142,8 @@ const jsonLd = {
     <meta property="og:image" content={image} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:locale" content="es_CO" />
+    <meta property="og:locale" content={copy.ogLocale} />
+    <meta property="og:locale:alternate" content={copy.ogLocaleAlt} />
     <meta property="og:site_name" content="Multinow" />
 
     <!-- Twitter Card -->
