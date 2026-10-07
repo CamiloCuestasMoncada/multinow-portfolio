@@ -19,6 +19,8 @@ const t = {
     wishlist: 'Agregar a Wishlist',
     learnMore: 'Saber más',
     capsuleAlt: 'Honey Im an Agent - arte promocional',
+    trailerTitle: 'Tráiler',
+    playTrailer: 'Reproducir tráiler',
     screenshotsTitle: 'Imágenes del Juego',
     view: 'Ver',
     lbLabel: 'Vista de imagen',
@@ -57,6 +59,8 @@ const t = {
     wishlist: 'Add to Wishlist',
     learnMore: 'Learn more',
     capsuleAlt: 'Honey Im an Agent - promotional art',
+    trailerTitle: 'Trailer',
+    playTrailer: 'Play trailer',
     screenshotsTitle: 'Game Screenshots',
     view: 'View',
     lbLabel: 'Image viewer',
@@ -85,6 +89,8 @@ const t = {
     meta: { title: 'Title', genre: 'Genre', genreValue: 'Action · Adventure · Indie', developer: 'Developer', publisher: 'Publisher', players: 'Players', demo: 'Demo' },
   },
 }[lang];
+
+const trailerId = 'QMAFuDrRqJk';
 
 const screenshots = Array.from({ length: 8 }, (_, i) => ({
   src: `/screenshots/honey-im-an-agent-${i + 1}.webp`,
@@ -173,6 +179,21 @@ const jsonLdGame = {
     <!-- ═══════════════ SCREENSHOTS ═══════════════ -->
     <section class="screenshots">
       <div class="container">
+        <h2 class="section-title">
+          <span class="section-title__line"></span>
+          {t.trailerTitle}
+          <span class="section-title__line"></span>
+        </h2>
+        <div class="trailer" id="trailer" data-vid={trailerId}>
+          <img src={`https://img.youtube.com/vi/${trailerId}/maxresdefault.jpg`} alt={`Honey, I'm an Agent - ${t.trailerTitle}`} loading="lazy" />
+          <button class="trailer__play" type="button" aria-label={t.playTrailer}>
+            <svg viewBox="0 0 68 48" aria-hidden="true">
+              <path d="M66.52 7.74C65.7 4.66 63.27 2.24 60.2 1.42 54.93 0 34 0 34 0S13.07 0 7.8 1.42C4.73 2.24 2.3 4.66 1.48 7.74 0 13.03 0 24 0 24s0 10.97 1.48 16.26c.82 3.08 3.25 5.5 6.32 6.32C13.07 48 34 48 34 48s20.93 0 26.2-1.42c3.07-.82 5.5-3.24 6.32-6.32C68 34.97 68 24 68 24s0-10.97-1.48-16.26z" fill="#ff0000"/>
+              <path d="M27 34l18-10-18-10v20z" fill="#fff"/>
+            </svg>
+          </button>
+        </div>
+
         <h2 class="section-title">
           <span class="section-title__line"></span>
           {t.screenshotsTitle}
@@ -367,6 +388,18 @@ const jsonLdGame = {
   }
 
   document.addEventListener('astro:page-load', initLightbox);
+
+  // El iframe de YouTube se carga solo al hacer clic, para no pesar en la carga inicial
+  function initTrailer() {
+    const trailer = document.getElementById('trailer');
+    if (!trailer) return;
+    trailer.addEventListener('click', () => {
+      const vid = trailer.dataset.vid;
+      trailer.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${vid}?autoplay=1&rel=0" title="Honey, I'm an Agent - Trailer" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
+    }, { once: true });
+  }
+
+  document.addEventListener('astro:page-load', initTrailer);
 </script>
 
 <style>
@@ -624,6 +657,56 @@ const jsonLdGame = {
 
   .section-title__line:last-child {
     background: linear-gradient(90deg, rgba(123, 47, 247, 0.4), transparent);
+  }
+
+  .trailer {
+    position: relative;
+    max-width: 960px;
+    margin: 0 auto 4rem;
+    aspect-ratio: 16 / 9;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(123, 47, 247, 0.25);
+    background: #000;
+    cursor: pointer;
+    box-shadow: 0 0 40px rgba(123, 47, 247, 0.15);
+  }
+
+  .trailer img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+
+  .trailer:hover img { transform: scale(1.02); }
+
+  .trailer__play {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+
+  .trailer__play svg {
+    width: 78px;
+    height: 55px;
+    filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.6));
+    transition: transform 0.2s;
+  }
+
+  .trailer:hover .trailer__play svg { transform: scale(1.1); }
+
+  .trailer :global(iframe) {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
   }
 
   .screenshots__grid {
