@@ -1,0 +1,764 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+import { getLangFromUrl, localizePath } from '../i18n/utils';
+import { STEAM_URL, TRAILER_ID, honeyText } from '../data/honey';
+
+const lang = getLangFromUrl(Astro.url);
+const l = (path: string) => localizePath(path, lang);
+const game = honeyText[lang];
+
+// Los originales en alta resolución viven en GitHub Releases para no consumir
+// la transferencia de Firebase; aquí solo se sirven vistas previas .webp.
+const RELEASE = 'https://github.com/CamiloCuestasMoncada/multinow-portfolio/releases/download/presskit-honey-v1';
+const PREVIEW = '/press/honey-im-an-agent';
+const P = 'honey-im-an-agent';
+const ZIP_URL = `${RELEASE}/${P}-presskit.zip`;
+const ZIP_SIZE = '12.7 MB';
+
+const asset = (name: string) => ({ full: `${RELEASE}/${name}.png`, preview: `${PREVIEW}/${name}.webp` });
+
+const t = {
+  es: {
+    metaTitle: "Honey, I'm an Agent – Press Kit | Multinow",
+    metaDesc: "Press kit de Honey, I'm an Agent: ficha técnica, descripción, tráiler, capturas, key art, logos y contacto de prensa. Descarga todo el material en un ZIP.",
+    breadcrumb: 'Press Kit',
+    lead: 'Todo lo necesario para cubrir el juego: ficha técnica, textos, tráiler e imágenes en alta resolución.',
+    downloadAll: 'Descargar todo',
+    downloadHint: 'Capturas, key art y logos en PNG',
+    factsheet: 'Ficha técnica',
+    facts: {
+      developer: 'Desarrollador', developerValue: 'Multinow — Bogotá, Colombia',
+      publisher: 'Editor',
+      release: 'Lanzamiento', releaseDemo: 'Demo: 6 oct 2026', releaseFull: 'Juego completo: por anunciar',
+      platforms: 'Plataforma', platformsValue: 'Steam (Windows, Linux)',
+      controllers: 'Mandos', controllersValue: 'Xbox y PlayStation',
+      engine: 'Motor',
+      genre: 'Género', genreValue: 'Acción · Aventura · Indie',
+      price: 'Precio', priceValue: 'Por anunciar',
+      languages: 'Idiomas',
+      website: 'Sitio web',
+      press: 'Contacto de prensa',
+    },
+    links: 'Enlaces',
+    description: 'Descripción',
+    shortDesc: 'Descripción corta',
+    longDesc: 'Descripción larga',
+    features: 'Características',
+    trailer: 'Tráiler',
+    playTrailer: 'Reproducir tráiler',
+    screenshots: 'Capturas',
+    screenshotsHint: 'Haz clic en una imagen para descargar el PNG original (1920×1080).',
+    screenshotAlt: 'captura de pantalla',
+    keyArt: 'Key art y cápsulas',
+    keyArtHint: 'El key art sin logo está pensado para que pongas tus propios títulos encima.',
+    logos: 'Logo e ícono',
+    names: {
+      keyArtNoLogo: 'Key art sin logo',
+      capsuleMain: 'Cápsula principal',
+      capsuleHeader: 'Cápsula de cabecera',
+      capsuleHeaderLogo: 'Cabecera solo logo',
+      capsuleVertical: 'Cápsula vertical',
+      capsuleLibrary: 'Cápsula de biblioteca',
+      capsuleSmall: 'Cápsula pequeña',
+      promoNewspaper: 'Arte promocional',
+      logoTransparent: 'Logo (fondo transparente)',
+      logoBackground: 'Logo con fondo',
+      icon: 'Ícono',
+    },
+    credits: 'Créditos',
+    roles: [
+      'Idea original, programación, arte y diseño de niveles',
+      'Música y efectos de sonido',
+      'Diseño de niveles',
+      'Asesoría',
+    ],
+    about: 'Sobre Multinow',
+    aboutText: 'Multinow es un estudio independiente de 4 personas fundado en 2023 en Bogotá, Colombia. Además de desarrollar videojuegos a medida para educación y marcas, crea sus propios juegos. Honey, I\'m an Agent es su primer título original, desarrollado en Godot.',
+    contact: 'Contacto',
+    contactText: 'Para entrevistas o consultas de prensa, escríbenos a:',
+    backToGame: '← Volver a la página del juego',
+  },
+  en: {
+    metaTitle: "Honey, I'm an Agent – Press Kit | Multinow",
+    metaDesc: "Honey, I'm an Agent press kit: factsheet, description, trailer, screenshots, key art, logos and press contact. Download all assets in a single ZIP.",
+    breadcrumb: 'Press Kit',
+    lead: 'Everything you need to cover the game: factsheet, copy, trailer and high-resolution images.',
+    downloadAll: 'Download all',
+    downloadHint: 'Screenshots, key art and logos as PNG',
+    factsheet: 'Factsheet',
+    facts: {
+      developer: 'Developer', developerValue: 'Multinow — Bogotá, Colombia',
+      publisher: 'Publisher',
+      release: 'Release date', releaseDemo: 'Demo: Oct 6, 2026', releaseFull: 'Full game: TBA',
+      platforms: 'Platform', platformsValue: 'Steam (Windows, Linux)',
+      controllers: 'Controllers', controllersValue: 'Xbox and PlayStation',
+      engine: 'Engine',
+      genre: 'Genre', genreValue: 'Action · Adventure · Indie',
+      price: 'Price', priceValue: 'TBA',
+      languages: 'Languages',
+      website: 'Website',
+      press: 'Press contact',
+    },
+    links: 'Links',
+    description: 'Description',
+    shortDesc: 'Short description',
+    longDesc: 'Long description',
+    features: 'Features',
+    trailer: 'Trailer',
+    playTrailer: 'Play trailer',
+    screenshots: 'Screenshots',
+    screenshotsHint: 'Click an image to download the original PNG (1920×1080).',
+    screenshotAlt: 'screenshot',
+    keyArt: 'Key art and capsules',
+    keyArtHint: 'The key art without logo is meant for you to place your own headlines on top.',
+    logos: 'Logo and icon',
+    names: {
+      keyArtNoLogo: 'Key art (no logo)',
+      capsuleMain: 'Main capsule',
+      capsuleHeader: 'Header capsule',
+      capsuleHeaderLogo: 'Header, logo only',
+      capsuleVertical: 'Vertical capsule',
+      capsuleLibrary: 'Library capsule',
+      capsuleSmall: 'Small capsule',
+      promoNewspaper: 'Promotional art',
+      logoTransparent: 'Logo (transparent)',
+      logoBackground: 'Logo with background',
+      icon: 'Icon',
+    },
+    credits: 'Credits',
+    roles: [
+      'Original concept, programming, art & level design',
+      'Music & sound effects',
+      'Level design',
+      'Advisor',
+    ],
+    about: 'About Multinow',
+    aboutText: 'Multinow is a 4-person independent studio founded in 2023 in Bogotá, Colombia. Besides developing custom video games for education and brands, it creates its own games. Honey, I\'m an Agent is its first original title, developed in Godot.',
+    contact: 'Contact',
+    contactText: 'For interviews or press inquiries, write to us at:',
+    backToGame: '← Back to the game page',
+  },
+}[lang];
+
+const languages = ['English', 'Español', 'Deutsch', 'Français', 'Português', '简体中文', '日本語'];
+
+const team = ['Camilo Cuestas Moncada', 'Carolina Cuestas Moncada', 'Carlos Cuestas Moncada', 'Lina Marcela Parra']
+  .map((name, i) => ({ name, role: t.roles[i] }));
+
+const socials = [
+  { label: 'Steam', href: STEAM_URL },
+  { label: 'YouTube', href: 'https://www.youtube.com/@MultinowGames' },
+  { label: 'TikTok', href: 'https://www.tiktok.com/@multinow_games' },
+];
+
+const screenshots = Array.from({ length: 15 }, (_, i) => {
+  const n = String(i + 1).padStart(2, '0');
+  return { ...asset(`${P}-screenshot-${n}`), alt: `Honey, I'm an Agent - ${t.screenshotAlt} ${i + 1}` };
+});
+
+const keyArt = [
+  { ...asset(`${P}-key-art-no-logo-3840x1240`),   name: t.names.keyArtNoLogo,      size: '3840×1240', wide: true },
+  { ...asset(`${P}-capsule-main-1232x706`),       name: t.names.capsuleMain,       size: '1232×706' },
+  { ...asset(`${P}-capsule-header-920x430`),      name: t.names.capsuleHeader,     size: '920×430' },
+  { ...asset(`${P}-promo-newspaper-1920x1080`),   name: t.names.promoNewspaper,    size: '1920×1080' },
+  { ...asset(`${P}-capsule-header-logo-920x430`), name: t.names.capsuleHeaderLogo, size: '920×430' },
+  { ...asset(`${P}-capsule-vertical-748x896`),    name: t.names.capsuleVertical,   size: '748×896', third: true },
+  { ...asset(`${P}-capsule-library-600x900`),     name: t.names.capsuleLibrary,    size: '600×900', third: true },
+  { ...asset(`${P}-capsule-small-462x174`),       name: t.names.capsuleSmall,      size: '462×174', third: true },
+];
+
+const logos = [
+  { ...asset(`${P}-logo-transparent-1280x701`), name: t.names.logoTransparent, size: '1280×701', checker: true },
+  { ...asset(`${P}-logo-background-1280x701`),  name: t.names.logoBackground,  size: '1280×701' },
+  { ...asset(`${P}-icon-256x256`),              name: t.names.icon,            size: '256×256', checker: true, square: true },
+];
+
+const gameUrl = `https://multinow-games.com${l('/games/Honey_Im_an_Agent/')}`;
+---
+
+<Layout
+  title={t.metaTitle}
+  description={t.metaDesc}
+  path="/games/Honey_Im_an_Agent/press/"
+  image="https://multinow-games.com/capsula_promocion_748.png"
+>
+  <Navbar />
+
+  <main class="pk">
+    <!-- ═══════ HEADER ═══════ -->
+    <header class="pk-head">
+      <div class="container pk-head__inner">
+        <div class="pk-head__text">
+          <nav class="pk-bread" aria-label="Breadcrumb">
+            <a href={l('/games/Honey_Im_an_Agent/')}>Honey, I'm an Agent</a>
+            <span aria-hidden="true">›</span>
+            <span>{t.breadcrumb}</span>
+          </nav>
+          <h1 class="pk-head__title">Honey, I'm an Agent <span>Press Kit</span></h1>
+          <p class="pk-head__lead">{t.lead}</p>
+          <a href={ZIP_URL} class="pk-zip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <span>
+              <strong>{t.downloadAll} (.zip, {ZIP_SIZE})</strong>
+              <small>{t.downloadHint}</small>
+            </span>
+          </a>
+        </div>
+        <img src={`${PREVIEW}/${P}-logo-transparent-1280x701.webp`} alt="Honey, I'm an Agent - logo" class="pk-head__logo" width="640" height="350" />
+      </div>
+    </header>
+
+    <div class="container pk-body">
+      <!-- ═══════ FACTSHEET ═══════ -->
+      <aside class="pk-facts">
+        <h2 class="pk-facts__title">{t.factsheet}</h2>
+        <dl>
+          <div><dt>{t.facts.developer}</dt><dd>{t.facts.developerValue}</dd></div>
+          <div><dt>{t.facts.publisher}</dt><dd>Multinow</dd></div>
+          <div><dt>{t.facts.release}</dt><dd>{t.facts.releaseDemo}<br />{t.facts.releaseFull}</dd></div>
+          <div><dt>{t.facts.platforms}</dt><dd>{t.facts.platformsValue}</dd></div>
+          <div><dt>{t.facts.controllers}</dt><dd>{t.facts.controllersValue}</dd></div>
+          <div><dt>{t.facts.genre}</dt><dd>{t.facts.genreValue}</dd></div>
+          <div><dt>{t.facts.engine}</dt><dd>Godot</dd></div>
+          <div><dt>{t.facts.price}</dt><dd>{t.facts.priceValue}</dd></div>
+          <div><dt>{t.facts.languages}</dt><dd>{languages.join(', ')}</dd></div>
+          <div><dt>{t.facts.website}</dt><dd><a href={gameUrl}>multinow-games.com</a></dd></div>
+          <div><dt>{t.facts.press}</dt><dd><span class="pk-email" data-u="contacto" data-d="multinow-games.com"></span></dd></div>
+        </dl>
+
+        <h3 class="pk-facts__sub">{t.links}</h3>
+        <ul class="pk-links">
+          {socials.map((s) => (
+            <li><a href={s.href} target="_blank" rel="noopener noreferrer">{s.label} ↗</a></li>
+          ))}
+        </ul>
+      </aside>
+
+      <div class="pk-main">
+        <!-- ═══════ DESCRIPCIÓN ═══════ -->
+        <section class="pk-section">
+          <h2 class="pk-title">{t.description}</h2>
+          <h3 class="pk-label">{t.shortDesc}</h3>
+          <p class="pk-copy">{game.sub}</p>
+
+          <h3 class="pk-label">{t.longDesc}</h3>
+          <p class="pk-copy"><strong>Honey, I'm an Agent</strong> {game.about1}</p>
+          <p class="pk-copy">{game.about2} <em>{game.about2Em}</em></p>
+          <p class="pk-copy">{game.about3}</p>
+          <ul class="pk-copy pk-phases">
+            {game.phases.map((ph) => <li><strong>{ph.titulo}:</strong> {ph.desc}</li>)}
+          </ul>
+        </section>
+
+        <!-- ═══════ CARACTERÍSTICAS ═══════ -->
+        <section class="pk-section">
+          <h2 class="pk-title">{t.features}</h2>
+          <ul class="pk-features">
+            {game.features.map((f) => <li><strong>{f.title}:</strong> {f.desc}</li>)}
+          </ul>
+        </section>
+
+        <!-- ═══════ TRÁILER ═══════ -->
+        <section class="pk-section">
+          <h2 class="pk-title">{t.trailer}</h2>
+          <div class="pk-trailer" id="pkTrailer" data-vid={TRAILER_ID}>
+            <img src={`https://img.youtube.com/vi/${TRAILER_ID}/maxresdefault.jpg`} alt={`Honey, I'm an Agent - ${t.trailer}`} loading="lazy" />
+            <button class="pk-trailer__play" type="button" aria-label={t.playTrailer}>
+              <svg viewBox="0 0 68 48" aria-hidden="true">
+                <path d="M66.52 7.74C65.7 4.66 63.27 2.24 60.2 1.42 54.93 0 34 0 34 0S13.07 0 7.8 1.42C4.73 2.24 2.3 4.66 1.48 7.74 0 13.03 0 24 0 24s0 10.97 1.48 16.26c.82 3.08 3.25 5.5 6.32 6.32C13.07 48 34 48 34 48s20.93 0 26.2-1.42c3.07-.82 5.5-3.24 6.32-6.32C68 34.97 68 24 68 24s0-10.97-1.48-16.26z" fill="#ff0000"/>
+                <path d="M27 34l18-10-18-10v20z" fill="#fff"/>
+              </svg>
+            </button>
+          </div>
+          <p class="pk-hint"><a href={`https://youtu.be/${TRAILER_ID}`} target="_blank" rel="noopener noreferrer">youtu.be/{TRAILER_ID} ↗</a></p>
+        </section>
+
+        <!-- ═══════ CAPTURAS ═══════ -->
+        <section class="pk-section">
+          <h2 class="pk-title">{t.screenshots}</h2>
+          <p class="pk-hint">{t.screenshotsHint}</p>
+          <div class="pk-shots">
+            {screenshots.map((s) => (
+              <a href={s.full} class="pk-shot" download>
+                <img src={s.preview} alt={s.alt} loading="lazy" width="960" height="540" />
+                <span class="pk-dl" aria-hidden="true">PNG ↓</span>
+              </a>
+            ))}
+          </div>
+        </section>
+
+        <!-- ═══════ KEY ART ═══════ -->
+        <section class="pk-section">
+          <h2 class="pk-title">{t.keyArt}</h2>
+          <p class="pk-hint">{t.keyArtHint}</p>
+          <div class="pk-art">
+            {keyArt.map((a) => (
+              <a href={a.full} class:list={['pk-asset', { 'pk-asset--wide': a.wide, 'pk-asset--third': a.third }]} download>
+                <div class="pk-asset__img"><img src={a.preview} alt={`Honey, I'm an Agent - ${a.name}`} loading="lazy" /></div>
+                <span class="pk-asset__meta"><span>{a.name}</span><small>PNG · {a.size} ↓</small></span>
+              </a>
+            ))}
+          </div>
+        </section>
+
+        <!-- ═══════ LOGOS ═══════ -->
+        <section class="pk-section">
+          <h2 class="pk-title">{t.logos}</h2>
+          <div class="pk-art pk-art--logos">
+            {logos.map((a) => (
+              <a href={a.full} class:list={['pk-asset', { 'pk-asset--square': a.square }]} download>
+                <div class:list={['pk-asset__img', { 'pk-asset__img--checker': a.checker }]}><img src={a.preview} alt={`Honey, I'm an Agent - ${a.name}`} loading="lazy" /></div>
+                <span class="pk-asset__meta"><span>{a.name}</span><small>PNG · {a.size} ↓</small></span>
+              </a>
+            ))}
+          </div>
+        </section>
+
+        <!-- ═══════ CRÉDITOS ═══════ -->
+        <section class="pk-section">
+          <h2 class="pk-title">{t.credits}</h2>
+          <ul class="pk-credits">
+            {team.map((m) => <li><strong>{m.name}</strong><span>{m.role}</span></li>)}
+          </ul>
+        </section>
+
+        <!-- ═══════ SOBRE MULTINOW ═══════ -->
+        <section class="pk-section">
+          <h2 class="pk-title">{t.about}</h2>
+          <p class="pk-copy">{t.aboutText}</p>
+        </section>
+
+        <!-- ═══════ CONTACTO ═══════ -->
+        <section class="pk-section pk-contact">
+          <h2 class="pk-title">{t.contact}</h2>
+          <p class="pk-copy">{t.contactText} <span class="pk-email" data-u="contacto" data-d="multinow-games.com"></span></p>
+          <a href={l('/games/Honey_Im_an_Agent/')} class="pk-back">{t.backToGame}</a>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<script>
+  function initPressKit() {
+    // El correo se arma en el navegador para que no lo lean los bots que recolectan direcciones
+    document.querySelectorAll<HTMLElement>('.pk-email').forEach((el) => {
+      const address = `${el.dataset.u}@${el.dataset.d}`;
+      const a = document.createElement('a');
+      a.href = `mailto:${address}`;
+      a.textContent = address;
+      el.replaceChildren(a);
+    });
+
+    // El iframe de YouTube se carga solo al hacer clic
+    const trailer = document.getElementById('pkTrailer');
+    trailer?.addEventListener('click', () => {
+      trailer.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${trailer.dataset.vid}?autoplay=1&rel=0" title="Honey, I'm an Agent - Trailer" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
+    }, { once: true });
+  }
+
+  document.addEventListener('astro:page-load', initPressKit);
+</script>
+
+<style>
+  .pk {
+    padding-top: 72px;
+    background: var(--bg-dark);
+    min-height: 100vh;
+  }
+
+  /* ═══════ HEADER ═══════ */
+  .pk-head {
+    padding: 4rem 0 3rem;
+    background:
+      radial-gradient(ellipse at 80% 40%, rgba(160, 200, 60, 0.12) 0%, transparent 60%),
+      radial-gradient(ellipse at 10% 90%, rgba(123, 47, 247, 0.12) 0%, transparent 55%);
+    border-bottom: 1px solid rgba(123, 47, 247, 0.15);
+  }
+
+  .pk-head__inner {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .pk-bread {
+    display: flex;
+    gap: 0.5rem;
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+  }
+
+  .pk-bread a:hover { color: var(--cyan); }
+
+  .pk-head__title {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    line-height: 1.15;
+    margin-bottom: 1rem;
+  }
+
+  .pk-head__title span {
+    display: block;
+    color: #c8e04a;
+  }
+
+  .pk-head__lead {
+    color: var(--text-muted);
+    max-width: 480px;
+    margin-bottom: 2rem;
+  }
+
+  .pk-head__logo {
+    width: 100%;
+    max-width: 460px;
+    height: auto;
+    justify-self: center;
+    image-rendering: pixelated;
+    filter: drop-shadow(0 0 30px rgba(160, 200, 60, 0.25));
+  }
+
+  .pk-zip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 0.9rem 1.5rem;
+    border-radius: 8px;
+    background: linear-gradient(135deg, var(--purple), var(--purple-light));
+    color: #fff;
+    box-shadow: 0 0 25px var(--purple-glow);
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+
+  .pk-zip:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 40px var(--purple-glow);
+  }
+
+  .pk-zip svg { width: 26px; height: 26px; flex-shrink: 0; }
+  .pk-zip span { display: flex; flex-direction: column; }
+  .pk-zip strong { font-family: var(--font-display); font-size: 0.85rem; letter-spacing: 0.04em; }
+  .pk-zip small { font-size: 0.78rem; opacity: 0.85; }
+
+  /* ═══════ BODY ═══════ */
+  .pk-body {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 3rem;
+    padding-top: 3rem;
+    padding-bottom: 5rem;
+    align-items: start;
+  }
+
+  /* FACTSHEET */
+  .pk-facts {
+    position: sticky;
+    top: 96px;
+    background: var(--bg-card);
+    border: 1px solid rgba(123, 47, 247, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+  }
+
+  .pk-facts__title,
+  .pk-facts__sub {
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #c8e04a;
+    margin-bottom: 1rem;
+  }
+
+  .pk-facts__sub { margin: 1.5rem 0 0.75rem; }
+
+  .pk-facts dl div {
+    padding: 0.6rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .pk-facts dt {
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.15rem;
+  }
+
+  .pk-facts dd {
+    font-size: 0.88rem;
+    color: var(--text);
+    word-break: break-word;
+  }
+
+  .pk-facts dd a,
+  .pk-email :global(a),
+  .pk-hint a {
+    color: var(--cyan);
+  }
+
+  .pk-links {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .pk-links a {
+    display: inline-block;
+    font-size: 0.8rem;
+    padding: 0.3rem 0.75rem;
+    border-radius: 20px;
+    border: 1px solid rgba(123, 47, 247, 0.35);
+    color: var(--text-muted);
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .pk-links a:hover { color: var(--cyan); border-color: var(--cyan); }
+
+  /* MAIN */
+  .pk-main { min-width: 0; }
+
+  .pk-section { margin-bottom: 3.5rem; }
+
+  .pk-title {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid rgba(123, 47, 247, 0.2);
+  }
+
+  .pk-label {
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: 1.25rem 0 0.5rem;
+  }
+
+  .pk-copy {
+    color: var(--text);
+    opacity: 0.9;
+    line-height: 1.75;
+    margin-bottom: 0.75rem;
+  }
+
+  .pk-phases,
+  .pk-features {
+    padding-left: 1.25rem;
+  }
+
+  .pk-features li,
+  .pk-phases li {
+    color: var(--text);
+    opacity: 0.9;
+    line-height: 1.7;
+    margin-bottom: 0.6rem;
+  }
+
+  .pk-hint {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin: 0.5rem 0 1rem;
+  }
+
+  /* TRAILER */
+  .pk-trailer {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(123, 47, 247, 0.25);
+    background: #000;
+    cursor: pointer;
+  }
+
+  .pk-trailer img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .pk-trailer__play {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+
+  .pk-trailer__play svg { width: 72px; height: 51px; filter: drop-shadow(0 2px 10px rgba(0,0,0,0.6)); transition: transform 0.2s; }
+  .pk-trailer:hover .pk-trailer__play svg { transform: scale(1.1); }
+  .pk-trailer :global(iframe) { width: 100%; height: 100%; border: none; display: block; }
+
+  /* SCREENSHOTS */
+  .pk-shots {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+  }
+
+  .pk-shot {
+    position: relative;
+    display: block;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(123, 47, 247, 0.15);
+    aspect-ratio: 16 / 9;
+    background: #0a0a20;
+  }
+
+  .pk-shot img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    image-rendering: pixelated;
+    transition: transform 0.35s ease;
+  }
+
+  .pk-shot:hover img { transform: scale(1.05); }
+
+  .pk-dl {
+    position: absolute;
+    right: 0.5rem;
+    bottom: 0.5rem;
+    font-family: var(--font-display);
+    font-size: 0.6rem;
+    letter-spacing: 0.06em;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    background: rgba(7, 7, 26, 0.85);
+    color: #fff;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .pk-shot:hover .pk-dl,
+  .pk-shot:focus-visible .pk-dl { opacity: 1; }
+
+  /* KEY ART + LOGOS */
+  .pk-art {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1rem;
+  }
+
+  .pk-art > .pk-asset { grid-column: span 3; }
+
+  .pk-art--logos { grid-template-columns: 1fr 1fr 0.6fr; }
+  .pk-art--logos > .pk-asset { grid-column: auto; }
+
+  .pk-asset {
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(123, 47, 247, 0.18);
+    background: var(--bg-card);
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .pk-asset:hover { border-color: #c8e04a; transform: translateY(-2px); }
+
+  .pk-art > .pk-asset--wide { grid-column: 1 / -1; }
+  .pk-art > .pk-asset--third { grid-column: span 2; }
+
+  .pk-asset__img {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #05050f;
+    padding: 0.75rem;
+  }
+
+  .pk-asset--wide .pk-asset__img { padding: 0; }
+
+  .pk-asset__img img {
+    max-width: 100%;
+    max-height: 280px;
+    height: auto;
+    display: block;
+    image-rendering: pixelated;
+  }
+
+  .pk-asset--wide .pk-asset__img img { max-height: none; width: 100%; }
+
+  /* Fondo a cuadros para que se note la transparencia */
+  .pk-asset__img--checker {
+    background-color: #2a2a3a;
+    background-image:
+      linear-gradient(45deg, #3a3a4d 25%, transparent 25%),
+      linear-gradient(-45deg, #3a3a4d 25%, transparent 25%),
+      linear-gradient(45deg, transparent 75%, #3a3a4d 75%),
+      linear-gradient(-45deg, transparent 75%, #3a3a4d 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0;
+  }
+
+  .pk-asset__meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.5rem;
+    padding: 0.7rem 0.9rem;
+    font-size: 0.85rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .pk-asset__meta small { color: var(--cyan); font-size: 0.72rem; white-space: nowrap; }
+
+  /* CREDITS */
+  .pk-credits {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+
+  .pk-credits li {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    padding: 1rem 1.1rem;
+    border-radius: 10px;
+    background: var(--bg-card);
+    border: 1px solid rgba(123, 47, 247, 0.15);
+  }
+
+  .pk-credits span { font-size: 0.85rem; color: var(--text-muted); }
+
+  .pk-back {
+    display: inline-block;
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    color: var(--cyan);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 960px) {
+    .pk-body { grid-template-columns: 1fr; }
+    .pk-facts { position: static; }
+    .pk-head__inner { grid-template-columns: 1fr; }
+    .pk-head__logo { order: -1; max-width: 320px; }
+  }
+
+  @media (max-width: 640px) {
+    .pk-shots { grid-template-columns: repeat(2, 1fr); }
+    .pk-art,
+    .pk-art--logos,
+    .pk-credits { grid-template-columns: 1fr; }
+    .pk-art > .pk-asset,
+    .pk-art > .pk-asset--third { grid-column: auto; }
+  }
+</style>
